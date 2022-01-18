@@ -20,9 +20,10 @@ span.note {
 	height: 20%;
 }
 
-div > img {
-	width: 40%;
-	height: 40%;
+img#bind-op-ad {
+	float: right;
+	width: 33%;
+	height: 33%;
 }
 th, td {border: 1px solid black;}
 
