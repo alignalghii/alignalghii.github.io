@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Haskell és matematika</title>
+
+		<link rel="stylesheet" href="assets/main.css"/>
+
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/haskell.min.js"></script>
+		<script>hljs.highlightAll();</script>
+	</head>
+	<body>
+		<h1>Haskell és matematika</h1>
+		<p>Haskell és matematika. És az én viszonyom hozzájuk</p>
+		<p>Tömören: persze érdekel a matematika a maga saját önálló okán is, valójában azonban eredetileg a fizika volt az ami vonzott, a Haskell és a matematika inkább járulékosan jött. A fizika — Isten számítógépe, a matemitika meg az ehhez való programnyelve. A Haskell előnye, hogy — nagyon helyesen — megpróbál ezekhez legalább közelíteni szellemiségben. Ehhez képes minden más az mellékes — piaci helyzet, vagy hogy egyáltalán hogy valami működik-e a hétköznapi életben.</p>
+		<p>Gyakorlatiasabbra fordítva a szót, két érdekes kérdést emelnék ki, amik hosszabban megfogtak:</p>
+		<ul>
+			<li>Mi felel meg az UML-nek a Haskell programozó világában?</li>
+			<li>A monász-transzformálóknak néha rossz hírük van, mint amelyek csak kompromisszumok árán tudnak valamiféle részleges lazy coupling-ot megvalósítani. Van-e valamiféle „végleges”, „tökéletes” megoldás e téren?</li>
+		</ul>
+		<p>A „Haskell-UML” kérdésre a Quora-n vagy a SO-n azt a félig vicces választ olvastam, hogy „<em>persze, létezik a Haskell-világban is UML, úgy hívják, hogy »kommutatív diagram«</em>.” Más hasonló szellemben született válaszok ennél is tágabban felelnek, miszerint <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/1364253#1364253">maga a matematika a Haskell-UML</a>, illetve <a href="https://stackoverflow.com/questions/2457903/can-uml-be-used-to-model-a-functional-program/2466703#2466703">>maga a kategóriaelmélet egésze</a>, továbbá Conal Elliot komoly hangvételű <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/11148678#11148678">válasza pedig</a> az Agda/Coq családot, illetve a Matrin-Löf típuselméletet említette.  A dologban minden vicces szándéktól függetlenül valószínűleg a tényleges igazság rejtőzik, bár a kategóriaelmélet ebben nem egyetlen bölcsek köve, mert a topológia és a (Martin-Löf) típuselmélet, illetve az intuicionista logika legalább ilyen fontos szerepet tölt be, és valószínűleg ezek sem egyedülállóak ebben, a téma valószínűleg meglehetősen nyitott az alapkutatások felé.</p>
+		<p>A monász-transzformálók által nyújtott „lazy coupling” meghaladása terén egyetlen régi emlékem  van, a „<a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>” cikk elolvasása, és felületes kipróbálása az akkoriban viszonylag híres <a href="https://hackage.haskell.org/package/uuagc">UUAGC</a> compileren. A dolgot mélyebben igazából nem, csak felületetesen értettem már akkoriban is, mára pedig nagyrészt elfelejtettem. A lényeg, hogy az attribútumnyelvtanok képesek olyan funkcionális „kötőanyagot” nyújtani, amellyel szinte az aspektusorientált programozás eredeti vízióinak megfelelő teljes szétválasztása érhető el a programok egyes aspektusainak. Mindenesetre akármi is van, a végső igazság valószínűleg mindeképp az lehet, hogy a matematika és annak modernebb alapkutatásai lehetnek képesek olyan fajta teljes lazy coupling-ot nyújtani, amire önmagában a Haskell sem képes, de ami víziója, szemelélete révén a programozás egészét húzni, vezetni tudja.</p>
+		<p>Az alábbiakban leírom, mi is vonz engem mostanában a topológiában, amelyet sajnos teljesen elhanyagoltam, és újra kellene tanulnom.</p>
+		<ul>
+			<li>Formális szemantika. Kiértékelési stratégák, lusta kiértékelés. A topológiát felhasználó domain-szemantikáról felületes dolgokon kívül nem tudok még sokat. Gyakorlati téren egyetlen eredményem egy lusta kiértékelést megvalósító interpreter-program kombinatorikus logikára. Több ilyen próbálkozásom volt, a legújabb változatok a zipper-adatszerkezetre épülnek, <a href="https://github.com/alignalghii/CL-zipper-RWS">ebből a legletisztultabb változat ez</a>.</li>
+			<li>A topológiát érintő nemrég feltámadt érdeklődésem fő oka azonban az, hogy a topológia kulcsot ad a kategóriaelmélet tanulásához. Elsősorban nem közvetlenül (bár úgy is), hanem azrt, mert a kategóriaelmélet tanulása nem azért nehéz, mintha az egyes tételek technikailag olyan nehezek lennének, hanem azért, mert az első érdeklődő általában nem tudja mihez kötni őket. A topológia tehát kötőanyagot hoz hozzá, igaz, ebben nem áll egyedül, mert ugyanezért akár a csoportelmélettel vagy a vektorterek elméletével is fel lehet törni a kategóriaelélet tanulásának első fő nehézségeit.</li>
+			<li>A topológia egyes tételei azonban nemcsak közvetve, szemléletük révén, hanem akár közvetlen analógiát is szolgáltathatnak néhány fogalomhoz, épp erre alább mutatok is példát.</li>
+		</ul>
+		<p>Topológiában: a lezárási operátorra vonatkozó tételek, amelyek épp a monászokra vonatkozó szabályokként  is értelmezhetőek:</p>
+		<ul>
+			<li><em>kiterjesztő</em> mivolt: \(A \subset \text cA\)</li>
+			<li>monotonitás: \(A \subset B \to \text cA \subset \text cB\)</li>
+			<li>idempotencia: \(\text c(\text cA) \subset \text cA\)</li>
+		</ul>
+		<div id="peeled-fruit" class="clearfix">
+			<img src="assets/orange.clipped.png" class="float-right"/>
+			<p>E tételek precíz bizonyítása, ha nem is triviális, de a könnyebbek közé tartozik. Ami még fontos, hogy a szemlélet, — mégha néha tán hamis biztonságérzetet is adva — de szintén képes valamelyest vezetni az embert. „A nyílt halmaz nem más, mint valamiféle hámozott gyümölcs. A zárt halmaz a hámozatlan eredetije. »Általános« halmazon pedig rajta lehetnek foltokban hámozatlan héjcafatok”. A lezárási operátor nem más, mint a héj „visszavarázsolása”, vagyis a hámozott vagy részleges, általánosan cafatos gyümölcsből visszaképezni az elképzelhető „hámozatlan eredetijüket”.</p>
+			<p>A formális bizonyítás persze ennél összetettebb, de az sem nehéz. Néhány segédtétel: pont környezetének fogalmát vehetjük „a pontot tartalmazó nyílt halmaznak”, mert a következmények ugyanazok maradnak, továbbá a lezárt fogalmánál lehet az egyszerűbb felépítésű definíciót használni <span class="note" title="Kologorov & Fomin: A függvényelmélet és a funkcionálanalízis elemei. TypoTex 2010.">(Kolmogorov & Fomin: FüggvElm-FunkAl, Def.2.5.1)</span>: egy \(P\) pont pontosan akkor tartozik egy \(A\) halmaz \(\text c A\) lezártjához, ha a \(P\) pont minden egyes környezete belemetsz (valamennyit) az (eredeti) \(A\) halmazba (másszóval egyik környezete sem diszjunkt tőle).</p>
+			<p>Ezzel pl. éppen az első tétel máris könnyen bizonyítható: \(A \subset \text cA\), hiszen \(\forall P \in A\ \bullet P \in \text c A\), azaz \(A\) bármely pontja szükségszerűen \(\text cA\) pontja is, hisz \(P\) tetszőleges környezete tartalmazza magát \(P\)-t is, ami épp a kiinduló feltétel alapján eleme \(A\)-nak, így valóban szükségszerűen \(P\) minden környezetének legalább egy közös pontja biztos lesz \(A\)-val, mégpedig legalább maga \(P\).</p>
+			<p>A többi tétel bizonyítása kicsit több lépésből áll, de jellegében hasonló és nem sokkal nehezebb.</p>
+		</div>
+ 		<p>Ehhez képest persze nem tekinthető bizonyításnak a „bőrős gyümölcs” szemlélete, de bármennyire is ingatag az efféle szemlélet a formális bizonyításhoz képest, de az előbbi három tételnek legalább a puszta megjegyezhetőségét megkönnyíti:</p>
+		<ul>
+			<li>Kiterjesztés \(A \subset \text cA\): a hámozatlan gyümölcs nyilvánvalóan magában foglalja a hámozottat.</li>
+			<li>Idempontencia \(\text c(\text cA) \subset \text cA\): ha egy gyümölcsre visszavarázsolom a héját, akkor másodszorra már nem kell és nem is lehet tovább „növelni”, mert a bőrét immár visszakapott gyümölcsön már nincsenek befoltozandó hiányosságok.</li>
+			<li>Monotonitás \(A \subset B \to \text cA \subset \text cB\): a tartalmazás mint viszony „megtartja” a gyümülcs „bőrősségét”, vagyis hámozott-kopasz és bőrös-héjcafatos foltosságának alapszerkezetét — a „bőr” csak olyan kopasz foltokra tud visszanőni, ahol a gyümölcs ténylegesen kopasz volt.</li>
+		</ul>
+		<p>
+			Az egész persze azért érdekes itt, mert a fenti három összefüggésnek kézenfekvőnek látszanak az analóg megfelelői a funkcionális programozás <em>monász</em>-fogalmának terén is:
+			<pre><code class="language-haskell">
+				return :: Monad   m => a        -> m a
+				fmap   :: Functor f => (a -> b) -> f a -> f b
+				join   :: Monad   m => m (m a)  -> m a
+			</code></pre>
+			amelynek szép konkrét példái (a lista monász esetére nézve):
+			<pre><code class="language-haskell">
+				return = flip (:) []           -- (: [])
+				fmap f = foldr ((:) . f) []
+				join   = concat
+			</code></pre>
+		</p>
+		<p>
+			A Haskell-kód alapján a <code>fmap</code> enyhén kilógni látszik a sorból: őt nem a <code>Monad</code>, hanem a <code>Functor</code> típusosztály deklarálja:
+			<pre><code class="language-haskell">
+				class Functor f where
+					fmap :: (a -> b) -> f a -> f b
+			</code></pre>
+			<pre><code class="language-haskell">
+				class Applicative m => Monad m where 
+					return :: a       -> m a
+					join   :: m (m a) -> m a
+			</code></pre>
+		</p>
+		<p id="CT-is-explicit" class="clearfix">			
+			<span class="float-right">
+				<img src="assets/Coherence_law_for_the_unit_of_a_monad.svg.png"/>
+				<img src="assets/Coherence_law_for_the_multiplication_of_a_monad.svg.png"/>
+			</span>
+			Mivel a <code>Monad</code> (közvetett) örököse is a <code>Functor</code>-nak, ezért ez a „különállás” inkább csak valamiféle fokozati jellegű minőségnek tűnik. Aki azonban ismeri a monászok fogalmát a „tiszta” kategóriaelméletből is, az tudja, hogy a <code>fmap</code> (és a hozzá tartozó „monotonitás”-összefüggés) ott egész más minőségben jelenik meg, mint a <code>return</code> és <code>join</code> által képviselt „kiterjesztési” és „idempontencia”-összefüggés: az elébbi az a <em>funktorokra</em>, az utóbbi kettő pedig az \(\eta\) és \(\mu\) ún. <em>természetes leképezés</em>re vonatkozik; és a „funktor” vs „természetes leképezés” fogalom egész különböző absztrakciós szinten helyezkedik el. (A kommutatív diagrampár képéért köszönet: Wikipedia — <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_multiplication_of_a_monad.svg">Smimram</a> and <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_unit_of_a_monad.svg">Sgnb</a> and Greatfermat)
+		</p>
+		<p>A topológia elsőre látszólag nem tűnik túl explicitnek ebben a fontos elkülönítésnek a dolgában: látszólag az ő képletei még csak annyi fokozati sugallatot sem nyújtanak, amennyit a Haskell-kód tükröt, nemhogy lényegi elkülönítettséget. Azonban ahogy Mark Jason Dominus „<a href="https://blog.plover.com/math/monad-closure.html">Triples and closure</a>” cikkposzt észreveszi, egyéb topológiai összefüggések már nagyon is közvetlenül rámutatnak a funktorok és természetes leképezések közti fogalmi elkülönülésre (illetve annak topológiai megfelelőjére). A cikkben említett példa: ahogy a topológiai lezárás operátorának a monászok fogalma felel meg, úgy felel meg  a topológiai nyílthalmaz-képzés (belsőrész-képzés, interior) operátorának pedig a ko-monász fogalma felel meg. Ezeknél a rendre egymással „ellentétes” fogalompároknál a nekik megfelelő képletek is rendszerű dualisztikus módon „kifordulnak”, kivéve éppen a funktornak megfelelő összefüggést, mert az változatlan marad! Ezzel is mutatva, hogy itt fogalmi szinten valami más szinten levő fogalomról van szó.</p>
+		<p>Egyetlen szóval összegezve azt, amit mind a fentiekben mutatni akartam: a kategóriaelmélet mellett a topológia is képes elmélyíteni a funkcionális programozással kapcsolatos tudást, sőt a topológia itt nemcsak „a kategóriaelmélet szolgálólánya” szerény szerepében (konkrét példák, fogalomalkotások mögötti motivációk) puszta felmutatásában tölti be szerepét, de képes közvetlenül is megvilágítani programozási fogalmakat, illetve az azokban meglátandó finomabb alaptételeket.</p>
+	</body>
+</html>

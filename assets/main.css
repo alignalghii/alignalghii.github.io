@@ -1,0 +1,21 @@
+.float-right {float: right;}
+
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+span.note {
+	font-style: italic 
+}
+
+#peeled-fruit img {
+	width: 30%;
+	height: 35;
+}
+
+#CT-is-explicit img {
+	width: 20%;
+	height: 20%;
+}
