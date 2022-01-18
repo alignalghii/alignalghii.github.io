@@ -19,3 +19,23 @@ span.note {
 	width: 20%;
 	height: 20%;
 }
+
+th, td {border: 1px solid black;}
+
+th {
+	color: white;
+	background-color: black;
+}
+
+th, td {
+	padding: 7px;
+}
+
+td.hole {border: none;}
+
+td#dual-11 {background: lightgreen;}
+td#dual-12 {background: pink;}
+td#dual-21 {background: lightgreen;}
+td#dual-22 {background: pink;}
+td#dual-31 {background: yellow;}
+td#dual-32 {background: yellow;}

@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<h1>Haskell és matematika</h1>
-		<p>Haskell és matematika. És az én viszonyom hozzájuk</p>
+		<p>Haskell és matematika. És az én viszonyom hozzájuk.</p>
 		<p>Tömören: persze érdekel a matematika a maga saját önálló okán is, valójában azonban eredetileg a fizika volt az ami vonzott, a Haskell és a matematika inkább járulékosan jött. A fizika — Isten számítógépe, a matemitika meg az ehhez való programnyelve. A Haskell előnye, hogy — nagyon helyesen — megpróbál ezekhez legalább közelíteni szellemiségben. Ehhez képes minden más az mellékes — piaci helyzet, vagy hogy egyáltalán hogy valami működik-e a hétköznapi életben.</p>
 		<p>Gyakorlatiasabbra fordítva a szót, két érdekes kérdést emelnék ki, amik hosszabban megfogtak:</p>
 		<ul>
@@ -24,7 +24,7 @@
 			<li>A monász-transzformálóknak néha rossz hírük van, mint amelyek csak kompromisszumok árán tudnak valamiféle részleges lazy coupling-ot megvalósítani. Van-e valamiféle „végleges”, „tökéletes” megoldás e téren?</li>
 		</ul>
 		<p>A „Haskell-UML” kérdésre a Quora-n vagy a SO-n azt a félig vicces választ olvastam, hogy „<em>persze, létezik a Haskell-világban is UML, úgy hívják, hogy »kommutatív diagram«</em>.” Más hasonló szellemben született válaszok ennél is tágabban felelnek, miszerint <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/1364253#1364253">maga a matematika a Haskell-UML</a>, illetve <a href="https://stackoverflow.com/questions/2457903/can-uml-be-used-to-model-a-functional-program/2466703#2466703">>maga a kategóriaelmélet egésze</a>, továbbá Conal Elliot komoly hangvételű <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/11148678#11148678">válasza pedig</a> az Agda/Coq családot, illetve a Matrin-Löf típuselméletet említette.  A dologban minden vicces szándéktól függetlenül valószínűleg a tényleges igazság rejtőzik, bár a kategóriaelmélet ebben nem egyetlen bölcsek köve, mert a topológia és a (Martin-Löf) típuselmélet, illetve az intuicionista logika legalább ilyen fontos szerepet tölt be, és valószínűleg ezek sem egyedülállóak ebben, a téma valószínűleg meglehetősen nyitott az alapkutatások felé.</p>
-		<p>A monász-transzformálók által nyújtott „lazy coupling” meghaladása terén egyetlen régi emlékem  van, a „<a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>” cikk elolvasása, és felületes kipróbálása az akkoriban viszonylag híres <a href="https://hackage.haskell.org/package/uuagc">UUAGC</a> compileren. A dolgot mélyebben igazából nem, csak felületetesen értettem már akkoriban is, mára pedig nagyrészt elfelejtettem. A lényeg, hogy az attribútumnyelvtanok képesek olyan funkcionális „kötőanyagot” nyújtani, amellyel szinte az aspektusorientált programozás eredeti vízióinak megfelelő teljes szétválasztása érhető el a programok egyes aspektusainak. Mindenesetre akármi is van, a végső igazság valószínűleg mindeképp az lehet, hogy a matematika és annak modernebb alapkutatásai lehetnek képesek olyan fajta teljes lazy coupling-ot nyújtani, amire önmagában a Haskell sem képes, de ami víziója, szemelélete révén a programozás egészét húzni, vezetni tudja.</p>
+		<p>A monász-transzformálók által nyújtott „lazy coupling” meghaladása terén egyetlen régi emlékem  van, Wouter Swierstra „<a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>” cikkének az elolvasása, és felületes kipróbálása az akkoriban még háttérbe nem szorult <a href="https://hackage.haskell.org/package/uuagc">UUAGC</a> compileren. A dolgot mélyebben igazából nem, csak felületetesen értettem már akkoriban is, mára pedig nagyrészt elfelejtettem. A lényeg, hogy az attribútumnyelvtanok képesek olyan funkcionális „kötőanyagot” nyújtani, amellyel szinte az aspektusorientált programozás eredeti vízióinak megfelelő teljes szétválasztása érhető el a programok egyes aspektusainak. Mindenesetre akármi is van, a végső igazság valószínűleg mindeképp az lehet, hogy a matematika és annak modernebb alapkutatásai lehetnek képesek olyan fajta teljes lazy coupling-ot nyújtani, amire önmagában a Haskell sem képes, de ami víziója, szemelélete révén a programozás egészét húzni, vezetni tudja.</p>
 		<p>Az alábbiakban leírom, mi is vonz engem mostanában a topológiában, amelyet sajnos teljesen elhanyagoltam, és újra kellene tanulnom.</p>
 		<ul>
 			<li>Formális szemantika. Kiértékelési stratégák, lusta kiértékelés. A topológiát felhasználó domain-szemantikáról felületes dolgokon kívül nem tudok még sokat. Gyakorlati téren egyetlen eredményem egy lusta kiértékelést megvalósító interpreter-program kombinatorikus logikára. Több ilyen próbálkozásom volt, a legújabb változatok a zipper-adatszerkezetre épülnek, <a href="https://github.com/alignalghii/CL-zipper-RWS">ebből a legletisztultabb változat ez</a>.</li>
@@ -81,9 +81,37 @@
 				<img src="assets/Coherence_law_for_the_unit_of_a_monad.svg.png"/>
 				<img src="assets/Coherence_law_for_the_multiplication_of_a_monad.svg.png"/>
 			</span>
-			Mivel a <code>Monad</code> (közvetett) örököse is a <code>Functor</code>-nak, ezért ez a „különállás” inkább csak valamiféle fokozati jellegű minőségnek tűnik. Aki azonban ismeri a monászok fogalmát a „tiszta” kategóriaelméletből is, az tudja, hogy a <code>fmap</code> (és a hozzá tartozó „monotonitás”-összefüggés) ott egész más minőségben jelenik meg, mint a <code>return</code> és <code>join</code> által képviselt „kiterjesztési” és „idempontencia”-összefüggés: az elébbi az a <em>funktorokra</em>, az utóbbi kettő pedig az \(\eta\) és \(\mu\) ún. <em>természetes leképezés</em>re vonatkozik; és a „funktor” vs „természetes leképezés” fogalom egész különböző absztrakciós szinten helyezkedik el. (A kommutatív diagrampár képéért köszönet: Wikipedia — <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_multiplication_of_a_monad.svg">Smimram</a> and <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_unit_of_a_monad.svg">Sgnb</a> and Greatfermat)
+			Mivel a <code>Monad</code> (közvetett) örököse is a <code>Functor</code>-nak, ezért ez a „különállás” inkább csak valamiféle fokozati jellegű minőségnek tűnik. Aki azonban ismeri a monászok fogalmát a „tiszta” kategóriaelméletből is, az tudja, hogy a <code>fmap</code> (és a hozzá tartozó „monotonitás”-összefüggés) ott egész más minőségben jelenik meg, mint a <code>return</code> és <code>join</code> által képviselt „kiterjesztési” és „idempontencia”-összefüggés: az elébbi az a <em>funktorokra</em>, az utóbbi kettő pedig az \(\eta\) és \(\mu\) ún. <em>természetes leképezés</em>re vonatkozik; és a „funktor” vs „természetes leképezés” fogalom egész különböző absztrakciós szinten helyezkedik el. <span class="note">(A kommutatív diagrampár képéért köszönet: Wikipedia — <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_multiplication_of_a_monad.svg">Smimram</a> és <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_unit_of_a_monad.svg">Sgnb</a> és Greatfermat)</span>
 		</p>
-		<p>A topológia elsőre látszólag nem tűnik túl explicitnek ebben a fontos elkülönítésnek a dolgában: látszólag az ő képletei még csak annyi fokozati sugallatot sem nyújtanak, amennyit a Haskell-kód tükröt, nemhogy lényegi elkülönítettséget. Azonban ahogy Mark Jason Dominus „<a href="https://blog.plover.com/math/monad-closure.html">Triples and closure</a>” cikkposzt észreveszi, egyéb topológiai összefüggések már nagyon is közvetlenül rámutatnak a funktorok és természetes leképezések közti fogalmi elkülönülésre (illetve annak topológiai megfelelőjére). A cikkben említett példa: ahogy a topológiai lezárás operátorának a monászok fogalma felel meg, úgy felel meg  a topológiai nyílthalmaz-képzés (belsőrész-képzés, interior) operátorának pedig a ko-monász fogalma felel meg. Ezeknél a rendre egymással „ellentétes” fogalompároknál a nekik megfelelő képletek is rendszerű dualisztikus módon „kifordulnak”, kivéve éppen a funktornak megfelelő összefüggést, mert az változatlan marad! Ezzel is mutatva, hogy itt fogalmi szinten valami más szinten levő fogalomról van szó.</p>
+		<p class="clearfix">
+			<table class="float-right">
+				<tr>
+					<td class="hole"></td>
+					<th>Lezárás</th>
+					<th>Belsőrész</th>
+					<td class="hole"></td>
+				</tr>
+				<tr>
+					<th>Kiterj. / Leszűk.</th>
+					<td id="dual-11">\(A \subset \text cA\)</td>
+					<td id="dual-12">\(\text{int} A \subset A\)</td>
+					<th> — duális párként</th>
+				</tr>
+				<tr>
+					<th>Idempotencia</th>
+					<td id="dual-21">\(\text c(\text cA) \subset \text cA\)</td>
+					<td id="dual-22">\(\text{int} A \subset \text{int} (\text{int} A)\)</td>
+					<th> — duális párként</th>
+				</tr>
+				<tr>
+					<th>Monotonitás</th>
+					<td id="dual-31">\(A \subset B \to \text cA \subset \text cB\)</td>
+					<td id="dual-32">\(A \subset B \to \text{int} A \subset \text{int} B\)</td>
+					<th> — itt nincs dualitás!</th>
+				</tr>
+			</table>
+			A topológia elsőre látszólag nem tűnik túl explicitnek ebben a fontos elkülönítésnek a dolgában: látszólag az ő képletei még csak annyi fokozati sugallatot sem nyújtanak, amennyit a Haskell-kód tükröt, nemhogy lényegi elkülönítettséget. Azonban ahogy Mark Jason Dominus „<a href="https://blog.plover.com/math/monad-closure.html">Triples and closure</a>” cikkposzt észreveszi, egyéb topológiai összefüggések már nagyon is közvetlenül rámutatnak a funktorok és természetes leképezések közti fogalmi elkülönülésre (illetve annak topológiai megfelelőjére). A cikkben említett példa: ahogy a topológiai lezárás operátorának a monászok fogalma felel meg, úgy felel meg  a topológiai belsőrész-képző operátor (interior) pedig a ko-monász fogalma felel meg. Ezeknél a rendre egymással „ellentétes” fogalompároknál a nekik megfelelő képletek is rendszerű dualisztikus módon „kifordulnak”, kivéve éppen a funktornak megfelelő összefüggést, mert az változatlan marad! Ezzel is mutatva, hogy itt fogalmi szinten valami más szinten levő fogalomról van szó.
+		</p>
 		<p>Egyetlen szóval összegezve azt, amit mind a fentiekben mutatni akartam: a kategóriaelmélet mellett a topológia is képes elmélyíteni a funkcionális programozással kapcsolatos tudást, sőt a topológia itt nemcsak „a kategóriaelmélet szolgálólánya” szerény szerepében (konkrét példák, fogalomalkotások mögötti motivációk) puszta felmutatásában tölti be szerepét, de képes közvetlenül is megvilágítani programozási fogalmakat, illetve az azokban meglátandó finomabb alaptételeket.</p>
 	</body>
 </html>
