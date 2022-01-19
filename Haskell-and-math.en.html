@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Haskell and mathematics</title>
+
+		<link rel="stylesheet" href="assets/main.css"/>
+
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/haskell.min.js"></script>
+		<script>hljs.highlightAll();</script>
+	</head>
+	<body>
+		<h1>Haskell and mathematics</h1>
+		<img id="bind-op-ad" src="assets/bind-op-ad.png"/>
+		<p>Haskell és matematika. An the way I relate to them.</p>
+		<p>In sort: of curse I am interested also in mathematics itself for its own sake. To tell the truth, it was originally the physics to which i deleveoped an attraction in my childhood. Mathematics and programming came later. Phyics is God&apos;s computer, and mathematics is her programming language using it. Haskell&apos; biggest achievement and main point is to reognize this and making a way to approach to the Platonic idea of all these above. Everything other is of secondary importance, including market and being able to work in everyday life.</p>
+		<h2>Motivating question examples</h2>
+		<p>Now turning to practice, I&apos;d like to mention two interesting questions, that  shaped my path of learning during the last year:</p>
+		<ul>
+			<li>What corresponds to UML in the world of Haskell programming?</li>
+			<li>Monad transformers sometimes have a bad reputation: being not to pure mathematically, and being mediocre at achieveing the goal they are used for: lazzy coupling, providing an ideal „glue” for guing different aspects/effects in a modular and untangled way. Monad transformers achieve this gloat at a price of compromises and trade-offs.i. Is there an ideals solutions in this field?</li>
+		</ul>
+		<p>As for the first question — „some kind of UML for functional programming”: both Quora and Stackoverflow discuss thise questions ant several threads. A jokeful answer (ocurring several times) is: „<em>Of course also the Haskell world has its UML, it is called »commutative diagram«</em>.” Similar jokeful answers of the same spirit mention  <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/1364253#1364253">mathematics itself is the UML of Haskell</a>, and also <a href="https://stackoverflow.com/questions/2457903/can-uml-be-used-to-model-a-functional-program/2466703#2466703">category theory as a whole</a> is mentioned. Conal Elliot replies with a <a href="https://stackoverflow.com/questions/1364237/is-there-a-visual-modeling-language-or-style-for-the-functional-programming-para/11148678#11148678">serious answer</a> mentioning</a> the Agda/Coq family, and the Matrin-Löf type theory. So, jokeful answers have a deep truth, moreover, besides intuitionistic Martin-Löf type theory, also seemingly distantly related thigs like topology can provide deep insights, and not only through its practical examples for category theory, but also on its own way for its own sake. Probably topology is not the only things that can provide deep insights, and it is a good strategy to keep an open mind towards mathematics as a whole.</p>
+		<p>As for the second question — what can be beyond the amount of „lazy coupling” provided by monad transformers, without its trade-offs and compromises: my only mamory about this question is an old article from Wouter Swierstra „<a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>”. I read and understood it only very superficially, maybe I tried it also on the <a href="https://hackage.haskell.org/package/uuagc">UUAGC</a> compiler (somewhat more famious at those time than today). Although i forgot even that little i understood at that time, the essence seems to be that the so-called <em>attribute grammars</em> can provide a rather ultimate level of lazy coupling, with all its advantages and without the disadvantages of monad transformers. In short: attribute grammars can provide a strong „glue”, even stronger than the higher-oder functions and the lazy evaluation of (Haskell-spirited) functional languages, and this magic „glue” enables a complete separation of aspects and a complete getting rid of tangled code,thus, they can prvide the ultimate goal of aspect-orinted programming among functional languages.</p>
+		<p>In any case, it seem that modern branches of mathematics and its novel achievements can provide a level of lazy coupling that cannot been reached by Haskell alone, but this openness towards mathematics can provide a vision and a leading force for programming.</p>
+		<h2>Mentioning topology</h2>
+		<p>Now I will describe what attracts me towards beginning to learning about topology — a pity that I was ignorant towards in the past decades.</p>
+		<ul>
+			<li>Formal semantics, more precisely: denonational semantics of lambda calculus (and functional programming languages with lazy evaluation strategy). This approach is based aupon topology, and it can model errors/exceptions, partial functions, recursion, also infinite runaway errors: in short, the presence vs absence of termination, and also the differences between various evaluation strategies like lazy vs strict evaluation. I know about it only very superficially. My only practical result in the topics of lambda clculus and lazy evaluation is my own interpreter program, a lazily-evaluating combinator logic interpreter. I have several versions of such interpeters (most of them implemented in Haskell, and one of them in C). The <a href="https://github.com/alignalghii/CL-zipper-RWS">most recent and clearest implementation</a> of mine for a CL-interpreter is based on the data structures called <em>zippers</em>, i.e., a tree with a moveble „hole”, a node in the focus.</li>
+			<li>A bigger motivation for me to learn and relearn topology again: topology provides a key to learn a heavier field, category theory. Topology provides motivatiing examples for hard concepts of category theory. The main goal in learning category theory is not that the therorems and definitons would be so hard, but rather, it is hard to find good examples that could be me motivationg for a newcomer. Group theory can play a similar role: also group theory can fill the theorems of category theory with contents. The same can be said about the theory of vector spaces. All these fields of mathematics are more concrete than category theory, and can provide a glue, a content-filler that can crack the closed gate of category theory&apos;s fortress of abstractness.</li>
+			<li>But topology can provide even more than a mere storehouse of motivating examples for category theory. Some theorems and definitons of topology provide an indirect help in understanding concepts of programming (and category theory). They provide aspect and insight, and indirect analogies.  Now I will try to demostrate this.</li>
+		</ul>
+		<p>The theorems around the so-called <em>closure operator</em> of topology seem to suggest an analogy with rules of <em>monads</em> of cateogory theory and functional programming:</p>
+		<ul>
+			<li><em>extension</em>: \(A \subset \text cA\)</li>
+			<li>monotonity: \(A \subset B \to \text cA \subset \text cB\)</li>
+			<li>idempotence: \(\text c(\text cA) \subset \text cA\)</li>
+		</ul>
+		<div id="peeled-fruit" class="clearfix">
+			<img src="assets/orange.clipped.png" class="float-right"/>
+			<p>The proof of these theorems isn not trivial, but not too difficult either. But if we remain at a superficial level, not ven a proof is necessary: intuition can lead us too, although the ice of relying on mere intuition is very thin and can break at any moment. . „An open set is like apeeled fruit: it has no skin on. A closed set is the original fruit with ist skin intect yet. »General« sets can be like a fruit peeled partialy, having its remained skin patches”. A closure operator is like a complete healing of the wounded skin of a partially or completely peeled fruit:giving beack thr original skin with magic..</p>
+			<p>Of course the precise formal proof of the above theorems are somewhat more difficult than the informal argumentation above — but not very much more difficult. We need some auuxiliary theorems: the so-called <em>neighborhood</em> of a given point can be defined as any open set containing that pont. This definition differs slightly from the definition occurring in most treatments, but it is easy to use and its consequeces are the same (a small practice to prove that!). We can also accept a simplified (but equivalent) definition for the notion of closure of a set <span class="note" title="Kologorov & Fomin: A függvényelmélet és a funkcionálanalízis elemei. TypoTex 2010.">(Kolmogorov & Fomin: FuncTh-FuncAnal, Def.2.5.1)</span>: any \(P\) point belongs to the \(\text c A\) closure of set \(A\), exactly then, iff each neighborhood of \(P\) intersects with the (original) \(A\) set (in other worlds: none of \(P\)&apos;s environments can be disjoint from \(A\)).</p>
+			<p>We can already prove the first theorem \(A \subset \text cA\) with the above simplified trestment. The proof for \(A \subset \text cA\) is: first we prove that \(\forall P \in A\ \bullet P \in \text c A\), i.e. any point belonging to \(A\) belongs to also \(\text cA\). This is easy to see, because each neighborhood of \(P\) contains \(P\) itself (everey neighboof contains the point it is the neighborhood of). An of course \(P\) belongs to \(A\) too (because this was the premise we started from), thus we can conclude now that our theorem to prove holds indeed: each environment of \(P\) has at least one common point with \(A\)-val, because \(P\) itself is an always fit candidate / witness for that.</p>
+			<p>The other two theorems are somewhat more complex to prove, but their prooves are similar in its concepts to the above one, and not very muvh more difficult.</p>
+		</div>
+		<p>Of course the intuitive argumentation by the vision of a „peeled fruit” is not a proof, but despite of this fragility compared to formal proofs, intuition at least can help the memorization of these already mentioned three theroem:</p>
+		<ul>
+			<li>Extension \(A \subset \text cA\): a peeled fruit is surely contained by the original, unpeeled one.</li>
+			<li>Idempontence \(\text c(\text cA) \subset \text cA\): if a peeled fruit would get back it peel by a sorcerer, then not even this sorcerer could augment the fuit more, because a fruit that has its peel again cannot grow more skin than it has, because there are no more „holes”, „wounds” on it to grow back — the „skin” can only grow back at bald places, at places where there is already a skin no growing process occurs.</li>
+			<li>Monotonity \(A \subset B \to \text cA \subset \text cB\): subset relation keeps the „skin patch” structure of the fruit, i.e. the structure of where the skin and where the bald parts are.</li>
+		</ul>
+		<h2>A deep analogy</h2>
+		<p>
+			What is the signiicance of all these? Functional programming has also three intresting rules that looke like exactly a formal analogy with the above three theorems. The signature of the main methods of <em>monads</em>!
+			<pre><code class="language-haskell">
+				return :: Monad   m => a        -> m a
+				fmap   :: Functor f => (a -> b) -> f a -> f b
+				join   :: Monad   m => m (m a)  -> m a
+			</code></pre>
+			To mention concrete intances/ implementations/bodies (for the list monad):
+			<pre><code class="language-haskell">
+				return = flip (:) []           -- (: [])
+				fmap f = foldr ((:) . f) []
+				join   = concat
+			</code></pre>
+		</p>
+		<h2>A fine conceptual distinction remaining implicit</h2>
+		<p>
+			The Haskell sourcecode seems suggesting that there is something special in the cafe of <code>fmap</code>, (i.e. (in the programming analogon for the rule of monotonity): <code>fmap</code> is not directly a method of <code>Monad</code> typeclass, instead, it is originally delcared in the <code>Functor</code> typeclass, and <code>Monad</code> inherits <code>fmap</code> from there:
+			<pre><code class="language-haskell">
+				class Functor f where
+					fmap :: (a -> b) -> f a -> f b
+			</code></pre>
+			<pre><code class="language-haskell">
+				class Applicative m => Monad m where
+					return :: a       -> m a
+					join   :: m (m a) -> m a
+			</code></pre>
+		</p>
+		<p id="CT-is-explicit" class="clearfix">
+			<span class="float-right">
+				<img src="assets/Coherence_law_for_the_unit_of_a_monad.svg.png"/>
+				<img src="assets/Coherence_law_for_the_multiplication_of_a_monad.svg.png"/>
+			</span>
+			Although Haskell suggests a fine difference in these concepts, still it suggests also a kind of mere graduality in this distinction: <code>Monad</code> is a descendant from <code>Functor</code>, thus, not being very differenct in essence, showing up only a rather quantitative but qualitative difference. In contrast, category theory treats the concepts of monads with more explicitness in separating different levels of abstractions: a functor acts between categories, a natural transformation acts between functors (thus, making a second-level of abstraction), and a monad is a functor and two natural transformation obeying special laws. Thus, category theory introduces very fine details underlying the less sophisticated and differentiated monad notion in programming. So, a monad is not only a functor, but a functor together with two <em>natural transformations</em>, \(eta\) and \(mu\), (their computer counterparts being <code>return</code> and <code>join</code>). In summary: the tory behind <code>fmap</code> belongs to a rather different level of abstraction than that <code>return</code> and <code>join</code>. So, the above three theorems the „extension” és „idempontence” and „monotonity” have their roots in rather distinct notions of category theory. <span class="note">(Credit and thans to the author of the figures of the commutative diagrams: Wikipedia — <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_multiplication_of_a_monad.svg">Smimram</a> és <a href="https://commons.wikimedia.org/wiki/File:Coherence_law_for_the_unit_of_a_monad.svg">Sgnb</a> és Greatfermat)</span>
+		</p>
+		<p class="clearfix">
+			<table class="float-right">
+				<tr>
+					<td class="hole"></td>
+					<th>Closure</th>
+					<th>Interior</th>
+					<td class="hole"></td>
+				</tr>
+				<tr>
+					<th>Extens. / Restrict.</th>
+					<td id="dual-11">\(A \subset \text cA\)</td>
+					<td id="dual-12">\(\text{int} A \subset A\)</td>
+					<th> — standing in a kind of duality</th>
+				</tr>
+				<tr>
+					<th>Idempotence</th>
+					<td id="dual-21">\(\text c(\text cA) \subset \text cA\)</td>
+					<td id="dual-22">\(\text{int} A \subset \text{int} (\text{int} A)\)</td>
+					<th> — standing in a kind of duality</th>
+				</tr>
+				<tr>
+					<th>Monotonity</th>
+					<td id="dual-31">\(A \subset B \to \text cA \subset \text cB\)</td>
+					<td id="dual-32">\(A \subset B \to \text{int} A \subset \text{int} B\)</td>
+					<th> — no duality here!</th>
+				</tr>
+			</table>
+			At first glance, topology does not separate the theorem of monotonity as coceptually separate from the other two other theorems (extension and idempotence). But as Mark Jason Dominus demonstrates in his article „<a href="https://blog.plover.com/math/monad-closure.html">Triples and closure</a>” there are other topological concepts that already reveal fine underlying distinctions, probably analogous to the functors and natural transformations being on distinct abstraction levels in category theory. A cikkben említett példa: ahogy a topológiai lezárás operátorának a monászok fogalma felel meg, úgy felel meg  a topológiai belsőrész-képző operátor (interior) pedig a ko-monász fogalma felel meg. Ezeknél a rendre egymással „ellentétes” fogalompároknál a nekik megfelelő képletek is rendszerű dualisztikus módon „kifordulnak”, kivéve éppen a funktornak megfelelő összefüggést, mert az változatlan marad! Ezzel is mutatva, hogy itt fogalmi szinten valami más szinten levő fogalomról van szó.
+		</p>
+		<p>
+			The concep of comonads, (originally also coming from category theory, like monads) is present also in functional programming: <a href="https://hackage.haskell.org/package/comonad">comonads in Haskell</a>:
+			<pre><code class="language-haskell">
+				class Functor f where
+					fmap :: (a -> b) -> f a -> f b
+			</code></pre>
+			<pre><code class="language-haskell">
+				class Functor w => Comonad w where
+					extract   :: w a     -> a
+					duplicate :: w (w a) -> w a
+			</code></pre>
+			As we have seen at monads, Haskell presents Comonads in an inheritance chain from Functors. Deeper conceptual details are suggested only by contrasting the type signature of comonadic <code>extract</code> with monadic <code>return</code>, and comonadic <code>duplicate</code> with monadic <code>join</code>, while <code>fmap</code> (palying role in functor bulding) is not subject to the „reversed writing” (duality). It is category theory which treats deeper details explicitly.
+		</p>
+		<p>Haskell is implicit also in another thing: most type classes have intended constraints/rules that should hold. A <code>Monoid</code> class instance shoul hold the monoid laws. Monads and functors also have implicit laws that cannot be expressed in Haskell's type system — it is a language with dependents types, for example Agda that can provide such explicitness about all rules/constraints associated with data structures. Haskell has to rely on informal and implicit ways to do that: comments or at most unit tests. Also monads and comonads have contraints that can be expressed only in the documentation of the Haskell libraries. Here presented those for the comonads:
+			<table>
+				<tr>
+					<td><a href="https://hackage.haskell.org/package/comonad-5.0.8/docs/Control-Comonad.html">Control.Comonad</a></td>
+				</tr>
+				<tr>
+					<td><pre><code class="language-haskell">
+extend extract      = id
+extract . extend f  = f
+extend f . extend g = extend (f . extend g)</code></pre>
+					</td>
+				</tr>
+			</table>
+		</p>
+		<p>In summary for all the above things written till now, what I wanted to demostrate: besides categeory theory, also topology can deepen the knowledge about functional programming, moreover, topology not only serves as „handmaiden of category theory” (the modest role of a demonstrator of motivating examples and samples), but topology can provide also directs insights into functional programming on its own, and make fine distinctions in the concept building possible.</p>
+		<p>Another thing I deduced from all that:</p>
+		<blockquote>„<em>To<strike>navigate</strike> learn mathematics is necessary</em>”</blockquote>
+		<p>because there is no substutute for its ability in building insights and vision, and in its power to lead a learning process. Besides that, Haskell is not so strong as mathematics is, but mathematics helps us to accept and appreciate what Haskell can provide, and build it into a path towards stepping further, either into topology, category theory, Martin-Löf type theory, attrubute grammars or any other open topics of the living mathematics.</p>
+	</body>
+</html>
