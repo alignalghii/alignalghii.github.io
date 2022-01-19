@@ -126,7 +126,7 @@
 					extract   :: w a     -> a
 					duplicate :: w (w a) -> w a
 			</code></pre>
-			Miként a topológiában is láttuk, itt a funktorfogalom lényegi különbözősége legfeljebb csak aon keresztül látszik, hogy a dualitás rá „nem vonatkozik”. A kategóriaelmélet az, amely igazán expliciten különíti el a fogalmakat. Természetesen a haskell egy másik fontos dolgot is csak impliciten — lényegében legfeljebb csak kommentek vagy unittesztek formájában — tud kifejezni: a monadikus, illetve komonadikus törvényeket. Íme alább a dokumentációk kommentezéséből:
+			Miként a topológiában is láttuk, itt a funktorfogalom lényegi különbözősége legfeljebb csak azon keresztül látszik, hogy a dualitás rá „nem vonatkozik”. A kategóriaelmélet az, amely igazán expliciten különíti el a fogalmakat. Természetesen a haskell egy másik fontos dolgot is csak impliciten — lényegében legfeljebb csak kommentek vagy unittesztek formájában — tud kifejezni: a monadikus, illetve komonadikus törvényeket. Íme alább a dokumentációk kommentezéséből:
 			<table>
 				<tr>
 					<td><a href="https://hackage.haskell.org/package/comonad-5.0.8/docs/Control-Comonad.html">Control.Comonad</a></td>
@@ -142,7 +142,7 @@ extend f . extend g = extend (f . extend g)</code></pre>
 		</p>
 		<p>Egyetlen szóval összegezve azt, amit mind a fentiekben mutatni akartam: a kategóriaelmélet mellett a topológia is képes elmélyíteni a funkcionális programozással kapcsolatos tudást, sőt a topológia itt nemcsak „a kategóriaelmélet szolgálólánya” szerény szerepében (konkrét példák, fogalomalkotások mögötti motivációk) puszta felmutatásában tölti be szerepét, de képes közvetlenül is megvilágítani programozási fogalmakat, illetve az azokban meglátandó finomabb alaptételeket.</p>
 		<p>A másik tanulság számomra:</p>
-		<blockquote>„<strike>Hajózni</strike> matematikát tanulni muszáj”</blockquote>
+		<blockquote>„<em><strike>Hajózni</strike> matematikát tanulni szükséges</em>”</blockquote>
 		<p>mert a szemléletformáló és a vziót vezető szerepe nélkülözhetetlen. A Haskell nem olyan erős, mint a matematika, de a matematika segít felismerni, hogy a Haskell meglévő erejét mindezzel együtt is meg tudjuk becsülni, és a további perspektívákban is segít.</p>
 	</body>
 </html>
