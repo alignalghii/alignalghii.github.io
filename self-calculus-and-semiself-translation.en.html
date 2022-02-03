@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</title>
+
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/haskell.min.js"></script>
+		<script>hljs.highlightAll();</script>
+	</head>
+	<body>
+		<h1>&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+		<h2>Motivation</h2>
+		<p>to implement recursive functions and recursion at all seems to be hard in pure lambda-calculus, because the concept of &bdquo;<em>self</em>&rdquo; is not a first-class citiizen. Can it be encoded or simulated somehow?</p>
+		<p>In this writing, we will proceed in two steps:</p>
+		<ol>
+			<li>First we will design a &bdquo;<em>self-calculus</em>&rdquo;, where the notion of &bdquo;self&rdquo; is a frst-class citizen. we show some examples for its use.</li>
+			<li>Afterwards, we eill demonstrate that such a &bdquo;self-calculus&rdquo; is just a syntactic sugar: it does not transcend pure lambda calculus in expressive power. We will present a technique (&bdquo;<em>halved-self translation</em>&rdquo;) that translates self-calculus to pure lambda calculus.</li>
+		</ol>
+		<p>After all that, we will see that &bdquo;halved-self translation&rdquo; is a rather expensive technique in terms of compactness, thus we will &bdquo;factor out&rdquo; the complicated part into a common function, (which will turn out to be the famous Y fixed-point combinator). thus separateing the wary parts in the name of conceptual modularity and reuse. In short: Y will be defined via  the &bdquo;halved-self translation&rdquo; technique, and any other recusrive functions will be defined via the Y combinator.</p>
+		<h2>The let-rec construct</h2>
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<h2>Special self constant/keyword</h2>
+		<h2>Special self binding: the self-calculus</h2>
+		<h2>The &bdquo;halved-self translation&rdquo; technique</h2>
+		\[
+			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
+		\]
+	</body>
+</html>
