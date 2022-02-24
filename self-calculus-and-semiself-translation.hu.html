@@ -21,5 +21,41 @@
 			<li><a href="index.hu.html">Vissza a személyes főoldalra</a></li>
 		</ul>
 		<h1>&bdquo;Szelf-kalkulus&rdquo; és &bdquo;felezett-szelf fordítástechnika&rdquo;</h1>
+		<h2>Indíték</h2>
+		<p>A tiszta funkcionális nyelvek matematikai alapjaival, a lambda-kalkulussal elsőkörben ismerkedő tanuló számára a kezdeti tanulás során  könnyen úgy tűnhetik, hogy a tiszta lamba-kalkulus eszközkészletével rekurzív függvényeket nem lehet definiálni, hiszen míg a paraméter fogalma világosan jelenik meg a lambda-kalkulusban, ugyanakkor ennek a nyelvnek az alapelemi között nem létezik valamiféle explicit &bdquo;szelf&rdquo;-fogalom, amivel a rekurzív definíció törzsében képesek lehetnénk &bdquo;megnevezni&rdquo; az épp definiálás alatt álló függvényt, azaz megvalósítani a saját magára hivatkozást, az &rdquo;önhivatkozást&rdquo;.</p>
+		<p>A gyakorlatias programnyelvek példái ebben kevés segítséget nyújtanak, hiszen ezek oly erős eszközzel rendelkeznek, ami a lambda-kalkulusból szándékosan hiányzik: programnyelvekben a függvények definíciója összekapcsolódik névadásukkal — akár globálisan</p>
+		<pre><code class="language-haskell">fac n = if n == 0
+    then 1
+    else n * fac (n - 1)</code></pre>
+		<p>akár lokálisan</p>
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>a rekurziv definíció azonnal élhet a frissen kapott névra való hivatkozhatás lehetőségével. Ez azonban a lambda-kalkulusban nem lehetséges:</p>
+		\[
+			\boxed{\textbf{fac}} :\equiv \lambda n. \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{\mathbf{fac}} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)
+		\]
+		<p>hiszen a fenti definíció nyilvánvalóan nem a lambda-kalkulus része: a \(\equiv\) jel már a metanyelv része, a tisztán lambda-kalkuluson mint tárgynelven belül maradó kifejezés kizárólag a baloldali kifejezés, amely így természetesen semmilyen metaelméleti entitásra nem hivatkozhatik, így a frissen definiált \(\boxed{\textbf{fac}}\) névre sem. Épp ez a lényegi különség: gyakorlati funkcionális programnyelvekben a névadás is a tágynyelv része, lambda-kalkulusnál az a metanyelvre marad, a tárgynyelvből közvetlenül elérhetetlenül.</p>
+		<p>Úgy mondhatnók, a szelf fogalma nem úgy alapvető nyelvi elem a lambda-kalkulusban, mint ahogy a függvények azok. Vagy ki lehet mégis valahogy fejezni? Ahhoz hasonlóan, ahogy tudjuk hogy a természetes számok, rendezett párok is milyen jól szimulálhatóak magasabbrendű függvényekkel, curry-zéssel és egyéb &bdquo;trükkökkel&rdquo;?</p>
+		<p>Akik akár a biológiából, akár a filozófiából, akár afféle robot-hasonlatok révn vagy számítástechnikai, matematikai fejtörők révén kapcsolatba kerültek már afféle önreprodukáló konstrukciókkal, mint Conway sejtautomatái, vagy a filozófiából a számítástechnikába avanzsált ún. <em>quine</em>-ok, vagy hallottak már az önreprodukáló robot elvi sémájáról, esetleg konrétan a biológia reprodukció alapsémájának legfőbb kulcsötletét képesek formálisan is megragadni, azoknak eszükbe juthat, hogy még egy igen alacsonyrendű nyelvezet vagy formalizmus is képes lehet a szelf fogalmának megragadására, noha ez felettébb közvetett, implicit, mondhatnók trükkös módon történik, és ebben a trükkben igen sok van abból a jellegzetes „átlós” gondolatmenetből, melyet a matematika története során a „hazug krétai” paradoxonában</a> már az ókori görögök ismertek, de formáliabb kidolgozása a Cantor-i halmazelmélettel és annak paradoxonainak kifejlődésével történt meg. A téma kifejtése Douglas Hofstadter &bdquo;Gödel, Escher, Bach&rdquo; könyvében, vagy Quine műveiben illetve azok folmományaiként a számítástechnikai quine-okat bemutató cikkekben található, legismertebb David Madore nagy <a href="http://www.madore.org/~david/computers/quine.html">quine-oldala</a>, és az ebből sokat merítő és általa is sokban formált Wikipédia-<a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine-cikk</a>. Mindezeket az &bdquo;<a href="https://en.wikipedia.org/wiki/Indirect_self-reference">közvetett önhivatkozás</a>&rdquo; címszavával foglalja össze egy másik Wikipédia-cikk</p>
+		<p>Ebben az írásban ezeket az inspiráló, illetve a kérdést meg is oldó témákat nem érintve, kizárólag a lambda-kalkulusra közvetlenül ráhúzható ötlet-szeletet mutanám be, és azt is egy közvetítő köztes lépésen keresztül:</p>
+		<ol>
+			<li>Elsőként mégiscsak kibővítem a lambda-kalkulus nyelvét egy afféle ad hoc &bdquo;<em>szelf-kalkulussá</em>&rdquo;, amelybe beemelem a &bdquo;szelf&rdquo; fgalmát a függvényekkel szinte teljesen egyenrangú közvetlen tárgynelvi elemként. Erre példákat is mutatok.</li>
+			<li>Utána pedig megmutatom, hogy az efféle &bdquo;self-calculus&rdquo; valójában csak szintaktikus cukorként viszonyul a lambda-kalkulushoz: kifejezőerejében ugyanis azt nem haladja meg. Erre bizonyíték egy fordítástechnika (&bdquo;felezett-szelf&rdquo;), amely tetszőleges szelf-kalkulusbeli kifejezést lefordít vele szemantikailag egyenértékű tiszta lambda-kalkulusbeli kifejezésre.</li>
+		</ol>
+		<p>Mindkét ötlet kézenfekvő, és bár e formában még nem láttam, valószínűleg ezerszámra jöttek már rá. (Ez amúgy az az Y-kombinátor mindkétfajta bevett definíciójából is kiderül, bár a rájövés módja nem.) Explicite kifejtve is biztosan megvan sokaknál ez a kis ujjgyakorlat a hálón, de mivel én még nem találkoztan efféle kifejtéssel, egyszerűség kevéért mégis összeszedem a magam tanulási útját.</p>
+		<p>Miután az elméleti lehetőséget megismertük lesz, a felhasználás szempontjból azt is látni kell, hogy e fenti &bdquo;felezett-szelf fordítás&rdquo; mindazonáltal fölöttébb kötséges technika: igencsak nem kompakt, nagyon is terjengős, haján van annak a fajta ökonomikus tisztasgnak, amit a programozásban újrafelhasználás és modularitás jegyében elvárnánk, sőt a téma tisztán matematikai kiépítésében is nagyobb &bdquo;fogalmi ökönomizmust&rdquo; várunk el. Konrétan szólva: noha &bdquo;felezett-szelf fordítás&rdquo; technikája tökéletesen alkalmas arra elvileg, hogy tetszőleges rekurzív függvényt egvalósítsunk a segítségével, mégsem fogjuk közvetlenül bevetni minden egyes rekurzív függvénynél. Ehelyett a fogalmilag „locska” részeket &bdquo;kiszervezzük&rdquo;, &bdquo;kiemeljük&rdquo; egy &bdquo;közös&rdquo; ún. <em>fixpontkombinátor</em> megvalósítására, és magukat az egyes rekurzív függvényeket már e fispontkombinátorral valósítjuk meg.</p>
+		<h2>A let-rec kifejezés</h2>
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<h2>Különleges szelf-konstans/kulcsszó</h2>
+		<h2>Különleges szelf-kötés: a szelf-kalkulus</h2>
+		<h2>A  &bdquo;felezett-szelf fordítástechnika&rdquo;</h2>
+		\[
+			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
+		\]
 	</body>
 </html>
