@@ -51,6 +51,13 @@ in fac 5</code></pre>
                 then 1
                 else n * fac (n - 1)
 in fac 5</code></pre>
+		<p>A Haskell (és más funkcionális programnyelvek) let-rec kifejezése globális függvénynévadás nélkül is képes függvény definiálására: lényegében lokális kötéssel, hatókörrel rendelkező helyi változót vezet be, és kifejezés-szinten képes függvényeket létrehozni. Bár ebben pont a tiszta lambda-kalkulusra hasonlít, viszont a let-rec mégsem egyszerűen csak a lambda valamiféle szintaktikus cukra (pontosabban szólva nem triviális módon az). A let-rec kifejezésbn hivatkozhatunk az épp defifiálandó függvény nevére, amit a tiszta lambda-kalkulusban közvetlen módon nem tehetünk meg. Az elébbeno példa a lambda-kalkulusban így néz ki:</p>
+		\[
+			\textbf{fac} :\equiv \mathbf{Y} \left(\lambda\ \boxed{f}\ n. \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)
+		\]
+		\[
+			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
+		\]
 		<h2>Különleges szelf-konstans/kulcsszó</h2>
 		<h2>Különleges szelf-kötés: a szelf-kalkulus</h2>
 		<h2>A  &bdquo;felezett-szelf fordítástechnika&rdquo;</h2>
