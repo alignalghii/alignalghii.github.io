@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>A let-rec kifejezés</title>
+
+		<link rel="stylesheet" href="assets/main.css"/>
+		<link rel="stylesheet" href="assets/menu.css"/>
+		<link rel="stylesheet" href="assets/code.css"/>
+
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/languages/haskell.min.js"></script>
+		<script>hljs.highlightAll();</script>
+	</head>
+	<body>
+		<ul class="menu">
+			<li><a href="let-rec.en.html">Ennek az oldalnak az angol változata</a></li>
+			<li><a href="index.hu.html">Vissza a személyes főoldalra</a></li>
+		</ul>
+		<h1>A let-rec kifejezés</h1>
+		<p>Az oldal a Haskell és más funkcionális programozási nyelvek ún. <em>let-rec</em> konstrukcióját mutatja be, azon belül is a lusta kiértékelésű let-rec konstukciót. Ez globális függvénynévadás nélkül is képes függvény definiálására: lényegében lokális kötéssel, hatókörrel rendelkező helyi változót vezet be. Haskellban ennek konkrét szintaktikai nyelvi alakja a <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; konstrukció, amelyet a Haskell az egyszerűbb, nemrekurzív behelyettesítéses / lokális fefiníciós szerkezetek kifejezésére <em>is</em> használ; viszont amennyiben a helyi definíció jobboldala tartalmazza a baloldal épp definiálandó nevét, abban az esetben automatikusan rekurzív értelmezést kap a definíció. Haskellban ennek szematikai háttere a lusta kiértékelésű let-rec értelmezés.</p>
+		<p>Jelen oldal épp a fent említett különféle lehetséges használati kontextuseseteket mutatja be, mivel ezek szematikája és fordítástechnikája, elméleti vonzata eltérő.</p>
+		<h2>Fordítása tiszta lambda-kalkulusra</h2>
+		<p>Az elébb említettnek negfelelően létezik egy rekurzív (fixpontos) és egy nemrekurzív (fixpontmentes) használati kontextus, alább ezek bemutatása következik.</p>
+		<p>Fontos előzetesen megemlítendő dolog még, hogy az oldal a rekurzív/fixpontos eset szemantikáját és fordítástechnikáját az ún. <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixpontkombinátorra</a> építve mutatja be. Elvileg létezik egy alpvetőbb, alacsonabbszintű fordítástechnika is, — részleteit ld. a &bdquo;<a href="self-calculus-and-semiself-translation.hu.html">felezett szelf-kalkulus</a>&rdquo; oldalon — de mivel magát az <span class="combinator">Y</span>-fixkombinátort is épp ezzel valósítjuk meg, ezért az áttekinthetőséget kívánó eseteket többnyire a magasabb szintűnek tekintett <span class="combinator">Y</span>-kombinátor közvetítésével építjük fel.</p>
+		<p>A <em>let-rec</em> témaköre primitív és unalmas témának tűnik felületesen, de hogy valójában milyen fontos is a szemantikájának a pontos megértése, az kellemetlenül vissza tus köszönöni a bonyolultabb esetekben, például Wouter Swierstra <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribete grammars matter</a> cikkének az elsőre legmisztikusabbnak tűnő része a &bdquo;<em>credit card transformation</em> rész (&bdquo;tie the recursive knot&rdquo;), amelynek mögött pontosan a let-rec értelmezésének egy nem annyira triviális, ún. lusta szematikájú esete áll. Erről a mű tömören ír, egyéni megértési célból a dolgot megpróbáltam személyesen egy külön személyes<a href="">Haskell-projekt és leírás</a> keretében kibontani.</p>
+		<h3>Fixpontos vs fixpontmentes eset</h3>
+		\[
+			\left[\!\left[\textbf{let }f = \Phi\textbf{ in }\Gamma\right]\!\right]
+			:\equiv
+			\begin{cases}
+				\Gamma\left[\dfrac{\Phi}{f}\right]                                  & \text{ha } f \notin \text{FVar}\left(\Phi\right)
+				\\
+				\\
+				\Gamma\left[\dfrac{\textbf{Y}\left(\lambda f . \Phi\right)}{f}\right] & \text{ha } f \in \text{FVar}\left(\Phi\right)
+			\end{cases}
+		\]
+		<p>Fordítása tiszta lambda-kalkulusra — vagyis lambda-kalkulusbeli megfelelőjének keresése — kétféleképpen történhetik, attól függően, hogy a let által helyben definiált változónév megjelenik-e a helyi definíció jobboldalán, vagy sem: ettől függően a let-in konstukció lehet a sima behelyettesítés kifejezése, de rekurzív esetben ezt &bdquo;meg kell spékelni&rdquo; az <span class="combinator">Y</span> ún. <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixpontkombinátorral</a> is. Lényegében két nagyon területre használjuk ugyanazt a formalizmust: konstansok behelyettesítésére (a konstans lehet valamilyen nem.rekurzív módon helyben kifejezett függvény is!), és függvények rekurzív definiálására.</p>
+		<p>A <a href="https://coq.inria.fr/">Coq rendszer</a> (annak <em>Gallina</em> nevű alnyelve) szépen elkülöníti a két  esetet: előbbire a <span class="emcode">Definition</span>, a másikra a <span class="emcode">Fixpont</span> kulcsszót használa, pontosabban szólva annak kifejezés szintű megfelelőiben a <span class="emcode">fun</span> és a <span class="emcode">fix</span> kulcsszót.</p>
+		<h3>Argumentum-jelölési konvenció</h3>
+		<p>Mivel mind a rekurzívan, mind a szimplán behelyettesítéssel de amúgy nem-rekurzívan létrehozott helyiváltozónév lehet függvény, ezért mindkét esetre vonatkozik az alábbi konvenció:</p>
+		\[
+			\left(\textbf{let } f\ x_1\ \dots\ x_n = \Phi\textbf{ in }\Gamma\right)
+			\equiv
+			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
+		\]
+		<h2>Példák</h2>
+		<h3>Fixpontmentes eset, és argumentumok használata nélkül</h3>
+		<p>Legegyszerűbb esetnek nézzünk egy pontatlan, de valamennyire magáért beszélő kifejezést annak kiszámítására, hogy az emúlt 3 évben hány nap is volt:</p>
+		<pre><code class="language-haskell">let years = 3 in 365 * years</code></pre>
+		<p>Ha a számok és a szorzás már le van fordítva a lambda-kalkulusra (pl. <a href="https://en.wikipedia.org/wiki/Church_encoding#Church_numerals">Church-számok</a> formájában a <span class="emcode">3</span> és a <span class="emcode">365</span> szám és a <span class="emcode">times</span> szorzás), akkor a fenti kifejezést a</p>
+		\[
+			\left(
+				\textbf{times}\ \textbf{365}\ y
+			\right)
+			\left[\dfrac{\textbf{3}}{y}\right]
+		\]
+		<p>behelyettesítés fejezi ki. A lambda-kalkulusra való fordításhoz használjuk a \(\beta\)-redukciót, ezzel pont ki tudjuk fejezni a szimpla behelyettesítést:
+		\[\left(\lambda y\ .\ \textbf{times}\ \textbf{365}\ y\right)\ \textbf{3}\]
+
+		<h3>Fixpontos eset, és argumentumok használata nélkül</h3>
+
+		<p>A legegyszerűbb bemutatott példának csak elméleti jelentősége lesz, ugyanis nem terminál, hanem divergál: végtelen ciklusba hullik. Ez amúgy a hírhedt \(\Omega\)-kombinátor:</p>
+
+		<pre><code class="language-haskell">let omega = omega in omega</code></pre>
+		<p>amelynek nincs kiértékelt eredménye, divergál. A &bdquo;programocska&rdquo; lamda-kalkulusra a csúnya szemantikai viselkedéssel együtt is formálisan, szintaktikailag igen egyszerű alakú:</p>
+		\[
+			\underbrace{\mathbf{Y} \left(\lambda\ \boxed{o}\ .\ \boxed{o}\right)}_{\Omega}
+		\]
+		<p>illetve aki szreti a kombinátorokat, és ismeri az \(\mathbf I :\equiv \lambda x\ .\ x\) kombinátort (a Haskell <span class="emcode">id</span>), az azonnal az alábbi egyszerű alakban is szemlélelheti:
+		\[
+			\underbrace{\mathbf{Y}\ \mathbf{I}}_{\Omega}
+		\]
+		<p>Az \(\Omega\) és a \(\mathbf{I}\) szoros kapcsolata a fixpontképzésen keresztül szépen látszik a Haskell szerkezetből is: <code class="language-haskell">let omega = omega in omega</code>.</p>
+		<p>Egyszerű szintaktikájú alakja miatt az \(\Omega\) egyike azon kevés rekurzív konstrukcióknak, amelyet lambda-kalkulusban <em>nem</em> az <span class="combinator">Y</span>-<a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixpontkombinátor</a> segítségével definiálunk, hanem egy közvetlenebb, alacsonyabbszintű trükkel, amit én személyes tanulásom során a &bdquo;<a href="self-calculus-and-semiself-translation.hu.html">felezett szelf-kalkulus</a>&rdquo; fordítástechnika formájában ismertem meg, de persze szakirodalombeli bevett alakja is ilyen. Erről azonban nem itt, a témát részletében ld. a linken.</p>
+
+		<p>A rekurzív függvények definícióinak legegyszerűbb valós, terminálni is képes példáit azok adják, ahol külön megállási feltétel megadása nélkül végtelen listákat állítunk elő, és annak véges kezdőszeleteit igényeljük ki (amire a lusta kiértékelés szerencsére tömör kifejezési lehetőséget ad).</p>
+		<p>Ezt az egyszereűséget arra használjuk ki, hogy argumentumok nélküli let-in kontrukciókra mutassunk nemtriviális példákat.</p>
+
+		<p>Csupa nyolcas végtelen listájának példája:</p>
+
+		<pre><code class="language-haskell">let eights = 8 : eights in take 10 ones</code></pre>
+		<p>amelynek kiértékelt eredménye <code class="language-haskell">[8, 8, 8, 8, 8, 8, 8, 8, 8]</code>. A programocska lamda-kalkulusra való fordítása:</p>
+		\[
+			\textbf{take}\ \textbf{10}
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{e}\ .\ \mathbf{cons}\ \textbf{8}\ \boxed{e}\right)}_{\textbf{eights}}\right)
+		\]
+
+		<p>A természetes számok végtelen sorozatának példája:</p>
+
+		<pre><code class="language-haskell">let nats = 0 : map succ nats in take 10 nats</code></pre>
+		<p>amelynek kiértékelt eredménye <code class="language-haskell">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code>. A programocska lamda-kalkulusra való fordítása:</p>
+
+		\[
+			\textbf{take}\ \textbf{10}
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{n}\ .\ \mathbf{cons}\ \textbf{0}\ \left(\mathbf{map}\ \mathbf{succ}\ \boxed{n}\right)\right)}_{\textbf{nats}}\right)
+		\]
+
+		<h3>Fixpontos eset, és argumentumok használatával</h3>
+
+		<p>Példaént most nézzük a matematikából ismert faktoriális-függvény helybeni definícióját példázó let-rec kifejezést:</p>
+
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>Emlékezzünk a let-rec kifejezésben az argumetumok használatának konvencíójára, vagyis a \(\) átírhatóságra:</p>
+		\[
+			\left(\textbf{let } f\ x_1\ \dots\ x_n = \Phi\textbf{ in }\Gamma\right)
+			\equiv
+			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
+		\]
+		<p>ezalapján a fenti kifejezés is átírható azalábbi alacsonyabbszintű alakban:</p>
+		<pre><code class="language-haskell">let fac = \n -> if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>amelynek fordítása már könnyen adódik a</p>
+		\[
+			\left[\!\left[\textbf{let }f = \Phi\textbf{ in }\Gamma\right]\!\right]
+			:\equiv
+			\begin{cases}
+				\Gamma\left[\dfrac{\Phi}{f}\right]                                  & \text{ha } f \notin \text{FVar}\left(\Phi\right)
+				\\
+				\\
+				\Gamma\left[\dfrac{\textbf{Y}\left(\lambda f . \Phi\right)}{f}\right] & \text{ha } f \in \text{FVar}\left(\Phi\right)
+			\end{cases}
+		\]
+		<p>fordítási szabálynak az \(f \in \text{FVar}\left(\Phi\right)\) esetága alapján:</p>
+		\[
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{f}\ n\ .\ \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)}_{\textbf{fac}}\right) 5
+		\]
+	</body>
+</html>

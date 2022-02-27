@@ -1,0 +1,15 @@
+span.combinator {
+	font-weight: bold;
+	font-family: monospace;
+}
+
+span.emcode {
+	font-weight: bold;
+	font-family: monospace;
+}
+
+*.meta {
+	font-weight: bold;
+	color: red;
+	background-color: lightgray;
+}

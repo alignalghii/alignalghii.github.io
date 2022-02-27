@@ -6,6 +6,7 @@
 
 		<link rel="stylesheet" href="assets/main.css"/>
 		<link rel="stylesheet" href="assets/menu.css"/>
+		<link rel="stylesheet" href="assets/code.css"/>
 
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -44,22 +45,16 @@ in fac 5</code></pre>
 			<li>Elsőként mégiscsak kibővítem a lambda-kalkulus nyelvét egy afféle ad hoc &bdquo;<em>szelf-kalkulussá</em>&rdquo;, amelybe beemelem a &bdquo;szelf&rdquo; fgalmát a függvényekkel szinte teljesen egyenrangú közvetlen tárgynelvi elemként. Erre példákat is mutatok.</li>
 			<li>Utána pedig megmutatom, hogy az efféle &bdquo;self-calculus&rdquo; valójában csak szintaktikus cukorként viszonyul a lambda-kalkulushoz: kifejezőerejében ugyanis azt nem haladja meg. Erre bizonyíték egy fordítástechnika (&bdquo;felezett-szelf&rdquo;), amely tetszőleges szelf-kalkulusbeli kifejezést lefordít vele szemantikailag egyenértékű tiszta lambda-kalkulusbeli kifejezésre.</li>
 		</ol>
-		<p>Mindkét ötlet kézenfekvő, és bár e formában még nem láttam, valószínűleg ezerszámra jöttek már rá. (Ez amúgy az az Y-kombinátor mindkétfajta bevett definíciójából is kiderül, bár a rájövés módja nem.) Explicite kifejtve is biztosan megvan sokaknál ez a kis ujjgyakorlat a hálón, de mivel én még nem találkoztan efféle kifejtéssel, egyszerűség kevéért mégis összeszedem a magam tanulási útját.</p>
-		<p>Miután az elméleti lehetőséget megismertük lesz, a felhasználás szempontjból azt is látni kell, hogy e fenti &bdquo;felezett-szelf fordítás&rdquo; mindazonáltal fölöttébb kötséges technika: igencsak nem kompakt, nagyon is terjengős, haján van annak a fajta ökonomikus tisztasgnak, amit a programozásban újrafelhasználás és modularitás jegyében elvárnánk, sőt a téma tisztán matematikai kiépítésében is nagyobb &bdquo;fogalmi ökönomizmust&rdquo; várunk el. Konrétan szólva: noha &bdquo;felezett-szelf fordítás&rdquo; technikája tökéletesen alkalmas arra elvileg, hogy tetszőleges rekurzív függvényt egvalósítsunk a segítségével, mégsem fogjuk közvetlenül bevetni minden egyes rekurzív függvénynél. Ehelyett a fogalmilag „locska” részeket &bdquo;kiszervezzük&rdquo;, &bdquo;kiemeljük&rdquo; egy &bdquo;közös&rdquo; ún. <em>fixpontkombinátor</em> megvalósítására, és magukat az egyes rekurzív függvényeket már e fispontkombinátorral valósítjuk meg.</p>
-		<h2>A let-rec kifejezés</h2>
-		<pre><code class="language-haskell">let fac n = if n == 0
-                then 1
-                else n * fac (n - 1)
-in fac 5</code></pre>
-		<p>A Haskell (és más funkcionális programnyelvek) let-rec kifejezése globális függvénynévadás nélkül is képes függvény definiálására: lényegében lokális kötéssel, hatókörrel rendelkező helyi változót vezet be, és kifejezés-szinten képes függvényeket létrehozni. Bár ebben pont a tiszta lambda-kalkulusra hasonlít, viszont a let-rec mégsem egyszerűen csak a lambda valamiféle szintaktikus cukra (pontosabban szólva nem triviális módon az). A let-rec kifejezésbn hivatkozhatunk az épp defifiálandó függvény nevére, amit a tiszta lambda-kalkulusban közvetlen módon nem tehetünk meg. Az elébbeno példa a lambda-kalkulusban így néz ki:</p>
-		\[
-			\textbf{fac} :\equiv \mathbf{Y} \left(\lambda\ \boxed{f}\ n. \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)
-		\]
-		\[
-			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
-		\]
+		<p>Mindkét ötlet kézenfekvő, és bár e formában még nem láttam, valószínűleg ezerszámra jöttek már rá. (Ez amúgy az az <span class="combinator">Y</span>-kombinátor mindkétfajta bevett definíciójából is kiderül, bár a rájövés módja nem.) Explicite kifejtve is biztosan megvan sokaknál ez a kis ujjgyakorlat a hálón, de mivel én még nem találkoztan efféle kifejtéssel, egyszerűség kevéért mégis összeszedem a magam tanulási útját.</p>
+		<p>Miután az elméleti lehetőséget megismertük lesz, a felhasználás szempontjából azt is látni kell, hogy e fenti &bdquo;felezett-szelf fordítás&rdquo; mindazonáltal fölöttébb költséges technika: igencsak nem kompakt, nagyon is terjengős, híján van annak a fajta ökonomikus tisztasgnak, amit a programozásban újrafelhasználás és modularitás jegyében elvárnánk, sőt a téma tisztán matematikai kiépítésében is nagyobb &bdquo;fogalmi ökönomizmust&rdquo; várunk el. Konkrétan szólva: noha &bdquo;felezett-szelf fordítás&rdquo; technikája tökéletesen alkalmas arra elvileg, hogy tetszőleges rekurzív függvényt egvalósítsunk a segítségével, mégsem fogjuk közvetlenül bevetni minden egyes rekurzív függvénynél. Ehelyett a fogalmilag „locska” részeket &bdquo;kiszervezzük&rdquo;, &bdquo;kiemeljük&rdquo; egy &bdquo;közös&rdquo; ún. <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixpontkombinátor</a> megvalósítására, és magukat az egyes rekurzív függvényeket már e fixpontkombinátorral valósítjuk meg.</p>
+
+		<h2 id="let-rec">A let-rec kifejezés</h2>
+		<p>Részletesebben ld. <a href="let-rec.hu.html">külön oldalon</a>.</p>
+
 		<h2>Különleges szelf-konstans/kulcsszó</h2>
+
 		<h2>Különleges szelf-kötés: a szelf-kalkulus</h2>
+
 		<h2>A  &bdquo;felezett-szelf fordítástechnika&rdquo;</h2>
 		\[
 			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
