@@ -22,7 +22,11 @@
 			<li><a href="index.hu.html">Vissza a személyes főoldalra</a></li>
 		</ul>
 		<h1>&bdquo;Szelf-kalkulus&rdquo; és &bdquo;felezett-szelf fordítástechnika&rdquo;</h1>
+
 		<h2>Indíték</h2>
+
+		<h3>Rekurzív függvények megvalósítása a lambda-kalkulusban</h3>
+
 		<p>A tiszta funkcionális nyelvek matematikai alapjaival, a lambda-kalkulussal elsőkörben ismerkedő tanuló számára a kezdeti tanulás során  könnyen úgy tűnhetik, hogy a tiszta lamba-kalkulus eszközkészletével rekurzív függvényeket nem lehet definiálni, hiszen míg a paraméter fogalma világosan jelenik meg a lambda-kalkulusban, ugyanakkor ennek a nyelvnek az alapelemi között nem létezik valamiféle explicit &bdquo;szelf&rdquo;-fogalom, amivel a rekurzív definíció törzsében képesek lehetnénk &bdquo;megnevezni&rdquo; az épp definiálás alatt álló függvényt, azaz megvalósítani a saját magára hivatkozást, az &rdquo;önhivatkozást&rdquo;.</p>
 		<p>A gyakorlatias programnyelvek példái ebben kevés segítséget nyújtanak, hiszen ezek oly erős eszközzel rendelkeznek, ami a lambda-kalkulusból szándékosan hiányzik: programnyelvekben a függvények definíciója összekapcsolódik névadásukkal — akár globálisan</p>
 		<pre><code class="language-haskell">fac n = if n == 0
@@ -35,12 +39,46 @@
 in fac 5</code></pre>
 		<p>a rekurziv definíció azonnal élhet a frissen kapott névra való hivatkozhatás lehetőségével. Ez azonban a lambda-kalkulusban nem lehetséges:</p>
 		\[
-			\boxed{\textbf{fac}} :\equiv \lambda n. \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{\mathbf{fac}} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)
+			\boxed{\textbf{fac}} :\equiv \lambda n. \left(\mathbf{greaterThan}\ n\ 0\right) \Bigg(\mathbf{times}\ n\ \left(\boxed{\mathbf{fac}} \left(\mathbf{minus}\ n\ 1\right)\right) 1\Bigg)
 		\]
 		<p>hiszen a fenti definíció nyilvánvalóan nem a lambda-kalkulus része: a \(\equiv\) jel már a metanyelv része, a tisztán lambda-kalkuluson mint tárgynelven belül maradó kifejezés kizárólag a baloldali kifejezés, amely így természetesen semmilyen metaelméleti entitásra nem hivatkozhatik, így a frissen definiált \(\boxed{\textbf{fac}}\) névre sem. Épp ez a lényegi különség: gyakorlati funkcionális programnyelvekben a névadás is a tágynyelv része, lambda-kalkulusnál az a metanyelvre marad, a tárgynyelvből közvetlenül elérhetetlenül.</p>
 		<p>Úgy mondhatnók, a szelf fogalma nem úgy alapvető nyelvi elem a lambda-kalkulusban, mint ahogy a függvények azok. Vagy ki lehet mégis valahogy fejezni? Ahhoz hasonlóan, ahogy tudjuk hogy a természetes számok, rendezett párok is milyen jól szimulálhatóak magasabbrendű függvényekkel, curry-zéssel és egyéb &bdquo;trükkökkel&rdquo;?</p>
-		<p>Akik akár a biológiából, akár a filozófiából, akár afféle robot-hasonlatok révn vagy számítástechnikai, matematikai fejtörők révén kapcsolatba kerültek már afféle önreprodukáló konstrukciókkal, mint Conway sejtautomatái, vagy a filozófiából a számítástechnikába avanzsált ún. <em>quine</em>-ok, vagy hallottak már az önreprodukáló robot elvi sémájáról, esetleg konrétan a biológia reprodukció alapsémájának legfőbb kulcsötletét képesek formálisan is megragadni, azoknak eszükbe juthat, hogy még egy igen alacsonyrendű nyelvezet vagy formalizmus is képes lehet a szelf fogalmának megragadására, noha ez felettébb közvetett, implicit, mondhatnók trükkös módon történik, és ebben a trükkben igen sok van abból a jellegzetes „átlós” gondolatmenetből, melyet a matematika története során a „hazug krétai” paradoxonában</a> már az ókori görögök ismertek, de formáliabb kidolgozása a Cantor-i halmazelmélettel és annak paradoxonainak kifejlődésével történt meg. A téma kifejtése Douglas Hofstadter &bdquo;Gödel, Escher, Bach&rdquo; könyvében, vagy Quine műveiben illetve azok folmományaiként a számítástechnikai quine-okat bemutató cikkekben található, legismertebb David Madore nagy <a href="http://www.madore.org/~david/computers/quine.html">quine-oldala</a>, és az ebből sokat merítő és általa is sokban formált Wikipédia-<a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine-cikk</a>. Mindezeket az &bdquo;<a href="https://en.wikipedia.org/wiki/Indirect_self-reference">közvetett önhivatkozás</a>&rdquo; címszavával foglalja össze egy másik Wikipédia-cikk</p>
-		<p>Ebben az írásban ezeket az inspiráló, illetve a kérdést meg is oldó témákat nem érintve, kizárólag a lambda-kalkulusra közvetlenül ráhúzható ötlet-szeletet mutanám be, és azt is egy közvetítő köztes lépésen keresztül:</p>
+		<p>Akik akár a biológiából, akár a filozófiából, akár afféle robot-hasonlatok révn vagy számítástechnikai, matematikai fejtörők révén kapcsolatba kerültek már afféle önreprodukáló konstrukciókkal, mint Conway sejtautomatái, vagy a filozófiából a számítástechnikába avanzsált ún. <em>quine</em>-ok, vagy hallottak már az önreprodukáló robot elvi sémájáról, esetleg konrétan a biológia reprodukció alapsémájának legfőbb kulcsötletét képesek formálisan is megragadni, azoknak eszükbe juthat, hogy még egy igen alacsonyrendű nyelvezet vagy formalizmus is képes lehet a szelf fogalmának megragadására, noha ez felettébb közvetett, implicit, mondhatnók trükkös módon történik, és ebben a trükkben igen sok van abból a jellegzetes „átlós” gondolatmenetből, melyet a matematika története során a „hazug krétai” paradoxonában</a> már az ókori görögök ismertek, de formáliabb kidolgozása a Cantor-i halmazelmélettel és annak paradoxonainak kifejlődésével történt meg. A téma kifejtése Douglas Hofstadter &bdquo;Gödel, Escher, Bach&rdquo; könyvében, vagy Quine műveiben illetve azok folmományaiként a számítástechnikai quine-okat bemutató cikkekben található, legismertebb David Madore nagy <a href="http://www.madore.org/~david/computers/quine.html">quine-oldala</a>, és az ebből sokat merítő és általa is sokban formált Wikipédia-<a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine-cikk</a>. Mindezeket az &bdquo;<a href="https://en.wikipedia.org/wiki/Indirect_self-reference">közvetett önhivatkozás</a>&rdquo; címszavával foglalja össze egy másik Wikipédia-cikk.</p>
+
+		<h3>A lambda-kalkulus önhivatkózó kombinátorai</h3>
+
+		<p>Nem kell feltétlenül a rekurzív függvények teljes megértéséig eljutni a lambda-kalkulus elméletében ahhoz, hogy az embernek ezzel kapcsolatos kérdéseim emrüljenek fel. Még a középiskolai matematikából jól ismert rekurzív függvények megvalósítási kérdéseinek felmerülése előtt is találkozik az ember a lambda-kalkulusban néhány mindenféle háttér nélkül is érthető viselkedésű, ámde megvalósításukban nehéznek tűnő kombinátorokkal. Ezek az önhivatkozó kombinátorok, mint az \(\Omega\) divergáló kombinátor és az \(Y\) fixkombinátor. Legalább fogalmilag jól el tudjuk képzelni őket, hiszen a tőlük elvárt viselkedés előírása világos:</p>
+		\[
+			\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\dots
+		\]
+		<p>illetve a gyakorlatban hasznosabb</p>
+		\[
+			\textbf{Y}\ f\;\;\rhd_\beta^+\;\;f\ \left(\mathbf{Y}\ f\right)
+		\]
+		<p>a szakirodalomból persze tudjuk, ezeket az érdekes önhivatkozó kombinátorokat mmiként lehet tiszta lambda-kalkulusban kifejezni:
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \left(\lambda z. z z\right) \left(\lambda z. z z\right)\\
+				\textbf{Y} &\equiv \Big(\lambda z f. f\left(z z f\right)\Big) \Big(\lambda z f. f\left(z z f\right)\Big)
+			\end{aligned}
+		\]
+		<p>Akár papír és ceruza révén kézzelelvégzve a redukciókat, láthatjuk hogy az elvárt viselkedés teljesül (sőt az \(\Omega\) az elvártnál szorosabb állítás is teljesül: épp egylépéses \(\rhd_\beta\) redukciókkal megy át rendre saját magába).
+		<p>De vajon hogyan lehet első ízben arra rájönni, felfdezni, hogy ez a megfelelő megvalósítás? Talán egy kicsit segít, ha legalább valami tapogatozó fogalomnevet adunk az egész, illetve annak összetevő részkifejezéseinek, és a változó maga is beszédesebb nevet kap:</p>
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \underbrace{\left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right) \left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right)}_{\textbf{self}}\\[7pt]
+				\textbf{Y} &\equiv \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big) \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big)
+			\end{aligned}
+		\]
+		<p>E kis <em>ad hoc</em> seggédfogalmaink jelentése: \(\textbf{self}\) nem más, mint a mindenkori &bdquo;definiendum&rdquo;, vagyis az épp definiálás alatt  álló kifejezés, azaz maga a teljes kifejezés. Azonban az <em>önhivatkozás</em>nak a tiszta lambda-kalkulusban nem létezik explicit, szintaktikailag és szemantikailag &bdquo;elsőosztályúan&rdquo; támogatott formája, viszont élhetünk a <em>közvetett</em>, implicit önhivatkozás módszerével, amely a híres Cantor-i átlós gondolat egyfajta szellemi örököse. Ennek folyományaként a szelfet csak úgytudjuk megvalósítani, ha egy részkifejezés, &bdquo;félkifejezés&rdquo; saját magára való alkalmazásaként állítjuk elő a szelfet. Az ön-alkalmzásként előálló \(\textbf{self}\) összetevő félkifejezését fogjuk \(\textbf{semiself}\) néven említeni.</p>
+		<p>Így talán már sejlik valami az alapgondolatból. Önhivatkozó szelfjeink mind rendre valamely önmagára alkalmazott &bdquo;szemiszelf&rdquo; alapján állnak elő, sima béte-redukcióval akár papíron és ceruzával utána lehet számolni, hogy jó. A szemléletesség kedvéért a szemiszelfet köző helyi változót \(s^{\frac12}\) jelöléssel jelöltük, képzeletben úgy lehet gondolni rá, hogy ahol a bétra-redukció majd \(s^{\frac12} s^{\frac12}\) részkifejezést helyettesít, ott a két egymás után álló szemiszelf-behelyettesítés, szóval a \(s^{\frac12}s^{\frac12}\) majd teljes szelffé ugtik össze, amolyan ,,szemiszelf + szemiszelf = szelf'' analógiára.</p>
+		<p>De még ez is inkább csak emlékeztetőnek, a képlet megtanulását valamelyest segítő segédeszköznek tűnik, az még ebből sem látszik: miként jöttek rá erre először? Amit én sem tudok, ezért az lábbiakban nem történeti, hanem személyes leírás fog következni, mi az az út, ahogy az én számomra végül megszilárdult az egész.</p>
+	<p>Bár teljesen önálló nem lesz ez az út (szinte biztos, hogy a szelf-kalkulus-gondolatra hatott valemyel más témában évekkel korábbanolvasott írás, valószínűleg Luca Cardelli valamelyik &bdquo;object calculus&rdquo;-a, ld. például Martín Abadi and Luca Cardelli: &bdquo;<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf">An Imperative Object Calculus. Basic Typing and Soundness</a>&rdquo;. Mindenesetre ez az emlék elég régi volt már ahhoz, hogy az önreferncia tanulásakor az alapgondolat valamelyest szervesen merüljön föl újra a személyes tanulás során.
+</p>
+
+		<h3>A gondolatmenet vázlata</h3>
+
+		<p>Ebben az írásban az önhivatkozással kapcsolatos inspiráló és tágabb témákat (quine, önreprodukció) nem érintve, kizárólag a lambda-kalkulusra közvetlenül ráhúzható ötlet-szeletet mutanám be, és azt is egy közvetítő köztes lépésen keresztül:</p>
 		<ol>
 			<li>Elsőként mégiscsak kibővítem a lambda-kalkulus nyelvét egy afféle ad hoc &bdquo;<em>szelf-kalkulussá</em>&rdquo;, amelybe beemelem a &bdquo;szelf&rdquo; fgalmát a függvényekkel szinte teljesen egyenrangú közvetlen tárgynelvi elemként. Erre példákat is mutatok.</li>
 			<li>Utána pedig megmutatom, hogy az efféle &bdquo;self-calculus&rdquo; valójában csak szintaktikus cukorként viszonyul a lambda-kalkulushoz: kifejezőerejében ugyanis azt nem haladja meg. Erre bizonyíték egy fordítástechnika (&bdquo;felezett-szelf&rdquo;), amely tetszőleges szelf-kalkulusbeli kifejezést lefordít vele szemantikailag egyenértékű tiszta lambda-kalkulusbeli kifejezésre.</li>
@@ -51,13 +89,351 @@ in fac 5</code></pre>
 		<h2 id="let-rec">A let-rec kifejezés</h2>
 		<p>Részletesebben ld. <a href="let-rec.hu.html">külön oldalon</a>.</p>
 
-		<h2>Különleges szelf-konstans/kulcsszó</h2>
+		<h2>Különleges (lefoglalt) szelf-konstans/kulcsszó</h2>
+
+		<p>Az alapondolat egyszerű: ott, ahol az önhivatkozásra szükség lenne, használjuk mindig a külön a célra lefoglalt \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) szimbólumot! Nem valami matematikus megoldás, de első körben nézzük meg ezt a módot!</p>
+		<p>Rekurzív függvényre nézzük az iskolai matematikából ismert faktoriális-függvény példáját:</p>
+		\[
+			\underbrace{
+				\lambda n\ .\
+					\left(
+						\textbf{greaterThan}\ n\ \textbf{0}
+					\right)
+					\Bigg(
+						\textbf{times}\ n
+						\left(
+							\boxed{\boxed{\boxed{\textbf{SELF}}}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+						\right)
+					\Bigg)
+					\textbf{1}
+			}_{\textbf{fac}}
+		\]
+		<p>Egyszerűbb felépítésű példákat is nézzünk, e célból nézzük meg a lambda-kalkulus híres-hírhedt önhivatkozó kombinátorait:</p>
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \boxed{\boxed{\boxed{\textbf{SELF}}}}\\
+				\textbf{Y} &\equiv \lambda\ f\ .\ f\left(\boxed{\boxed{\boxed{\textbf{SELF}}}} f\right)
+			\end{aligned}
+		\]
+		<p>Eufemisztikusan elmondhatjuk, hogy e lépésnek rendkívül kicsiny volt a hozadéka absztrakció és általában a kérdés matematikai megértése terén, és nem sokkal léptünk előre abban a célban, hogy rájöjjünk a tiszta lambda-kalkulusra való fordítás ötletére. Ugyanakkor bármily kicsiny is volt ez a lépés, az ennek szellemében folytatódó következő lépéssel együtt már kezdeni fog kirajzolódni legalábbis az alapgonolat csírája.</p>
 
 		<h2>Különleges szelf-kötés: a szelf-kalkulus</h2>
 
+		<p>Különleges szelf-kulcsszó lefoglalásánál valamivel &bdquo;matematikusabb&rdquo; ötlet az, ha nem lefoglalt kulcsszót, hanem külön &bdquo;szelf-lekötő&rdquo; <em>operátort</em> vezetünk be.</p>
+
+		<p>Ennek alapötlete az, hogy amiként a lambda-kalkulusban a lambda-operátor képes változót megkötni, és hatáskörén belül azt afféle lokális változóként bevezetni, amihez aztán a béta-redukció során &bdquo;érték&rdquo; is köthető, ennek mintájára, analógiájára bevezethetnénk a lmandához hasonló operátort, mondjuk egy \(\sigma\)-operátort, amelyet teljesen a lambadoperátor mintjájára használnánk.</p>
+		<p>Lenne egy szintaktikai és egy szemantikai különbség:</p>
+		<dl>
+			<dt>Szemantikailag:</dt>
+			<dd>
+				Ha a \(\sigma\)-operátorral lekötünk egy \(s\)-változót valamilyen, az operátor hatáskörében álló \(\Phi\) kifejezésre, akkor az \(s\) minden \(\Phi\)-beli előfordulása helyébe a &bdquo;szelfet&rdquo; kell érteni, tehát a <em>teljes</em> \(\sigma s.\Phi\) kifejezést! Egyszóval, a \(\sigma\) operátor valóban a <em>közvetlen, explicit</em> önhivatkozás lehetőségét teremti meg! Formalizáltan ezt úgy rögzíthetjük, hogy bevezetünk egy \(\rhd_\sigma\) redukciófogalmat, amelynek szabálya:
+				\[\sigma s.\Phi\;\;\rhd_\sigma\;\;\Phi\left[\dfrac{\sigma s.\Phi}{s}\right]\]
+			</dd>
+			<dt>Szintaktikailag:</dt>
+			<dd>szintaktikailag igazából nem lenne semmi plusz megkötés, szabadon kombinálhatóak a szigma- és a labda-operátorok a nekik megfelelő szabályok szerint, de ez konrétan azt jelenti, hog a \(\sigma\)-kifejezésre <em>nem</em> értelmezünk <em>(függvény)alkalmazás</em>-műveletet, vagyis argumentumként expliciten átadott értéket. Pontosabban formalizálva: a \(\sigma\)-kifejezésre nincs beta-redukció, csak a fent említett &bdquo;szigma-redukció&rdquo;. itt konkrétan ebben az írásban a \(\sigma\)-operátor mindig a legkülső operátor lesz (talán ennél elképzelhető általánosabb felállás is, de itt ez is elég lesz).</dd>
+		</dl>
+		<p>Nézzünk példákat. Elsőnek egy bonyolult példa: rekurzív függvény kifejezése, mégpedig az iskolából  ismert faktoriális-függvényé:</p>
+		\[
+			\underbrace{
+				\sigma\ \boxed{s}\ .\
+					\lambda n\ .\
+						\left(
+							\textbf{greaterThan}\ n\ \textbf{0}
+						\right)
+						\Bigg(
+							\textbf{times}\ n
+							\Big(
+								\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+							\Big)
+						\Bigg)
+						\textbf{1}
+			}_{\textbf{fac}}
+		\]
+
+		<p>Itt is nézzük meg egyszerűbb felépítésű példák gyanánt a híres-hírhedt önhivatkozó kombinátorokat:</p>
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \left[\!\left[\sigma\ s\ .\ s\right]\!\right]\\
+				\textbf{Y} &\equiv \left[\!\left[\sigma\ s\ .\ \lambda\ f\ .\ f\ \left(s\ f\right)\right]\!\right]
+			\end{aligned}
+		\]
+		<p>
+			Az utóbbi kettőnél nézzük is meg, vajon tényelg jól, az elvárt módon viselkednek-e a rendukció tényleges végrehajára során?
+			Bonyolultabb levezetéseknél soronként egyetlen szabály alkalmazása fog szerepelni.
+			Minden egyes szabály elsütésének bal- és jobboldalán is aláhúzás fogja jelölni a szabály által érintett ráilleszkedő bemeneti és kimeneti <em>redex</em>et. A redex (vagyis az aktuális redukciós szabályra közvetlenül ráilleszkedő részkifejezés) aláhúzással való megjelölésének ötletét, a levezetés ily módon való olvashatóbbá tevését Dr. Csörnyei Zoltán „<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>” c. könyvéből vettem (azzal a pici módosítással, hogy a redukció utáni kifejezésben is megjelölöm az érintett &bdquo;kimeneti&rdquo; redexet).
+		</p>
+		<p>\(\Omega\)-kombinátor szigma-kalkulusbeli változata esetében:</p>
+		\[
+			\sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \dots
+		\]
+		<p>ez megfelel az \(\Omega\)-kombinátor elvárt operacionális szemantikájának (divergáló, deminden lépésben redukálódó önmagába &bdquo;redukálódó&rdquo;).</p>
+		<p>Lássuk a másik önhivatkozó kombinátor, az <span class="combinator">Y</span> viselkedését, konrétan valamely \(F\) argumentummal:</p>
+		\[
+			\begin{matrix}
+				\textbf{Y}\ F                                                              &               &  &  & \\[6pt]
+				|||                                                                        &               &  &  & \\[9pt]
+				\overbrace{\underline{\Big(\sigma s\lambda f.f(sf)\Big)}}^{\textbf{Y}}\ F  &  \rhd_\sigma  & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}}\ f\Big)\bigg)}\ F  &  & \\[6pt]
+				& & |||  &  & \\[6pt]
+				& & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}}\ f\Big)\bigg)\ F}  &  \rhd_\beta  &  \underline{F\Bigg(\overbrace{\Big(\sigma s\lambda f^\prime.(sf^\prime)\Big)}^{\textbf{Y}}\;F\Bigg)} \\[8pt]
+				& & & & ||| \\[8pt]
+				& & & & F\left(\textbf{Y}\ F\right)
+			\end{matrix}
+		\]
+
+		<h2>Naív (hibás, de javítható) fordítás lambda-kalkulusra</h2>
+
+		\[
+			\Bigg(
+				\underbrace{
+					\lambda\ \boxed{s}\ .\
+						\lambda n\ .\
+							\left(
+								\textbf{greaterThan}\ n\ \textbf{0}
+							\right)
+							\bigg(
+								\textbf{times}\ n
+								\Big(
+									\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+								\Big)
+							\bigg)
+							\textbf{1}
+				}_{\textbf{fac}}
+			\Bigg)
+			\Bigg(
+				\underbrace{
+					\lambda\ \boxed{s}\ .\
+						\lambda n\ .\
+							\left(
+								\textbf{greaterThan}\ n\ \textbf{0}
+							\right)
+							\bigg(
+								\textbf{times}\ n
+								\Big(
+									\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+								\Big)
+							\bigg)
+							\textbf{1}
+				}_{\textbf{fac}}
+			\Bigg)
+		\]
+		<p>innen \(\beta\)-redukcióval</p>
+
+		\[
+			\underbrace{
+				\lambda n\ .\
+					\left(
+						\textbf{greaterThan}\ n\ \textbf{0}
+					\right)
+					\bigg(
+						\textbf{times}\ n
+						\Big(
+							\boxed{\textbf{fac}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+						\Big)
+					\bigg)
+					\textbf{1}
+			}_{\boxed{\textbf{fac}}}
+		\]
+
+		<p>Ha ezt átgondoljuk, kiderül, hogy ez az irány nem jó. Aznban a faktoriális mint rekurzív függvény kissé túl összetett, nézzük meg itt  híres-hírhedt önhivatkozó kombinátorok példáján mint egyszerűbb felépítésű példán, mi is az, ami nem jó:</p>
+
+		\[
+			\begin{aligned}
+				\Omega
+				&\equiv
+				\underbrace{
+					\left(
+						\lambda\ s\ .\ s
+					\right)
+				}_{\textbf{self}}
+				\;
+				\underbrace{
+					\left(
+						\lambda\ s\ .\ s
+					\right)
+				}_{\textbf{self}}
+
+				\\
+
+				\textbf{Y}
+				&\equiv
+				\underbrace{
+					\Big(
+						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+					\Big)
+				}_{\textbf{self}}
+				\;
+				\underbrace{
+					\Big(
+						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+					\Big)
+				}_{\textbf{self}}
+			\end{aligned}
+		\]
+
+		<p>Nézzük meg, jók-e ezek: írjuk fül ki rendre az \(\Omega\) redukciós lépéssorozatát, és az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozatát is! Úgy viselkedik-e a redukció, ahogy ezektől az önrhivatkozó kombinátoroktól elvárnánk?</p>
+		\[
+			\Omega
+			\;\;\equiv\;\;
+			\left(
+				\lambda\ s\ .\ s
+			\right)
+			\left(
+				\lambda\ s\ .\ s
+			\right)
+			\;\;\rhd_\beta\;\;
+			\lambda\ s\ .\ s
+		\]
+		<p>Hát az \(\Omega\) nem. Ez egyetlen lépésben terminált, az igazi \(\Omega\)-nak végtelenségig kellene tartania a redukcióknak. Lássuk most az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozatát:</p>
+		\[
+			\textbf{Y}\ f
+			\;\;\equiv\;\;
+			\Big(
+				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+			\Big)
+			\Big(
+				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+			\Big)
+			\ f
+			\;\;\rhd_\beta\;\;
+			f\
+			\Bigg(
+				\Big(
+					\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+				\Big)\
+				f
+			\Bigg)
+			\;\;\rhd_\beta\;\;
+			f\
+			\bigg(
+				\lambda\ f\ .\ f\ \left(f\ f\right)
+			\bigg)
+		\]
+
+		<p>Láthatjuk, hogy az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozata sem az elvárás szerinti.</p>
+		<p>Tehát jó-e mindez? <em>Nem!!!</em> Hamarosan kiderül, miért nem az, de egyelőre nézzük meg, mi lenne a folyománya, ha jó lenne.</p>
+
+		<p>Ha ez jó lenne (nem az!), akkor már írhatnánk is fel a már alakra is szép, egyszerű általános fordítási szabályt szelf-kalkulusról ,,tiszta'' lambda-kalkulusra: testszőleges \(\sigma s.\Phi\) szelf-kalkulus kifejezésre</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\left(
+						\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+			\
+			\underbrace{
+				\left(
+					\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+		\]
+
+		<p>Majdnem jó gondolatmenet, de egy javítható részletben mégis hibás. Még nem illeszkednek össze hézagmentesen a részletek. valójában a definiálandó \(\textbf{fac}\) nem rendre a két-két részkifejezés, hanem a két részkifejezésből alkotott teljes nagy kifejezés lenne! Valahogy így:</p>
+		\[
+			\underbrace{
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+			}_{\textbf{fac}}
+		\]
+		<p>A kívánt faktoriális-függvény (\(\textbf{fac}\)) tehát a teljes nagy kifejezés, ő itt a ,,szelf''. A két részkifejezés nem maga a kívánt \(\textbf{fac}\) nem ők játsszák a szelf szerepét, ők afféle ,,szemiszelf'', és jelölésben is különböztessük meg valamiféle rendszerezett módon: jelöljük úgy, hogy \(\textbf{fac}^{\frac12}\), a kis feles-kitevő különböztesse meg mindig a félkifejezést az egésztől, a szemiszelfet a mindenkori szelftől!</p>
+		<p>Általános módon felírva valahogy így:</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+							\lambda s. \Phi
+					\right)
+				}_{\textbf{semiself}}
+				\
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{semiself}}
+			}_{\textbf{self}}
+		\]
+		<p>vagy tömörebben, a &bdquo;\(\textbf{semiself}\)&rdquo; helyett a tömörebb és a modulárisabb \(\textbf{self}^{\frac12}\) jelöléssel:</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+							\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+				\
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+			}_{\textbf{self}}
+		\]
+
+
+		<h2>A fordítás javítása</h2>
+
+		<p>
+			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
+			A hiba végső oka az, ahogy a \(\beta\)-redukciót ténylegesen elvégezzük, kiderül,
+			hogy ahol a szelfet várnánk el, oda pont a szemiszelf kerül, pont nem illeszkedik össze a gondolatmenet.
+		</p>
+		<p>
+		</p>
+
 		<h2>A  &bdquo;felezett-szelf fordítástechnika&rdquo;</h2>
 		\[
-			[\![\sigma s. \Phi]\!] \equiv \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right) \left(\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]\right)
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+					}_{\textbf{semiself}}
+				\right)
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+					}_{\textbf{semiself}}
+				\right)
+			}_{\textbf{self}}
 		\]
+
+		<h2>Példák</h2>
+
 	</body>
 </html>
