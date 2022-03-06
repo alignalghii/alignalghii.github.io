@@ -9,7 +9,7 @@ echo "Unit test";
 for feature in filter-mathjax-contents;
 	do
 		echo "- Feature: $feature";
-		echo $fixture/$feature/*.source.dat\
+		find $fixture/$feature -iname '*.source.dat'\
 		|
 		while read sourceFile;
 			do
