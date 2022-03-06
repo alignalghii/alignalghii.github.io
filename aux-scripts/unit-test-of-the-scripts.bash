@@ -6,7 +6,7 @@ fixture=$here/unit-test-fixtures;
 declare -A run=([pl]="perl" [awk]="awk -f" [sed]="sed -n -f");
 
 echo "Unit test";
-for feature in filter-mathjax-contents;
+for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 	do
 		echo "- Feature: $feature";
 		find $fixture/$feature -iname '*.source.dat'\
