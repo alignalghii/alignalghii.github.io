@@ -14,7 +14,6 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 		while read sourceFile;
 			do
 				sampleName=${sourceFile%.source.dat};
-				expectationFile=$sampleName.expectation.dat;
 				echo "  Samples:"
 				echo "  - Sample \``basename $sampleName`':";
 				echo "    Testers:";
