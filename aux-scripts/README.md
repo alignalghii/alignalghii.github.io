@@ -69,6 +69,8 @@ x;
 
 This is not so obscure as it seems first (see the comments in the [source code](filter-mathjax-contents.sed)). In essence, it uses flags like the perl sample, but Sed lacks variables, it is like an assembly language. Sed uses the „pattern space” and „hold space” as sort-of registers instead of variables, that is its way to implement statefulness. Here, in the sample, the trick of algebraic conjoint is used: some operations can be implemented well by swapping these two registers, doing the intended operation, and finally swapping the registers back.
 
+Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be oranized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.
+
 ### MathJax janitor
 
 Remove empty lines (regarded as superfluous and distracting),
