@@ -10,35 +10,34 @@
 			<li><a href="index.hu.html">Hungarian version of this personal main page</a></li>
 		</ul>
 		<h1>Personal main page: my projects site</h1>
-		<h2>Tag categories</h2>
-		<h3>Mathematics, my relationship with math</h3>
+		<h2>Mathematics, my relationship with math</h2>
 		<ul>
 			<li><a href="Haskell-and-math.en.html">Haskell and mathematics (and the way I relate to them)</a>. A short personal writing about the topic. How can Haskell and mathematics strengthen each other mutually, and why is it necessary to keep an openness towards the whole of mathematics?</li>
 			<li><a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/doc/haskell">My rather ad-hoc collision detection solution with Fourier-Motzkin elimination</a>. A nicer and cleaner sourcecode could be achieved with Agda, at least for documentation purposes, because vectors and matrices are apt to be <a href="">represented with dependent-types</a>.</li>
 			<li>Agda sample for dependent types, also a very simple Agda proof</li>
 			<li>A proof in category theory, read on Quora, but formalized into  Gentzen-tysle deduction proof tree by myself</li>
 		</ul>
-		<h2>Samples about self-reference</h2>
+		<h3>Samples about self-reference</h3>
 		<ul>
 			<li><a href="self-calculus-and-semiself-translation.en.html">Self-calculus and semi-self translation</a>: recursive functions in combinatory logic. A heuristic way to Y fixpoint-combinator. Indirect reference.</li>
 			<li><a href="file:///home/physis/Documents/my-blog/alignalghii.github.io/let-rec.en.html">My simple page trying to write about formalizing the semantics of the famous lazy let-rec construct</a>. The lazy let-rec construct is important also in itself, and is used both in Swiestra&apos;s attribute grammar article.</li>
 			<li><a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">My personal first steps</a> in understanding  Wouter Swierstra&apos;s article <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>. My personal mini-project to explain the strange-looking let-rec used by the article.</li>
 		</ul>
 
-		<h3>Implementations of mini programming languages/calculi</h3>
+		<h2>Implementations of mini programming languages/calculi</h2>
 		<ul>
 			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
 			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
 			<li>A super-concise implementation (reduction algorithm), but only in early steps, not having any user interface.</li>
 		</ul>
 
-		<h3>My most recent Haskell projects</h3>
+		<h2>My most recent Haskell projects</h2>
 		<p>&hellip; showing my most recent knowledge and coding style</p>
 		<ul>
 			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
 			<li>The already mentioned, new, yet less featureful, but conceptually clean combinatory logic interpreter, with well-organized clean sourcecode</li>
 		</ul>
-		<h3>Testing</h3>
+		<h2>Testing</h2>
 		<ul>
 			<li>Unit testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/UnitTest.hs">sample</a> with its two spec files <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeriesSpec.hs">effectless spec</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeries.hs">effectless</a>) and <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeriesSpec.hs">effectful</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeries.hs">effectful</a>) as part of my <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">client program project</a> to the WikiMedia search API. It uses Hspec as a test framework.</li>
 			<li>Integration testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/IntegrationTest.hs">sample</a> as part of my client program project to the WikiMedia search API. It uses custom Haskell code as test framework.</li>
@@ -51,13 +50,13 @@
 				</ul>
 			</li>
 		</ul>
-		<h3>My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</h3>
+		<h2>My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</h2>
 		See <a="">tag</a>
 		<ul>
 			<li><a href="https://github.com/alignalghii/lazy-IO-for-pure-functional-interactivity">Lazy IO interactivity and update-hash</a></li>
 			<li><a href="https://github.com/alignalghii/tricky-foldr-oneliner-for-a-complex-query">Tricky foldr order</a></li>
 		</ul>
-		<h3>Functional web apps</h3>
+		<h2>Functional web apps</h2>
 		See <a="">tag</a>
 		<ul>
 			<li><a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a>, example for JavaScript in the declaritve style. See the most functional-style part in the <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">model</a> module</li>
@@ -66,10 +65,10 @@
 			<li>Opposite of a web app: a <a href="https://github.com/alignalghii/sample-search-client-paginated-with-monad-transformers">crawler in Haskell with monad transfomers</a></li>
 		</ul>
 
-		<h3>My old non-Haskell projects</h3>
+		<h2>My old non-Haskell projects</h2>
 		<ul>
 			<li><a href="old-projects.html">My old reference works and old projects</a>. Some of my small PHP web apps, with their standalone custom hand-made framework.</li>
 		</ul>
-		<h3>My old Haskell projects</h3>
+		<h2>My old Haskell projects</h2>
 	</body>
 </html>
