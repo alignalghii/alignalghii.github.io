@@ -14,16 +14,29 @@
 		<h3>Mathematics, my relationship with math</h3>
 		<ul>
 			<li><a href="Haskell-and-math.en.html">Haskell and mathematics (and the way I relate to them)</a>. A short personal writing about the topic. How can Haskell and mathematics strengthen each other mutually, and why is it necessary to keep an openness towards the whole of mathematics?</li>
-			<li><a href="self-calculus-and-semiself-translation.en.html">Self-calculus and semi-self translation</a>: recursive functions in combinatory logic. A heuristic way to Y fixpoint-combinator. Indirect reference.</li>
-			<li>Collision detection with Fourier-Motzkin elimination. Mention Agda.</li>
+			<li><a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/doc/haskell">My rather ad-hoc collision detection solution with Fourier-Motzkin elimination</a>. A nicer and cleaner sourcecode could be achieved with Agda, at least for documentation purposes, because vectors and matrices are apt to be <a href="">represented with dependent-types</a>.</li>
 			<li>Agda sample for dependent types, also a very simple Agda proof</li>
-			<li>A proof in category theory, read on Quora, but formalized into  Gentzen-tysle deduction proof treeby myself</li>
+			<li>A proof in category theory, read on Quora, but formalized into  Gentzen-tysle deduction proof tree by myself</li>
 		</ul>
+		<h2>Samples about self-reference</h2>
+		<ul>
+			<li><a href="self-calculus-and-semiself-translation.en.html">Self-calculus and semi-self translation</a>: recursive functions in combinatory logic. A heuristic way to Y fixpoint-combinator. Indirect reference.</li>
+			<li><a href="file:///home/physis/Documents/my-blog/alignalghii.github.io/let-rec.en.html">My simple page trying to write about formalizing the semantics of the famous lazy let-rec construct</a>. The lazy let-rec construct is important also in itself, and is used both in Swiestra&apos;s attribute grammar article.</li>
+			<li><a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">My personal first steps</a> in understanding  Wouter Swierstra&apos;s article <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>. My personal mini-project to explain the strange-looking let-rec used by the article.</li>
+		</ul>
+
+		<h3>Implementations of mini programming languages/calculi</h3>
+		<ul>
+			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
+			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
+			<li>A super-concise implementation (reduction algorithm), but only in early steps, not having any user interface.</li>
+		</ul>
+
 		<h3>My most recent Haskell projects</h3>
 		<p>&hellip; showing my most recent knowledge and coding style</p>
 		<ul>
 			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
-			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
+			<li>The already mentioned, new, yet less featureful, but conceptually clean combinatory logic interpreter, with well-organized clean sourcecode</li>
 		</ul>
 		<h3>Testing</h3>
 		<ul>
