@@ -20,8 +20,8 @@
 					<li><a href="#selfref">Samples about self-reference</a></li>
 				</ul>
 			</li>
-			<li><a href="#calculi">Implementations of mini programming languages/calculi</a></li>
-			<li><a href="#recent">My most recent Haskell projects</a></li>
+			<li><a href="#calculi">Implementations of mini programming languages/calculi. Using zippers</a></li>
+			<li><a href="#recent">My most recent Haskell projects. Using monad transformers</a></li>
 			<li><a href="#testing">Testing</a></li>
 			<li><a href="#onliner">My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</a></li>
 			<li><a href="#webapp">Functional web apps</a></li>
@@ -52,7 +52,7 @@
 			<li><a href="index.hu.html#selfref">Hungarian version of this section</a></li>
 		</ul>
 
-		<h2 id="calculi">Implementations of mini programming languages/calculi</h2>
+		<h2 id="calculi">Implementations of mini programming languages/calculi. Using zippers</h2>
 		<ul>
 			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
 			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
@@ -63,7 +63,7 @@
 			<li><a href="index.hu.html#calculi">Hungarian version of this section</a></li>
 		</ul>
 
-		<h2 id="recent">My most recent Haskell projects</h2>
+		<h2 id="recent">My most recent Haskell projects. Using monad transformers</h2>
 		<p>&hellip; showing my most recent knowledge and coding style</p>
 		<ul>
 			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
@@ -104,9 +104,10 @@
 
 		<h2 id="webapp">Functional web apps</h2>
 		<ul>
-			<li><a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a>, example for JavaScript in the declaritve style. See the most functional-style part in the <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">model</a> module</li>
-			<li><a>Mini Scotty</a>, a Scotty webmicroframework sample</li>
+			<li>Mostly cliens-side: <a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a>, example for JavaScript in the declaritve style. See the most functional-style part in the <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">model</a> module</li>
+			<li>Mostly server-side: <a>Mini Scotty</a>, a Scotty webmicroframework sample</li>
 			<li><a href="https://github.com/alignalghii/functional-design-upon-imperative-substrate">Functional design upon imperative substrate</a> (JavaScript, PHP)</li>
+			<li>Both-tiers webapp sample: floor plan designer (frontend) with lightweight user and document ERP (backend).</li>
 			<li>Opposite of a web app: a <a href="https://github.com/alignalghii/sample-search-client-paginated-with-monad-transformers">crawler in Haskell with monad transfomers</a></li>
 		</ul>
 		<ul class="menu">
