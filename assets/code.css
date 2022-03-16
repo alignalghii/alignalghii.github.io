@@ -3,6 +3,10 @@ span.combinator {
 	font-family: monospace;
 }
 
+span.code {
+	font-family: monospace;
+}
+
 span.emcode {
 	font-weight: bold;
 	font-family: monospace;
