@@ -6,6 +6,8 @@
 
 		<link rel="stylesheet" href="assets/main.css"/>
 		<link rel="stylesheet" href="assets/menu.css"/>
+		<link rel="stylesheet" href="assets/code.css"/>
+		<link rel="stylesheet" href="assets/definition.css"/>
 
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -21,14 +23,77 @@
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 		<h1>&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+
 		<h2>Motivation</h2>
-		<p>to implement recursive functions and recursion at all seems to be hard in pure lambda-calculus, because the concept of &bdquo;<em>self</em>&rdquo; is not a first-class citiizen. Can it be encoded or simulated somehow?</p>
+
+		<p>Probably the main goal of this present writing of mine is better done in Daniel Etridge&apos;s &bdquo;<a href="https://medium.com/@dkeout/why-you-must-actually-understand-the-%CF%89-and-y-combinators-c9204241da7a">Why you must actually understand the \(\Omega\) and \(\textbf{Y}\) combinators</a>&rdquo; article (which I read only afterwards). Still, I let my writing staying, as this was my own personal way to discover the felleing and the experience of the topics for myself and explaing it to myself.</p>
+
+		<h3>Implementation of recursive functions in lambda calculus</h3>
+
+		<p>For beginners who are at their beginnings steps at learning lambda calculus, the mathematical foundation of functional programming, it may seem hard to understand how recursive functions can be defined with the seemingly rather Spartan and limited toolkit of lambda calculus. Lambda calculus may seem to lack the necessary expressive power to define recursive functions. Although there is an explicit notation for the notion of parameter in the syntax of this minimalistic language formalism, but there is no explicit way to express the notion of <em>self</em>: we cannot repeat the name of the freshly defined function in the definition body, since lambda calculus totally lacks any notion of named functions at all. In summary: there is no way to express self-reference explicitly.</p>
+		<p>Practical functional languages can define self-refrence easily, since they can define named functions. Lambda calculus lacks named functions, still, it can define recursive function, by a technique called implicit or indirect self-reference. Understanding this is a very steep step, a part of the hard learning curve.</p>
+		<p>In practical functiona programming languages the  function definition is usually combined with name-giving, a very expressive tool enabling direct self-reference. This can be done either globally:</p>
+		<pre><code class="language-haskell">fac n = if n == 0
+    then 1
+    else n * fac (n - 1)</code></pre>
+		<p>or locally:</p>
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>in either cases, the self-reference is explicit/direct: the definition body can simply refer to the name itself that is just being defined. And it is exactly this kind of (direct/explicit) self-reference that is lacking in pure lambda calculus:</p>
+		\[
+			\boxed{\textbf{fac}} :\equiv \lambda n. \left(\mathbf{greaterThan}\ n\ 0\right) \Bigg(\mathbf{times}\ n\ \left(\boxed{\mathbf{fac}} \left(\mathbf{minus}\ n\ 1\right)\right) 1\Bigg)
+		\]
+
+		<p>the above expression is <em>invalid</em> in pure lambda-calculus, because any such kind of named definition, name-giving is not a part of the object language of the lambda-calculus, only a part of the metalanguage surrounding it, thus, not a lambda term on its own! In short, the concept of &bdquo;<em>self</em>&rdquo; is not a first-class citizen in this language formalism.</p>
+		<p>Can it be encoded or simulated somehow, in some indirect, implicit way? Lambda calculus is suprprisingly expressive: it can booleans,  represent numbers (Church numerals), finite algebraic datatypes. Can it represent recursive functions (and recursive datatypes) too? But how to achieve the seemingly lacking capability of self-reference?</p>
+		<p>People who have an interest in biological analogies know about a kind of <em>indirect</em>/<em>implicit</em> self-reference in programming, manifested in the <a href="https://www.scientificamerican.com/article/go-forth-and-replicate-2008-02/">self-reproduction machine</a> of Conway&apos;s cellular automata, following very strong biological analogies. The main idea is that Conway&apos;s self-replication machine contains a kind of DNA part, which can govern assemblage. The machine assemblages its own copy by following the rules encoded in its own DNA. By how is replicated the DNA part? It cannot contain itself! But it does not need to contain itself. The DNA part is simply copied. Self-replication can be down partly by rule-governed assemblage, partly by simple copying of the rule tape. This kind-of self-replication does not need an explicit, direct self-concept: the concept of self is implemented implicitly, in an emergent way.</p>
+		<p>The same idea is realized in the so-called <em>quine</em>s, or <em>self-reps</em>: programs that can print out their own sourcecode listing without resorting to any direct (operating-system misusing) tool. Quines are based on the idea of self-quotation, a logical approach very similar and related to the diagonal argument and to many logical paradoxes. See David Madore&apos;s article on <a href="http://www.madore.org/~david/computers/quine.html">Quines (self-replicationg programs)</a>.</p>
+		<p>In this writing, these interesting achievements of the 20th century mathematics are not mentioned any deeper, and only some thoughts restricted to the realm of lambda-calculus will be presented.</p>
+
+
+		<h3>Famous self-referent combinators of lambda calculus</h3>
+
+		<p>Even before You meet the topics of recursive functions, You may have met the famous self-referent combinators of lambda calculus: they are usually mentioned as examples for topics in evalation strategies and divergence. The main point about these combinators are easy to explain, yet they may look like sort of paradoxical for the beginner. Most notably, the  \(\Omega\) divergence combinator and the \(\textbf{Y}\) fixkombinátor can be regarded as self-referent. For beginners, it is eay to explain what they are expected to behave like, but it is much harder to explain how they can be realized/implemented (how they achieve their working exactly). Their expected reduction behavior is:</p>
+		\[
+			\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\dots
+		\]
+		<p>this was a combinator simply to demostrate divergence. Much more useful is the fixed-pont combinator:</p>
+		\[
+			\textbf{Y}\ f\;\;\rhd_\beta^+\;\;f\ \left(\mathbf{Y}\ f\right)
+		\]
+		<p>Their expected reduction behavior is clear now &mdash; but can they be realized at all? We know from the prominent books and articles about lambda calculus, how they are defined (definitions by Curry, Church):
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \left(\lambda z. z z\right) \left(\lambda z. z z\right)\\
+				\textbf{Y} &\equiv \Big(\lambda z f. f\left(z z f\right)\Big) \Big(\lambda z f. f\left(z z f\right)\Big)
+			\end{aligned}
+		\]
+		<p>if we already know that, we can proove even by paper-and-pancil that the above definitions indeed satisfy the expectad behaviors. (Moreover, \(\Omega\) achieves that even with a single \(\rhd_\beta\) reduction step to transform itself into itself own, which may sound paradoxical at first, but it is trivial to see by pen-and paper.)
+		<p>De vajon hogyan lehet első ízben arra rájönni, felfdezni, hogy ez a megfelelő megvalósítás? Talán egy kicsit segít, ha legalább valami tapogatozó fogalomnevet adunk az egész, illetve annak összetevő részkifejezéseinek, és a változó maga is beszédesebb nevet kap:</p>
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \underbrace{\left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right) \left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right)}_{\textbf{self}}\\[7pt]
+				\textbf{Y} &\equiv \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big) \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big)
+			\end{aligned}
+		\]
+		<p>E kis <em>ad hoc</em> segédfogalmaink jelentése: \(\textbf{self}\) nem más, mint a mindenkori &bdquo;definiendum&rdquo;, vagyis az épp definiálás alatt  álló kifejezés, azaz maga a teljes kifejezés. Azonban az <em>önhivatkozás</em>nak a tiszta lambda-kalkulusban nem létezik explicit, szintaktikailag és szemantikailag &bdquo;elsőosztályúan&rdquo; támogatott formája, viszont élhetünk a <em>közvetett</em>, implicit önhivatkozás módszerével, amely a híres Cantor-i átlós gondolat egyfajta szellemi örököse. Ennek folyományaként a szelfet csak úgytudjuk megvalósítani, ha egy részkifejezés, &bdquo;félkifejezés&rdquo; saját magára való alkalmazásaként állítjuk elő a szelfet. Az ön-alkalmzásként előálló \(\textbf{self}\) összetevő félkifejezését fogjuk \(\textbf{semiself}\) néven említeni.</p>
+		<p>Így talán már sejlik valami az alapgondolatból. Önhivatkozó szelfjeink mind rendre valamely önmagára alkalmazott &bdquo;szemiszelf&rdquo; alapján állnak elő, sima béte-redukcióval akár papíron és ceruzával utána lehet számolni, hogy jó. A szemléletesség kedvéért a szemiszelfet köző helyi változót \(s^{\frac12}\) jelöléssel jelöltük, képzeletben úgy lehet gondolni rá, hogy ahol a bétra-redukció majd \(s^{\frac12} s^{\frac12}\) részkifejezést helyettesít, ott a két egymás után álló szemiszelf-behelyettesítés, szóval a \(s^{\frac12}s^{\frac12}\) majd teljes szelffé ugtik össze, amolyan ,,szemiszelf + szemiszelf = szelf'' analógiára.</p>
+		<p>De még ez is inkább csak emlékeztetőnek, a képlet megtanulását valamelyest segítő segédeszköznek tűnik, az még ebből sem látszik: miként jöttek rá erre először? Amit én sem tudok, ezért az lábbiakban nem történeti, hanem személyes leírás fog következni, mi az az út, ahogy az én számomra végül megszilárdult az egész.</p>
+	<p>Bár teljesen önálló nem lesz ez az út (szinte biztos, hogy a szelf-kalkulus-gondolatra hatott valemyel más témában évekkel korábbanolvasott írás, valószínűleg Luca Cardelli valamelyik &bdquo;object calculus&rdquo;-a, ld. például Martín Abadi and Luca Cardelli: &bdquo;<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf">An Imperative Object Calculus. Basic Typing and Soundness</a>&rdquo;. Mindenesetre ez az emlék elég régi volt már ahhoz, hogy az önreferncia tanulásakor az alapgondolat valamelyest szervesen merüljön föl újra a személyes tanulás során.
+</p>
+
+		<h3>Summary of the main thoughts</h3>
+
 		<p>In this writing, we will proceed in two steps:</p>
 		<ol>
 			<li>First we will design a &bdquo;<em>self-calculus</em>&rdquo;, where the notion of &bdquo;self&rdquo; is a frst-class citizen. we show some examples for its use.</li>
 			<li>Afterwards, we will demonstrate that such a &bdquo;self-calculus&rdquo; is just a syntactic sugar: it does not transcend pure lambda calculus in expressive power. We will present a technique (&bdquo;<em>halved-self translation</em>&rdquo;) that translates self-calculus to pure lambda calculus.</li>
 		</ol>
 		<p>After all that, we will see that &bdquo;halved-self translation&rdquo; is a rather expensive technique in terms of compactness, thus we will &bdquo;factor out&rdquo; the complicated part into a common function, (which will turn out to be the famous Y fixed-point combinator). thus separateing the wary parts in the name of conceptual modularity and reuse. In short: Y will be defined via  the &bdquo;halved-self translation&rdquo; technique, and any other recusrive functions will be defined via the Y combinator.</p>
+
+
 		<h2 id="let-rec">The let-rec construct</h2>
 		<pre><code class="language-haskell">let fac n = if n == 0
                 then 1
