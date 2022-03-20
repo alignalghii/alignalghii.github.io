@@ -67,15 +67,19 @@ in fac 5</code></pre>
 		\[
 			\begin{aligned}
 				\Omega     &\equiv \left(\lambda z. z z\right) \left(\lambda z. z z\right)\\
-				\textbf{Y} &\equiv \Big(\lambda z f. f\left(z z f\right)\Big) \Big(\lambda z f. f\left(z z f\right)\Big)
+				\textbf{Y} &\equiv \lambda f.\Big(\lambda z. f\left(z z\right)\Big) \Big(\lambda z. f\left(z z\right)\Big)
 			\end{aligned}
 		\]
-		<p>if we already know that, we can proove even by paper-and-pancil that the above definitions indeed satisfy the expectad behaviors. (Moreover, \(\Omega\) achieves that even with a single \(\rhd_\beta\) reduction step to transform itself into itself own, which may sound paradoxical at first, but it is trivial to see by pen-and paper.)
-		<p>De vajon hogyan lehet első ízben arra rájönni, felfdezni, hogy ez a megfelelő megvalósítás? Talán egy kicsit segít, ha legalább valami tapogatozó fogalomnevet adunk az egész, illetve annak összetevő részkifejezéseinek, és a változó maga is beszédesebb nevet kap:</p>
+		<p>if we already know that, we can prove even by paper-and-pancil that the above definitions indeed satisfy the expected behaviors. (Moreover, \(\Omega\) achieves that even with a single \(\rhd_\beta\) reduction step to transform itself into itself own, which may sound paradoxical at first, but it is trivial to see by pen-and paper.)</p>
+		<p>For the <span class="combinator">Y</span> combinator also an alternative definition would be appropriate, like this (prove it by reducing it on paper by pencil):</p>
+		\[
+			\textbf{Y} \equiv \Big(\lambda z f. f\left(z z f\right)\Big) \Big(\lambda z f. f\left(z z f\right)\Big)
+		\]
+		<p>De vajon hogyan lehet első ízben arra rájönni, felfedezni, hogy ez a megfelelő megvalósítás? Talán egy kicsit segít, ha legalább valami tapogatozó fogalomnevet adunk az egész, illetve annak összetevő részkifejezéseinek, és a változó maga is beszédesebb nevet kap:</p>
 		\[
 			\begin{aligned}
-				\Omega     &\equiv \underbrace{\left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right) \left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right)}_{\textbf{self}}\\[7pt]
-				\textbf{Y} &\equiv \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big) \Big(\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)\Big)
+				\Omega     &\equiv \underbrace{\left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right) \left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right)}_{\textbf{self}}\\[9pt]
+				\textbf{Y} &\equiv \underbrace{\Bigg(\;\underbrace{\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)}_{\textbf{semiself}}\;\Bigg) \Bigg(\;\underbrace{\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)}_{\textbf{semiself}}\;\Bigg)}_{\textbf{self}}
 			\end{aligned}
 		\]
 		<p>E kis <em>ad hoc</em> segédfogalmaink jelentése: \(\textbf{self}\) nem más, mint a mindenkori &bdquo;definiendum&rdquo;, vagyis az épp definiálás alatt  álló kifejezés, azaz maga a teljes kifejezés. Azonban az <em>önhivatkozás</em>nak a tiszta lambda-kalkulusban nem létezik explicit, szintaktikailag és szemantikailag &bdquo;elsőosztályúan&rdquo; támogatott formája, viszont élhetünk a <em>közvetett</em>, implicit önhivatkozás módszerével, amely a híres Cantor-i átlós gondolat egyfajta szellemi örököse. Ennek folyományaként a szelfet csak úgytudjuk megvalósítani, ha egy részkifejezés, &bdquo;félkifejezés&rdquo; saját magára való alkalmazásaként állítjuk elő a szelfet. Az ön-alkalmzásként előálló \(\textbf{self}\) összetevő félkifejezését fogjuk \(\textbf{semiself}\) néven említeni.</p>
