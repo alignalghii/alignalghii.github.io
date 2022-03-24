@@ -123,7 +123,7 @@ in y   (
 		<h2>Special self constant/keyword</h2>
 
 		<p>Although the let-rec construct shown above is still a rather complicated formalism, lacking the pureness and mathematical versatility of a logical calculus, we can already have an idea how to make a kind of self-calculus and direct self-reference.</p>
-		<p>The main idea is simple: let us use a special reserved (\boxed{\boxed{\boxed{\textbf{SELF}}}}\) symbol at the location of self-reference to denote the very act of selfreference! This is not a very dep solution with any mathematical insights, still, it is good for exploring the prossibilities in first round.</p>
+		<p>The main idea is simple: let us use a special reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) symbol at the location of self-reference to denote the very act of selfreference! This is not a very dep solution with any mathematical insights, still, it is good for exploring the prossibilities in first round.</p>
 		<p>Let us see an example for a familiary recursive function, e.g. the well-known factorial function from school math:</p>
 		\[
 			\underbrace{
@@ -152,9 +152,63 @@ in y   (
 
 		<h2>Special self-abstraction and binding of a self-variable: the self-calculus</h2>
 
-		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; ********** keyword Különleges szelf-kulcsszó lefoglalásánál valamivel &bdquo;matematikusabb&rdquo; ötlet az, ha nem lefoglalt kulcsszót, hanem külön &bdquo;szelf-lekötő&rdquo; <em>operátort</em> vezetünk be.</p>
+		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; to introduce a self abstractor, entirely to the analogy of lambda-calculus:</p>
+		<ul>
+			<li>
+				<span>In lambda-calculus, a \(\lambda\) abstractor binds a variable, that gets value by later parameter-passing (\(beta\)-reduction)</span>
+				\[
+					\left(
+						\lambda x . \Phi
+					\right)
+					\Psi
+					\;
+					\rhd_\beta
+					\;
+					\Phi
+					\left[
+						\frac\Psi x
+					\right]
+				\]
+			</li>
+			<li>
+				<span>To the complete analogy of this, we would introduce a \(\sigma\) abstactor, binding a variable, that gets value by identifying it with the entire term itself (a so-called &bdquo;self-abstraction&rdquo; or \(sigma\)-reduction).</span>
+				\[\sigma s.\Phi\;\;\rhd_\sigma\;\;\Phi\left[\dfrac{\sigma s.\Phi}{s}\right]\]
+			</li>
+		</ul>
+		<p>
+			In short, we make a fist-class citizen notion (and notation) to express th concept of &bdquo;self&rdquo; explicitly and directly.
+			This is a big leap forward: this is at last a <em>calculus</em> in the mathematical sense:
+			there are very clear and minimalistic syntactical rules and semantical interpretations, and we can achieve good mathematical rigor with that.
+		</p>
+		<p>In plain English: the \(sigma\)-operator can bind a variable (here in the example: a variable \(s\), talking name \(s\) for &bdquo;self&rdquo;), and inside its local scope \(Phi\) any \(s\)-occurance should be substituted for the entire original expression \(\sigma s.\Phi\). We have grasped the very essence of the self-concept with that, both in syntax and semantics.</p>
 
+		<p>This \(sigma\)-calculus in ts purest for is not very expressive, but we can already define the already mentioned \(\Omega\) combinator in it:
+		\[
+			\Omega \;\equiv\; \sigma s. s
+		\]
+		<p>This is exaclty that what enables \(\Omega\) to satisfy its expected sematical behavior:</p>
+		\[
+			\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\dots
+		\]
+		<p>For more complex examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
 		<p>Ennek alapötlete az, hogy amiként a lambda-kalkulusban a lambda-operátor képes változót megkötni, és hatáskörén belül azt afféle lokális változóként bevezetni, amihez aztán a béta-redukció során &bdquo;érték&rdquo; is köthető, ennek mintájára, analógiájára bevezethetnénk a lmandához hasonló operátort, mondjuk egy \(\sigma\)-operátort, amelyet teljesen a lambadoperátor mintjájára használnánk.</p>
+
+		<h2>Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
+		<p>We can comnine both abstractors freely in a common formal grammar framework, a combined calculus, where syntac contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
+		<p>Best example for the combined usage: the two possible alternative ways for the famous fixed-point combinator:</p>
+		\[
+			\begin{aligned}
+				\textbf{Y}_{\textbf{Curry}}  &\;\;\equiv\; \lambda f. \sigma  s. fs              \\
+				\textbf{Y}_{\textbf{Turing}} &\;\;\equiv\; \sigma  s. \lambda f. f\left(sf\right)
+			\end{aligned}
+		\]
+		<p>Of course, they did not use that notation, we will see later the correspondence by the semi-self translation technique. In the literature, \(\textbf{Y}_{\textbf{Curry}}\) is usually denoted simply \(\textbf{Y}\), and \(\textbf{Y}_{\textbf{Turing}}\) is denoted as \(\Theta\).</p>
+		<p>syntactically \(\textbf{Y}_{\textbf{Curry}}\)  looks simpler, but despite of that, after having been translated to their pure lambda-calculus form, it is \(\textbf{Y}_{\textbf{Turing}}\) that has a much simpler semantics. \(\textbf{Y}_{\textbf{Curry}}\) makes use of an additional \(\eta\)-conversion. See Dr Csörnyei Zoltán &apos;s book &bdquo;<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>&rdquo;, section 5.2 (pages 88-90).</p>
+		<p>In both cases, the expected behavior is this: for any term \(f\)</p>
+		\[
+			\textbf{Y} f = f \left(\textbf{Y} f\right)
+		\]
+		<p>where, the = symbol denotes reflexive, symmetric, and transitive closure of either \(\beta\)- or \(\sigma\)-reductions.</p>
 		<p>Lenne egy szintaktikai és egy szemantikai különbség:</p>
 		<dl>
 			<dt>Szemantikailag:</dt>
