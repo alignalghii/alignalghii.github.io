@@ -4,6 +4,10 @@
 
 ## Features
 
+### Table-of-contents generator
+
+- The sed file `table-of-contents-generator.sed` helps to generate a table-of-contents section semi-automatically for a HTML file. It finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used for the href of the link.
+
 ### MathJax extractor
 
 Show only the MathJax environments of a markdown document!
