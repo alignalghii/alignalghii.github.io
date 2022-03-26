@@ -10,7 +10,7 @@ fixture=$here/unit-test-fixtures;
 declare -A run=([pl]="perl" [awk]="awk -f" [sed]="sed -n -f");
 
 echo "Unit test";
-for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
+for feature in table-of-contents-generator filter-mathjax-contents skip-empty-lines-inside-mathjax;
 	do
 		echo "- Feature: $feature";
 		find $fixture/$feature -iname '*.source.dat'\
@@ -21,7 +21,7 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 				echo "  Samples:"
 				echo "  - Sample \``basename $sampleName`':";
 				echo "    Testers:";
-				for extension in ${!run[@]};
+				for extension in `find $here -iname "$feature.*" | sed 's/.*\.\(\w\+\)$/\1/'`;
 					do
 						# The actual comparions:
 						echo -en "    - Tester \`${run[$extension]}': ";
