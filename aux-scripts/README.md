@@ -5,7 +5,7 @@
 ## Table of contents
 
 - [Introduction](#introduction)
-- [Features / tools](#features-tools)
+- [Features / tools](#features--tools)
     - [Table-of-contents generator](#table-of-contents-generator)
     - [MathJax extractor](#mathjax-extractor)
     - [MathJax janitor](#mathjax-janitor)
@@ -228,5 +228,3 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 		done;
 done;
 ```
-
-Its main orchestrizing core: see the [Bash sourcecode file](unit-test-of-the-scripts.bash).
