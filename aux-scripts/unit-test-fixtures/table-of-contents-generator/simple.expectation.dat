@@ -1,8 +1,53 @@
-	<li><a href="#">Thesis</a></li>
-		<li><a href="#math">Mathematics</a></li>
-			<li><a href="#">Algebra</a></li>
-				<li><a href="#poly">Numbers, polynomials and equations</a></li>
-				<li><a href="#">Abstract algebra</a></li>
-			<li><a href="#">Logics</a></li>
-		<li><a href="#">Physics</a></li>
-		<li><a href="#"><Chemistry</a></li>
+<ol>
+	<li>
+		<a href="#">Thesis</a>
+		<ol>
+			<li>
+				<a href="#math">Mathematics</a>
+				<ol>
+					<li>
+						<a href="#">Algebra</a>
+						<ol>
+							<li><a href="#poly">Numbers, polynomials and equations</a></li>
+							<li><a href="#">Abstract algebra</a></li>
+						</ol>
+					</li>
+					<li><a href="#">Logics</a></li>
+				</ol>
+			</li>
+			<li><a href="#">Physics</a></li>
+			<li>
+				<a href="#">Chemistry</a>
+				<ol>
+					<li>
+						<a href="#">Organic chemistry</a>
+						<ol>
+							<li>
+								<a href="#">Alcanes</a>
+								<ol>
+									<li>
+										<a href="#">Methane</a>
+										<ol>
+											<li><a href="#">Industry</a></li>
+										</ol>
+									</li>
+								</ol>
+							</li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+			<li>
+				<a href="#">Biology</a>
+				<ol>
+					<li>
+						<a href="#">Plants</a>
+						<ol>
+							<li><a href="#">Trees</a></li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+		</ol>
+	</li>
+</ol>
