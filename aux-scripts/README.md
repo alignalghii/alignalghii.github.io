@@ -2,11 +2,31 @@
 
 \+ unit test for the correctness of the auxiliary scripts themselves
 
-## Features
+
+This document describes „features” and their corresponding test scenarios, together with the test framowork itself.
+
+The „features” are the little tools themselves: small auxiliary scripts for maintaining a HTML or Markdown document. For example: generating a table-of-contents for a large HTML file automatically out of its `<h1>`, ... `<h4>` ... etc. headers. The table-of-contents should be a possibly nested `<ul>` listing. Nesting must be correct valid HTML5, and it must be also nicely indented.
+
+Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be also welcome if any such auxiliary tool's correctness could be tested. Unit testing of such a custom self-made tool is itself a self-made mini-framework, in simplest way a shell script organizing and diffing piped results from text-processing tools.
+
+
+## Features / tools
+
+First the little auxiliary tools are describes. The common test framework above them proving their correctness comes afterwards.
 
 ### Table-of-contents generator
 
-- The sed file `table-of-contents-generator.sed` helps to generate a table-of-contents section semi-automatically for a HTML file. It finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used for the href of the link.
+This is probably the most characteristic and most complex tool of all the other examples.
+
+The tool is expected to be able to generating a table-of-contents for a large HTML file automatically out of its `<h1>`, ... `<h4>` ... etc. headers. The table-of-contents must be a possibly nested `<ul>` listing. Nesting must be correct valid HTML5, and it must be also nicely indented.
+
+In more details: it finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used automatically for the generated href of the link (so that the reader can jump from the ToC to any section directly). If the section header does not have an id, then the generated ToC item `<li><a href="#">...</a></li>` will have its section link as an empty "#", waiting for filling it out by hand (human assistance) later.
+
+An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). Maybe it is not too reader-friendly, still, it is much more reader friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed).
+
+Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the transltion process.
+
+Although **`sed`** seems to be like an „assembly” language for text processing, still, it can give a very drastic insigths into the philosophy of such [data-driven languages](https://en.wikipedia.org/wiki/Data-driven_programming), a huge topics having connections with state machines, event-driven programming, aspect-orinted programming.
 
 ### MathJax extractor
 
