@@ -229,4 +229,4 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 done;
 ```
 
-See the [Bash sourcecode file](unit-test-of-the-scripts.bash).
+Its main orchestrizing core: see the [Bash sourcecode file](unit-test-of-the-scripts.bash).
