@@ -2,6 +2,21 @@
 
 \+ unit test for the correctness of the auxiliary scripts themselves
 
+## Table of contents
+
+- [Introduction](#introduction)
+- [Features / tools](#features-tools)
+    - [Table-of-contents generator](#table-of-contents-generator)
+    - [MathJax extractor](#mathjax-extractor)
+    - [MathJax janitor](#mathjax-janitor)
+        - [User-friendly implementations](#user-friendly-implementations)
+        - [Challenging implementation](#challenging-implementation)
+- [Unit test for the correctness of features themselves](#unit-test-for-the-correctness-of-features-themselves)
+    - [Test run sample](#test-run-sample)
+    - [Test framework](#test-framework)
+
+## Introduction
+
 
 This document describes „features” and their corresponding test scenarios, together with the test framowork itself.
 
