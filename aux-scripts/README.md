@@ -22,11 +22,13 @@ The tool is expected to be able to generating a table-of-contents for a large HT
 
 In more details: it finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used automatically for the generated href of the link (so that the reader can jump from the ToC to any section directly). If the section header does not have an id, then the generated ToC item `<li><a href="#">...</a></li>` will have its section link as an empty "#", waiting for filling it out by hand (human assistance) later.
 
-An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). Maybe it is not too reader-friendly, still, it is much more reader friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed).
+The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator/simple.expectation.dat) file.
 
-Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the transltion process.
+An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). It exactly satisfies the specification. Maybe it is not too reader-friendly, still, it is much more reader-friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed). The `sed` variant is a little sloppy by making some superfluous empty lines.
 
-Although **`sed`** seems to be like an „assembly” language for text processing, still, it can give a very drastic insigths into the philosophy of such [data-driven languages](https://en.wikipedia.org/wiki/Data-driven_programming), a huge topics having connections with state machines, event-driven programming, aspect-orinted programming.
+Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the translation process.
+
+Although **`sed`** seems to be like an „assembly” language among those languages for text processing, still, it can give a very drastic insigths into the philosophy of such [data-driven languages](https://en.wikipedia.org/wiki/Data-driven_programming), a huge topics having connections with state machines, event-driven programming, aspect-orinted programming.
 
 ### MathJax extractor
 
