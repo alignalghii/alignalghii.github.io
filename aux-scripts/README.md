@@ -195,7 +195,7 @@ me@my-computer:~/Documents/my-blog/alignalghii.github.io$
 
 ### Test framework
 
-Everything is orchestrated by a „big” bash-script. The feature scripts are executed upon test input data sourcefiles, and the produced actual results are compared with expectation files. Comparisons are done with `diff`.
+Everything is orchestrated by a „big” bash-script, [`unit-test-of-the-scripts.bash`](unit-test-of-the-scripts.bash). It bases also on the [folder structure convention](.). The feature scripts are executed upon test input data sourcefiles, and the produced actual results are compared with expectation files. Comparisons are done with `diff`.
 
 ```bash
 #!/bin/bash
