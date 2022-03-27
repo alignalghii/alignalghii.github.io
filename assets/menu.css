@@ -4,9 +4,9 @@ ul.menu li {
 	margin-right: 20px;
 	background-color: lightgray;
 	font-weight: bold;
-	padding-bottom: 12pt;
+	padding-bottom: 2pt;
 	padding-left: 12pt;
 	padding-right: 12pt;
-	padding-top: 5pt;
+	padding-top: 2pt;
 	border: 5px blue solid;
 }
