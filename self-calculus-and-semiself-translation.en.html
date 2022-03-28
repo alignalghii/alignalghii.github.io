@@ -27,7 +27,7 @@
 		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
 			<li>
-				<a href="#top">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
+				<a href="#self-calculus">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
 				<ul>
 					<li><a href="#table-of-contents">Table of contents</a></li>
 					<li>
@@ -39,17 +39,43 @@
 					<li>
 						<a href="#introduction">Introduction: implementation of recursive functions in lambda calculus</a>
 						<ul>
+							<li>
+								<a href="#recursive-functions">Recursive functions. The seemingly paradox.</a>
+								<ul>
+									<li><a href="#hints">How do we know that this is not a real paradox? Hints and analogies.</a></li>
+								</ul>
+							</li>
 							<li><a href="#selfrep-combinators">Famous self-referent combinators of lambda calculus</a></li>
 							<li><a href="#summary-thoughts">Summary of the main thoughts</a></li>
 						</ul>
 					</li>
-					<li><a href="#let-rec">The let-rec construct</a></li>
-					<li><a href="#self-keyword">Special self constant/keyword</a></li>
-					<li><a href="#self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</a></li>
-					<li><a href="#combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</a></li>
-					<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
-					<li><a href="#mend-translation">A fordítás javítása</a></li>
-					<li><a href="#halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</a></li>
+					<li>
+						<a href="#exploration-curve-gradual-calculus-building">Stages of a gradual calculus building process on our exploration/learning curve</a>
+						<ul>
+							<li>
+								<a href="#definitional equation">Definitional equation</a>
+								<ul>
+									<li><a href="#let-rec">The let-rec construct</a></li>
+								</ul>
+							</li>
+							<li><a href="#self-keyword">Special self constant/keyword</a></li>
+							<li><a href="#self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</a></li>
+							<li>
+								<a href="#combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</a>
+								<ul>
+									<li><a href="#curry-vs-turing-as-lambda-self-order">Fixed-point variants of Curry vs Turing as \(\lambda\sigma\)-abstractors order</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#translation">Translation from self-calculus into lambda-calculus</a>
+						<ul>
+							<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
+							<li><a href="#mend-translation">A fordítás javítása</a></li>
+							<li><a href="#halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</a></li>
+						</ul>
+					</li>
 					<li><a href="#examples">Examples</a></li>
 				</ul>
 			</li>
@@ -70,6 +96,8 @@
 
 		<h2 id="introduction">Introduction: implementation of recursive functions in lambda calculus</h2>
 
+		<h3 id="recursive-functions">Recursive functions. The seemingly paradox.</h3>
+
 		<p>For beginners who are at their beginnings steps at learning lambda calculus, the mathematical foundation of functional programming, it may seem hard to understand how recursive functions can be defined with the seemingly rather Spartan and limited toolkit of lambda calculus. Lambda calculus may seem to lack the necessary expressive power to define recursive functions. Although there is an explicit notation for the notion of parameter in the syntax of this minimalistic language formalism, but there is no explicit way to express the notion of <em>self</em>: we cannot repeat the name of the freshly defined function in the definition body, since lambda calculus totally lacks any notion of named functions at all. In summary: there is no way to express self-reference explicitly.</p>
 		<p>Practical functional languages can define self-refrence easily, since they can define named functions. Lambda calculus lacks named functions, still, it can define recursive function, by a technique called implicit or indirect self-reference. Understanding this is a very steep step, a part of the hard learning curve.</p>
 		<p>In practical functiona programming languages the  function definition is usually combined with name-giving, a very expressive tool enabling direct self-reference. This can be done either globally:</p>
@@ -88,6 +116,8 @@ in fac 5</code></pre>
 
 		<p>the above expression is <em>invalid</em> in pure lambda-calculus, because any such kind of named definition, name-giving is not a part of the object language of the lambda-calculus, only a part of the metalanguage surrounding it, thus, not a lambda term on its own! In short, the concept of &bdquo;<em>self</em>&rdquo; is not a first-class citizen in this language formalism.</p>
 		<p>Can it be encoded or simulated somehow, in some indirect, implicit way? Lambda calculus is suprprisingly expressive: it can booleans,  represent numbers (Church numerals), finite algebraic datatypes. Can it represent recursive functions (and recursive datatypes) too? But how to achieve the seemingly lacking capability of self-reference?</p>
+
+		<h4 id="hints">How do we know that this is not a real paradox? Hints and analogies.</h4>
 		<p>People who have an interest in biological analogies know about a kind of <em>indirect</em>/<em>implicit</em> self-reference in programming, manifested in the <a href="https://www.scientificamerican.com/article/go-forth-and-replicate-2008-02/">self-reproduction machine</a> of Conway&apos;s cellular automata, following very strong biological analogies. The main idea is that Conway&apos;s self-replication machine contains a kind of DNA part, which can govern assemblage. The machine assemblages its own copy by following the rules encoded in its own DNA. By how is replicated the DNA part? It cannot contain itself! But it does not need to contain itself. The DNA part is simply copied. Self-replication can be down partly by rule-governed assemblage, partly by simple copying of the rule tape. This kind-of self-replication does not need an explicit, direct self-concept: the concept of self is implemented implicitly, in an emergent way.</p>
 		<p>The same idea is realized in the so-called <em>quine</em>s, or <em>self-reps</em>: programs that can print out their own sourcecode listing without resorting to any direct (operating-system misusing) tool. Quines are based on the idea of self-quotation, a logical approach very similar and related to the diagonal argument and to many logical paradoxes. See David Madore&apos;s article on <a href="http://www.madore.org/~david/computers/quine.html">Quines (self-replicationg programs)</a>.</p>
 		<p>In this writing, these interesting achievements of the 20th century mathematics are not mentioned any deeper, and only some thoughts restricted to the realm of lambda-calculus will be presented.</p>
@@ -143,8 +173,11 @@ in fac 5</code></pre>
 		</ol>
 		<p>After all that, we will see that &bdquo;halved-self translation&rdquo; is a rather expensive technique in terms of compactness, thus we will &bdquo;factor out&rdquo; the complicated part into a common function, (which will turn out to be the famous Y fixed-point combinator). thus separateing the wary parts in the name of conceptual modularity and reuse. In short: Y will be defined via  the &bdquo;halved-self translation&rdquo; technique, and any other recusrive functions will be defined via the <span class="combinator">Y</span> combinator.</p>
 
+		<h2 id="exploration-curve-gradual-calculus-building">Stages of a gradual calculus building process on our exploration/learning curve</h2>
 
-		<h2 id="let-rec">The let-rec construct</h2>
+		<h3 id="definitional equation">Definitional equation</h3>
+
+		<h4 id="let-rec">The let-rec construct</h2>
 		<p>In more details, I wrote <a href="let-rec.hu.html">its own dedicated page</a>, explaining the mathematics behind it.</p>
 		<p>Example for using the lazy let-rec for defining the factorial recursive function:</p>
 		<pre><code class="language-haskell">let fac n = if n == 0
@@ -161,7 +194,7 @@ in y   (
                            else 1
        )</code></pre>
 
-		<h2 id="self-keyword">Special self constant/keyword</h2>
+		<h3 id="self-keyword">Special self constant/keyword</h2>
 
 		<p>Although the let-rec construct shown above is still a rather complicated formalism, lacking the pureness and mathematical versatility of a logical calculus, we can already have an idea how to make a kind of self-calculus and direct self-reference.</p>
 		<p>The main idea is simple: let us use a special reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) symbol at the location of self-reference to denote the very act of selfreference! This is not a very dep solution with any mathematical insights, still, it is good for exploring the prossibilities in first round.</p>
@@ -191,7 +224,7 @@ in y   (
 		<p>We can say in a polite way with euphemism, that this symbolism could not yield too much insight, abstracton and deeper understanding, and did not help much to invent the idea how to express self-reference in pure lambda calculus. Despite of this weaknesses, this was a first step and we can continue stepping further in this spirit, exploring the pure mathematics behind self-reference and finding how pure math can provide an indirect, implicit way to express it by pure means.</p>
 
 
-		<h2 id="self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</h2>
+		<h3 id="self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</h2>
 
 		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; to introduce a self abstractor, entirely to the analogy of lambda-calculus:</p>
 		<ul>
@@ -234,8 +267,11 @@ in y   (
 		<p>For more complex examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
 		<p>Ennek alapötlete az, hogy amiként a lambda-kalkulusban a lambda-operátor képes változót megkötni, és hatáskörén belül azt afféle lokális változóként bevezetni, amihez aztán a béta-redukció során &bdquo;érték&rdquo; is köthető, ennek mintájára, analógiájára bevezethetnénk a lmandához hasonló operátort, mondjuk egy \(\sigma\)-operátort, amelyet teljesen a lambadoperátor mintjájára használnánk.</p>
 
-		<h2 id="combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
+		<h3 id="combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
 		<p>We can comnine both abstractors freely in a common formal grammar framework, a combined calculus, where syntac contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
+
+		<h4 id="curry-vs-turing-as-lambda-self-order">Fixed-point variants of Curry vs Turing as \(\lambda\sigma\)-abstractors order</h4>
+
 		<p>Best example for the combined usage: the two possible alternative ways for the famous fixed-point combinator:</p>
 		\[
 			\begin{aligned}
@@ -308,7 +344,9 @@ in y   (
 			\end{matrix}
 		\]
 
-		<h2 id="naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</h2>
+		<h2 id="translation">Translation from self-calculus into lambda-calculus</h2>
+
+		<h3 id="naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</h2>
 
 		\[
 			\Bigg(
@@ -533,7 +571,7 @@ in y   (
 		\]
 
 
-		<h2 id="mend-translation">A fordítás javítása</h2>
+		<h3 id="mend-translation">A fordítás javítása</h2>
 
 		<p>
 			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
@@ -543,7 +581,7 @@ in y   (
 		<p>
 		</p>
 
-		<h2 id="halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</h2>
+		<h3 id="halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</h2>
 		\[
 			[\![\sigma s. \Phi]\!]
 			\equiv
