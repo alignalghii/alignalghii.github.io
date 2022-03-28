@@ -22,7 +22,7 @@ BEGIN {
 		}
 		print linkify(res);
 	} else {
-		print tabbing(currentTabbing++) "<ol>";
+		print tabbing(currentTabbing++) "<ul>";
 	}
 
 	state = trim($0);
@@ -32,7 +32,7 @@ BEGIN {
 END {
 	if (exists_state) {
 		print linkify(closingItem(state, -level(state)+1));
-		print tabbing(--currentTabbing) "</ol>";
+		print tabbing(--currentTabbing) "</ul>";
 	}
 }
 
@@ -51,7 +51,7 @@ function simpleItem(txt) {
 function parentItem(txt, n) {
 	n = currentTabbing;
 	currentTabbing += 2;
-	return tabbing(n) "<li>\n" tabbing(n+1) txt "\n" tabbing(n+1) "<ol>";
+	return tabbing(n) "<li>\n" tabbing(n+1) txt "\n" tabbing(n+1) "<ul>";
 }
 
 
@@ -60,7 +60,7 @@ function closingItem(txt, diff, i, res) {
 	res = simpleItem(txt);
 	for (i = 0; i < -diff; i++) {
 		currentTabbing--;
-		res = res "\n" tabbing(currentTabbing) "</ol>";
+		res = res "\n" tabbing(currentTabbing) "</ul>";
 		currentTabbing--;
 		res = res "\n" tabbing(currentTabbing) "</li>";
 	}
