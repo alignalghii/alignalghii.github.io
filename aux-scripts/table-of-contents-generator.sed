@@ -1,7 +1,15 @@
 #n
 #!/bin/sed -n -f
 
+
+
 /<h[0-9]\(\s\+id="[^"]*"\)\?>.*<\/h[0-9]>/ {
+
+	# Trim
+	s/^\s*//;
+	s/\s*$//;
+
+	# Access the hold space in order to manage state (the previous header)
 	x;
 		/./ {
 			/<h1/ {
