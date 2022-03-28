@@ -22,9 +22,9 @@
 			<li><a href="self-calculus-and-semiself-translation.hu.html">Hungarian version of this page</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
-		<h1>&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+		<h1 id="self-calculus">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
 
-		<h2>Table of contents</h2>
+		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
 			<li>
 				<a href="#">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
@@ -55,11 +55,11 @@
 			</li>
 		</ul>
 
-		<h2>Motivation</h2>
+		<h2 id="motivation">Motivation</h2>
 
 		<p>This writing attempts to present a well-known topics in a maybe novel way. All elements of this writing are better treated in the literature (see below). Still, I let my writing staying, as this has beeen my own personal way to discover the feeling and the experience of the topics for myself and explaining it to myself. Furthermore, as far as I know, self-calculus, originally used in formalization attempts for On years agoOP (Cardelli), has not yet been used in investigating direct and indirect self-reference in such fields of computer science like lambda-calculus, quines, selfreps, recursive functions. This little writing of mine uses a simplified kind of self-calculus as a heuristic missing link between the hard implementations details of indirect self-reference and the informal familiar treatment of the topics &mdash; a kind of heuristic &bdquo;<em>How someone could have invented it as first</em>&rdquo; reconstruction.</p>
 
-		<h3>Bibliography</h3>
+		<h3 id="bibliography">Bibliography</h3>
 
 		<ul>
 			<li>Daniel Etridge&apos;s &bdquo;<a href="https://medium.com/@dkeout/why-you-must-actually-understand-the-%CF%89-and-y-combinators-c9204241da7a">Why you must actually understand the \(\Omega\) and \(\textbf{Y}\) combinators</a>&rdquo;. I have read this <em>after</em> haveing written this writing, and the treatment is in all aspects better than mine. Still, the novelty of my writing is to use a kind of custom-made &bdquo;self-calculus&rdquo; to explain the topics.</li>
@@ -67,7 +67,8 @@
 			<li>The focus about direct vs indirect self-reference, and its biological analogies, and its importance in mathematical logics and paradoxes: all these topics come from papers like <a href="https://www.scientificamerican.com/article/go-forth-and-replicate-2008-02/">self-reproduction machine</a> of Conway&apos;s cellular automata, and also from David Madore&apos;s article on <a href="http://www.madore.org/~david/computers/quine.html">Quines (self-replicationg programs)</a></li>
 			<li>The formalism of lambda calculus, notations, concepts come from Dr Csörnyei Zoltán &apos;s book &bdquo;<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>&rdquo;</li>
 		</ul>
-		<h2>Introduction: implementation of recursive functions in lambda calculus</h2>
+
+		<h2 id="introduction">Introduction: implementation of recursive functions in lambda calculus</h2>
 
 		<p>For beginners who are at their beginnings steps at learning lambda calculus, the mathematical foundation of functional programming, it may seem hard to understand how recursive functions can be defined with the seemingly rather Spartan and limited toolkit of lambda calculus. Lambda calculus may seem to lack the necessary expressive power to define recursive functions. Although there is an explicit notation for the notion of parameter in the syntax of this minimalistic language formalism, but there is no explicit way to express the notion of <em>self</em>: we cannot repeat the name of the freshly defined function in the definition body, since lambda calculus totally lacks any notion of named functions at all. In summary: there is no way to express self-reference explicitly.</p>
 		<p>Practical functional languages can define self-refrence easily, since they can define named functions. Lambda calculus lacks named functions, still, it can define recursive function, by a technique called implicit or indirect self-reference. Understanding this is a very steep step, a part of the hard learning curve.</p>
@@ -92,7 +93,7 @@ in fac 5</code></pre>
 		<p>In this writing, these interesting achievements of the 20th century mathematics are not mentioned any deeper, and only some thoughts restricted to the realm of lambda-calculus will be presented.</p>
 
 
-		<h3>Famous self-referent combinators of lambda calculus</h3>
+		<h3 id="selfrep-combinators">Famous self-referent combinators of lambda calculus</h3>
 
 		<p>Even before You meet the topics of recursive functions, You may have met the famous self-referent combinators of lambda calculus: they are usually mentioned as examples for topics in evalation strategies and divergence. The main point about these combinators are easy to explain, yet they may look like sort of paradoxical for the beginner. Most notably, the  \(\Omega\) divergence combinator and the \(\textbf{Y}\) fixkombinátor can be regarded as self-referent. For beginners, it is eay to explain what they are expected to behave like, but it is much harder to explain how they can be realized/implemented (how they achieve their working exactly). Their expected reduction behavior is:</p>
 		\[
@@ -132,7 +133,7 @@ in fac 5</code></pre>
 		<p>Although all these above can be a mnemotechnical help, but  still, all these fail to explain the heuristic path: how did scolars first find out the way to express recursive functions and self-referenc combinators in lambda-calculus? It seems easy to check the definitions, but it seems hard to invent them from scratch. Although i do not know the history of these invention process, but I know my own personal way: so I try to explain my own personal experiences.</p>
 	<p>This personal path of mine is very probably not valuable in the scientific sense: it is almost sure that many other people have invented the same on their own, moreover, there is a good chance that my &bdquo;inventions&rdquo; have been formed by my semi-forgotten reader experiences about Luca Cardelli&apos; &bdquo;object calculus&rdquo; (e.g. Martín Abadi and Luca Cardelli: &bdquo;<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf">An Imperative Object Calculus. Basic Typing and Soundness</a>&rdquo;). Despite of that, this writing is not based directly on Cardelli&apos;s papers: my memories have been very old and unconscious by the time of preparing this writing, thus the thoughts presented here are at least transformed by personal struggle along the learning curves.</p>
 
-		<h3>Summary of the main thoughts</h3>
+		<h3 id="summary-thoughts">Summary of the main thoughts</h3>
 
 		<p>In this writing, we will proceed in three steps: we make several custom mini-languages refining them in stages, making it &bdquo;purer&rdquo; and &bdquo;purer&rdquo; until it reaches the simplicity of lambda calculus itself.</p>
 		<ol>
@@ -159,7 +160,8 @@ in y   (
                            then n * self (n - 1)
                            else 1
        )</code></pre>
-		<h2>Special self constant/keyword</h2>
+
+		<h2 id="self-keyword">Special self constant/keyword</h2>
 
 		<p>Although the let-rec construct shown above is still a rather complicated formalism, lacking the pureness and mathematical versatility of a logical calculus, we can already have an idea how to make a kind of self-calculus and direct self-reference.</p>
 		<p>The main idea is simple: let us use a special reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) symbol at the location of self-reference to denote the very act of selfreference! This is not a very dep solution with any mathematical insights, still, it is good for exploring the prossibilities in first round.</p>
@@ -189,7 +191,7 @@ in y   (
 		<p>We can say in a polite way with euphemism, that this symbolism could not yield too much insight, abstracton and deeper understanding, and did not help much to invent the idea how to express self-reference in pure lambda calculus. Despite of this weaknesses, this was a first step and we can continue stepping further in this spirit, exploring the pure mathematics behind self-reference and finding how pure math can provide an indirect, implicit way to express it by pure means.</p>
 
 
-		<h2>Special self-abstraction and binding of a self-variable: the self-calculus</h2>
+		<h2 id="self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</h2>
 
 		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; to introduce a self abstractor, entirely to the analogy of lambda-calculus:</p>
 		<ul>
@@ -232,7 +234,7 @@ in y   (
 		<p>For more complex examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
 		<p>Ennek alapötlete az, hogy amiként a lambda-kalkulusban a lambda-operátor képes változót megkötni, és hatáskörén belül azt afféle lokális változóként bevezetni, amihez aztán a béta-redukció során &bdquo;érték&rdquo; is köthető, ennek mintájára, analógiájára bevezethetnénk a lmandához hasonló operátort, mondjuk egy \(\sigma\)-operátort, amelyet teljesen a lambadoperátor mintjájára használnánk.</p>
 
-		<h2>Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
+		<h2 id="combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
 		<p>We can comnine both abstractors freely in a common formal grammar framework, a combined calculus, where syntac contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
 		<p>Best example for the combined usage: the two possible alternative ways for the famous fixed-point combinator:</p>
 		\[
@@ -306,7 +308,7 @@ in y   (
 			\end{matrix}
 		\]
 
-		<h2>A naive (invalid, but corrigable) transation technique from self-calculus into lambda-calculus</h2>
+		<h2 id="naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</h2>
 
 		\[
 			\Bigg(
@@ -531,7 +533,7 @@ in y   (
 		\]
 
 
-		<h2>A fordítás javítása</h2>
+		<h2 id="mend-translation">A fordítás javítása</h2>
 
 		<p>
 			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
@@ -541,7 +543,7 @@ in y   (
 		<p>
 		</p>
 
-		<h2>The &bdquo;halved-self translation&rdquo; technique</h2>
+		<h2 id="halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</h2>
 		\[
 			[\![\sigma s. \Phi]\!]
 			\equiv
@@ -559,7 +561,7 @@ in y   (
 			}_{\textbf{self}}
 		\]
 
-		<h2>Examples</h2>
+		<h2 id="examples">Examples</h2>
 
 	</body>
 </html>
