@@ -305,7 +305,11 @@
 			s!<h\([0-9]\)\(\s\+id="\([^"]*\)"\)\?>\(.*\)<\/h\([0-9]\)>!<a href="#\3">\4</a>!;
 
 			#s!\t*\n!\n!g;
-			p;
+			:typingOnlyGraphicalLines
+			/[[:graph:]]/P;
+			s/^[^\n]*\n//;
+			#s/^\n//;
+			t typingOnlyGraphicalLines;
 
 			# Push state + Remove the previous, but keep its indentation info
 			x;
@@ -341,7 +345,11 @@ $ {
 			# linkify
 			s!<h\([0-9]\)\(\s\+id="\([^"]*\)"\)\?>\(.*\)</h\([0-9]\)>!<a href="#\3">\4</a>!;
 
-			p;
+			:typingOnlyGraphicalLines2
+			/[[:graph:]]/P;
+			s/^[^\n]*\n//;
+			#s/^\n//;
+			t typingOnlyGraphicalLines2;
 		}
 	x;
 }

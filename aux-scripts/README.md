@@ -41,7 +41,7 @@ In more details: it finds HTML `<h...>` tags and turn them into `<li><a href="#.
 
 The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator/simple.expectation.dat) file.
 
-An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). It exactly satisfies the specification. Maybe it is not too reader-friendly, still, it is much more reader-friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed). The `sed` variant is a little sloppy by making some superfluous empty lines.
+An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). It exactly satisfies the specification. Maybe it is not too reader-friendly, still, it is much more reader-friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed).
 
 Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the translation process.
 
