@@ -1,3 +1,5 @@
+#### Top
+
 [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 # Auxiliary text-check-and-filter scripts
@@ -26,7 +28,7 @@ The „features” are the little tools themselves: small auxiliary scripts for 
 
 Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be also welcome if any such auxiliary tool's correctness could be tested. Unit testing of such a custom self-made tool is itself a self-made mini-framework, in simplest way a shell script organizing and diffing piped results from text-processing tools.
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#top) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ## Features / tools
