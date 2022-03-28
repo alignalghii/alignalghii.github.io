@@ -1,6 +1,4 @@
-#### Top
-
-[See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 # Auxiliary text-check-and-filter scripts
 
@@ -28,7 +26,7 @@ The „features” are the little tools themselves: small auxiliary scripts for 
 
 Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be also welcome if any such auxiliary tool's correctness could be tested. Unit testing of such a custom self-made tool is itself a self-made mini-framework, in simplest way a shell script organizing and diffing piped results from text-processing tools.
 
-[Up to table-of-contents of this page](#top) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ## Features / tools
@@ -51,7 +49,7 @@ Both implementations work with  maintaining a state storing hierarchy level and 
 
 Although **`sed`** seems to be like an „assembly” language among those languages for text processing, still, it can give a very drastic insigths into the philosophy of such [data-driven languages](https://en.wikipedia.org/wiki/Data-driven_programming), a huge topics having connections with state machines, event-driven programming, aspect-orinted programming.
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ### MathJax extractor
@@ -86,7 +84,7 @@ while (<>) {
 }
 ```
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 #### Challenging implementation
@@ -124,7 +122,7 @@ This is not so obscure as it seems first (see the comments in the [source code](
 
 Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be oranized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ### MathJax janitor
@@ -172,7 +170,7 @@ p;
 
 See details in the respective [Perl source file](skip-empty-lines-inside-mathjax.pl) and [Sed source file](skip-empty-lines-inside-mathjax.sed).
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ## Unit test for the correctness of features themselves
@@ -211,12 +209,12 @@ Unit test
 me@my-computer:~/Documents/my-blog/alignalghii.github.io$
 ```
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
 
 ### Test framework
 
-Everything is orchestrated by a „big” bash-script, [`unit-test-of-the-scripts.bash`](unit-test-of-the-scripts.bash). It bases also on the [folder structure convention](.). The feature scripts are executed upon test input data sourcefiles, and the produced actual results are compared with expectation files. Comparisons are done with `diff`.
+Everything is orchestrated by a „big” bash-script, [`unit-test-of-the-scripts.bash`](unit-test-of-the-scripts.bash). It bases also on the [folder structure convention](#top). The feature scripts are executed upon test input data sourcefiles, and the produced actual results are compared with expectation files. Comparisons are done with `diff`.
 
 ```bash
 #!/bin/bash
@@ -250,4 +248,4 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 done;
 ```
 
-[Up to table-of-contents of this page](#table-of-contents) ||| [See the shell programs and tools](.) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
