@@ -197,8 +197,32 @@ in fac 5</code></pre>
 
 		<h3 id="definitional-equation">Definitional equation</h3>
 
-		<h4 id="let-rec">The let-rec construct</h2>
-		<p>In more details, I wrote <a href="let-rec.hu.html">its own dedicated page</a>, explaining the mathematics behind it.</p>
+		<p>Example for defining a familar recursive function with the usual notation (definitional equation):</p>
+		\[
+			\text{fac} =
+				\begin{cases}
+					1                                    & \text{if } n = 1
+					\\
+					n \cdot \text{fac}\left(n - 1\right) & \text{if } n > 0
+				\end{cases}
+		\]
+		<p>Example for defining self-referenct combinators with the usual notation (definitional equation):</p>
+		\[
+			\begin{aligned}
+				\Omega      &= \Omega \\
+				\textbf{Y} f&= f\left(\textbf{Y} f\right)
+			\end{aligned}
+		\]
+		<p>In the case of \(\Omega\), the defintion looks like a trivial identity, but this apparent innocence is seductive. The definition is highly paradoxical, the very essence of a <em>circulus vitiosus</em>. You can see that in haskell directly: write a definition like</p>
+		<pre><code class="language-haskell">omega = omega</code></pre>
+		<p>Haskell will compile, but if you run it, it will run forever.</p>
+		<p>The other famous self-referent combinator, the <span class="combinator">Y</span> fixed-point combinator is more useful. The paradoxicallity of \(\textbf{Y} f\) depends on the (outer) \(f\). In cases of lazy interpretation, \(f\) can stop further need for recurrence, providing for the finite, terminable nature of the definition. It may look strange at first, think of something like a processing of a finite, limited data structure, e.g. a list. Of course, in case of am inappropriate \(f\), the expression can run in infinite loop, too.</p>
+		<p>As for the first example, the familiar factorial function from school math, its valid finite nature can be seen at first sight, both intuitively and also formally by the known properties of natural numbers.</p>
+		<p>In summary: as for notation for recursivity, and in general, for self-reference, this familiar notation of such definitional equations like these above, this notation is a very laic-friendly notation for self-reference, we can meet it even in school math. Still, we should never forget that these are not equations in the algebraic sense (or at least, very special kinds of equations). These are <em>definitions</em>, and as the case of \(\Omega\) shows, they are far from being trivial. The simple and familiar notation may hide that fact that these are hardcore self-references, with all possible theoretical questions underlying.</p>
+
+		<h4 id="let-rec">The let-rec construct</h4>
+		<p>The let-rec construct can be regarded as a kind of local variant of the familiar notation of definitional equations. They are sort of halfway between &bdquo;normal&rdquo; &bdquo;named&rdquo; function definitions, and the anonymous function definitions provided by lambda notation.</p>
+		<p>About the exaxt semantics of the let-rec construct, for more details, I wrote <a href="let-rec.hu.html">its own dedicated page</a>, explaining the mathematics behind it. In short: the let rec construct has all the difficulty of the self-reference problem. More details about these are on the linked page.</p>
 		<p>Example for using the lazy let-rec for defining the factorial recursive function:</p>
 		<pre><code class="language-haskell">let fac n = if n == 0
                 then 1
