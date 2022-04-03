@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Explicit vs implicit self-reference in lambda-calculus? &bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</title>
+		<title>Explicit vs implicit self-reference in lambda-calculus? Precursor concepts before fixed-point combinator: &bdquo;self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</title>
 
 		<link rel="stylesheet" href="assets/main.css"/>
 		<link rel="stylesheet" href="assets/menu.css"/>
@@ -22,7 +22,8 @@
 			<li><a href="self-calculus-and-semiself-translation.hu.html">Hungarian version of this page</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
-		<h1 id="self-calculus">Explicit vs implicit self-reference in lambda-calculus? &bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+		<h1>Explicit vs implicit self-reference in lambda-calculus? Precursor concepts before fixed-point combinator: &bdquo;self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+
 
 		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
@@ -540,7 +541,267 @@ in y   (
 		\[
 			\underbrace{\Bigg(\overbrace{\dots\vphantom{\Bigg(\Bigg)}}^{\text{fac}^{\frac12}}\Bigg)\Bigg(\overbrace{\dots\vphantom{\Bigg(\Bigg)}}^{\text{fac}^{\frac12}}\Bigg)}_{\text{fac}}
 		\]
-		<p>let us summarize the above in a more formalized way. We tried a translation function</p>
+
+
+
+		<p>Majdnem jó gondolatmenet, de egy javítható részletben mégis hibás. Még nem illeszkednek össze hézagmentesen a részletek. valójában a definiálandó \(\textbf{fac}\) nem rendre a két-két részkifejezés, hanem a két részkifejezésből alkotott teljes nagy kifejezés lenne! Valahogy így:</p>
+		\[
+			\underbrace{
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+			}_{\textbf{fac}}
+		\]
+		<p>A kívánt faktoriális-függvény (\(\textbf{fac}\)) tehát a teljes nagy kifejezés, ő itt a ,,szelf''. A két részkifejezés nem maga a kívánt \(\textbf{fac}\) nem ők játsszák a szelf szerepét, ők afféle ,,szemiszelf'', és jelölésben is különböztessük meg valamiféle rendszerezett módon: jelöljük úgy, hogy \(\textbf{fac}^{\frac12}\), a kis feles-kitevő különböztesse meg mindig a félkifejezést az egésztől, a szemiszelfet a mindenkori szelftől!</p>
+
+		<h3 id="match-puzzle-pieces">Matching the pieces of the puzzle together</h3>
+
+		<p>Let us regard it as a riddle, or even more, as a puzzle. The most imortant pieces are signed with the boxes: \(\boxed{\textbf{???}}\) is the input box, and \(\boxed{\boxed{\textbf{fac}}}\) is the output box. What must we be write into the \(\boxed{\textbf{???}}\) input boxes, in order to achieve \(\boxed{\boxed{\textbf{fac}}}\) in the output boxes? How can be achieve that the complete whole topmost expression <span class="emcode">fac</span> itself reappears in the \(\boxed{\boxed{\textbf{fac}}}\) boxes?</p>
+		\[
+			\underbrace{
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{\textbf{???}}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{\boxed{\textbf{fac}}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{\textbf{???}}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{\boxed{\textbf{fac}}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+			}_{\textbf{fac}}
+		\]
+
+		<p>Spoiler warning: the next section begins with the solution!</p>
+
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
+			<li><a href="index.html">Back to the main personal page</a></li>
+		</ul>
+
+		<h3 id="halved-self-translation">The <q>halved-self translation</q> trick</h3>
+		<p>Spoiler! warning! What about this:</p>
+		\[
+			\underbrace{
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s^{\frac12}}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{\boxed{s^{\frac12}s^{\frac12}}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+				\Bigg(
+					\underbrace{
+						\lambda\ \boxed{s^{\frac12}}\ .\
+							\lambda n\ .\
+								\left(
+									\textbf{greaterThan}\ n\ \textbf{0}
+								\right)
+								\bigg(
+									\textbf{times}\ n
+									\Big(
+										\boxed{\boxed{s^{\frac12}s^{\frac12}}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+									\Big)
+								\bigg)
+								\textbf{1}
+					}_{\textbf{fac}^{\frac12}}
+				\Bigg)
+			}_{\textbf{fac}}
+		\]
+		<p>That seems to be correct! Practice: check it, do the \(\beta\)-reduction accordingly and see the validity of the recursion occurring.</p>
+		<p>The  same sample formula, with somewhat more generalized explanatory labels:</p>
+		\[
+			\require{mathtools}
+
+			\begin{multlined}
+				\textbf{fac}
+				\;\;\equiv\;\;
+				\left[\!\!\left[
+					\underbrace{
+						\sigma \overbrace{\boxed s}^{\text{self}} . \lambda n .
+						\left(
+							\textbf{greaterThan}\ n\ \textbf{0}
+						\right)
+						\bigg(
+							\textbf{times}\ n
+							\Big(
+								\overbrace{\boxed s}^{\text{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+							\Big)
+						\bigg)
+						\textbf{1}
+					}_{\textbf{self}}
+				\right]\!\!\right]
+				\;\;\equiv\;\;
+				\\[24pt]
+				\;\;\equiv\;\;
+
+
+				\underbrace{
+					\Bigg(
+						\underbrace{
+							\lambda\ \boxed{s^{\frac12}}\ .\
+								\lambda n\ .\
+									\left(
+										\textbf{greaterThan}\ n\ \textbf{0}
+									\right)
+									\bigg(
+										\textbf{times}\ n
+										\Big(
+											\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{\textbf{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+										\Big)
+									\bigg)
+									\textbf{1}
+						}_{\textbf{self}^{\frac12}}
+					\Bigg)
+					\Bigg(
+						\underbrace{
+							\lambda\ \boxed{s^{\frac12}}\ .\
+								\lambda n\ .\
+									\left(
+										\textbf{greaterThan}\ n\ \textbf{0}
+									\right)
+									\bigg(
+										\textbf{times}\ n
+										\Big(
+											\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{\textbf{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+										\Big)
+									\bigg)
+									\textbf{1}
+						}_{\textbf{self}^{\frac12}}
+					\Bigg)
+				}_{\textbf{self}}
+			\end{multlined}
+		\]
+
+		<p>The essence in summary: in self-calculus, we use the \(\sigma\) self-abstractor binding a variable (here <span class="mathvar">s</span>) to convey the <q>self</q>, the topmost expression just being defined. Contrary to this, in pure lambda-calculus there is <em>no way</em> to convey explicitly the self in any variable. What we at most can achieve is to meddle with <q>semiself</q>-like half-expressions. Thus, the local variables we can bind will be bound to such semiselfs (and not to self): let us denote  this important difference with naming our local variables \(s^{\frac12}\) for better clarity. Although we cannot have a single <span class="mathvar">s</span> binding the topmost expression, we can achieve the same by using the <q>suplicated</q> \(s^{\frac12}\) everywhere where we would write the self-notion-binding <span class="mathvar">s</span> in the <q>original</q> self-calculus form.</p>
+		<p>Even shorter summary:</p>
+		<ul>
+			<li>self-calculus has an explicit, <q>first-class-citizen</q> <em>self-concept</em>.</li>
+			<li>In lambda-calculus, we achieve the same with the idea of <em>duplication</em>.</li>
+			<li>But  the duplcation idea has a unpleasant secondary effect: our <em>self</em>-notions (and the variables trying to bind them) intantiously <q>degrade</q> into <em>semiselfs</em>.</li>
+			<li>The remedy: we <em>duplicate all our semiself-binding variable occurrances as well!</em></li>
+		</ul>
+
+		<p>Let us summarize the above in a more formalized way. We tried a translation function</p>
+		\[
+			\left[\!\left[\dots\right]\!\right] : \lambda\sigma\text{-calculus} \to \lambda\text{-calculus}
+		\]
+		<p>with our naively inspired (first-idea) translation formula</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\left(
+						\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+			\
+			\underbrace{
+				\left(
+					\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+		\]
+		<p>which turned out to be wrong. The pieces simply fail to fit together: what we mean to be a conveyer of the topmost expression, the self, instatiousy degrades itself into just a half of it, semiself, by the usage ofthe duplication idea. We know for sure that the duplication idea is good, but fitting the pieces together correctly needs a simple extra step.</p>
+		<p>In order to mend the original idea, we have discovered a notion like <q>semiself</q>, and introduced meaningful, intention-suggesting notations like the <q>\(\textbf{self}^{\frac12}\) versus <span class="emcode">self</span></q> distinction. These suggest a rearrangment of the wrong lambda-formuation into a corrcted one in the following way:</p>
+		<ul>
+			<li>
+				<span>let us use the bound variable to refer to the semiself \(\textbf{self}^{\frac12}\) instead of the self</span>
+				<ul>
+					<li>for clarity&apos;sake let us even rename the bound variable into \(s^{\frac12}\) instead of <span class="mathvar">s</s>!</li>
+				</ul>
+			<li>And two such \(s^{\frac12}\) occurrences in a pair should <q>fuse</q> together into the <q>original</q> <span class="mathvar">s</span> that was meant to play the complete <span="emcode">self</span>'s role:</li>
+
+		<p>This indeed mends the problems, and now we have the correct translation formula:</p>
+		\[
+			[\![
+				\underbrace{
+					\sigma \overbrace{s}^{\textbf{self}}. \Phi
+				}_{\textbf{self}}
+			]\!]
+			\;\;\equiv\;\;
+			\underbrace{
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+			}_{\textbf{self}}
+		\]
+
+		<p>Let us remember the menotechnical reading mentioned already (in section <a href="#selfref-combinators">self-referent combinators</a>): let us read \(s^{\frac12} s^{\frac12}\) like <q>semiself and semiself make together a complete self</q>, or simply <q>semiself + semiself = self</q>, or even more compactly \(\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}}\).</p>
+		<hr/>
+
+
+
+
+		<p>Let us summarize the above in a more formalized way. We tried a translation function</p>
 		\[
 			\left[\!\left[\dots\right]\!\right] : \lambda\sigma\text{-calculus} \to \lambda\text{-calculus}
 		\]
@@ -607,7 +868,7 @@ in y   (
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 
-		<h3 id="halved-self-translation">Mending the naive idea: the <q>halved-self translation</q> trick</h3>
+		<h3 id="halved-self-translation">The <q>halved-self translation</q> trick</h3>
 		<p>
 			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
 			A hiba végső oka az, ahogy a \(\beta\)-redukciót ténylegesen elvégezzük, kiderül,
@@ -971,7 +1232,7 @@ in y   (
 				\text{if } \Phi \approx \textbf{Y}
 			\end{cases}
 		\]
-		<h3>The conceptual spiral closes in: analogy between Y and \(\sigma\)</h3>
+		<h3>The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</h3>
 		<p>Despite of what has just been said above, we need not to entirely forget good old self-calculus unthankfully. Although we used it here as is a &bdquo;lower-level assembly language &rdquo;for which we built on top of it the &rdquo;high-level API&rdquo; of the <span class="combinator">Y</span> combinator, still, if we look at them from a more mathematical viewpoint, they are more closely related to one another than we might think. It seems that the  <span class="combinator">Y</span> combinator of lambda-calculus shares the very same formalism as the \(\sigma\)-abstractor of self-calculus:
 		\[
 			\begin{aligned}
