@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</title>
+		<title>Explicit vs implicit self-reference in lambda-calculus? &bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</title>
 
 		<link rel="stylesheet" href="assets/main.css"/>
 		<link rel="stylesheet" href="assets/menu.css"/>
@@ -22,7 +22,7 @@
 			<li><a href="self-calculus-and-semiself-translation.hu.html">Hungarian version of this page</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
-		<h1 id="self-calculus">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
+		<h1 id="self-calculus">Explicit vs implicit self-reference in lambda-calculus? &bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
 
 		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
@@ -45,7 +45,7 @@
 									<li><a href="#hints">How do we know that this is not a real paradox? Hints and analogies.</a></li>
 								</ul>
 							</li>
-							<li><a href="#selfrep-combinators">Famous self-referent combinators of lambda calculus</a></li>
+							<li><a href="#selfref-combinators">Famous self-referent combinators of lambda calculus</a></li>
 							<li><a href="#summary-thoughts">Summary of the main thoughts</a></li>
 						</ul>
 					</li>
@@ -72,8 +72,7 @@
 						<a href="#translation">Translation from self-calculus into lambda-calculus</a>
 						<ul>
 							<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
-							<li><a href="#mend-translation">A fordítás javítása</a></li>
-							<li><a href="#halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</a></li>
+							<li><a href="#halved-self-translation">Mending the naive idea: the <q>halved-self translation</q> trick</a></li>
 						</ul>
 					</li>
 					<li><a href="#examples">Examples</a></li>
@@ -105,7 +104,7 @@
 
 		<p>For beginners who are at their beginnings steps at learning lambda calculus, the mathematical foundation of functional programming, it may seem hard to understand how recursive functions can be defined with the seemingly rather Spartan and limited toolkit of lambda calculus. Lambda calculus may seem to lack the necessary expressive power to define recursive functions. Although there is an explicit notation for the notion of parameter in the syntax of this minimalistic language formalism, but there is no explicit way to express the notion of <em>self</em>: we cannot repeat the name of the freshly defined function in the definition body, since lambda calculus totally lacks any notion of named functions at all. In summary: there is no way to express self-reference explicitly.</p>
 		<p>Practical functional languages can define self-refrence easily, since they can define named functions. Lambda calculus lacks named functions, still, it can define recursive function, by a technique called implicit or indirect self-reference. Understanding this is a very steep step, a part of the hard learning curve.</p>
-		<p>In practical functiona programming languages the  function definition is usually combined with name-giving, a very expressive tool enabling direct self-reference. This can be done either globally:</p>
+		<p>In practical functional programming languages the  function definition is usually combined with name-giving, a very expressive tool enabling direct self-reference. This can be done either globally:</p>
 		<pre><code class="language-haskell">fac n = if n == 0
     then 1
     else n * fac (n - 1)</code></pre>
@@ -133,9 +132,9 @@ in fac 5</code></pre>
 		</ul>
 
 
-		<h3 id="selfrep-combinators">Famous self-referent combinators of lambda calculus</h3>
+		<h3 id="selfref-combinators">Famous self-referent combinators of lambda calculus</h3>
 
-		<p>Even before You meet the topics of recursive functions, You may have met the famous self-referent combinators of lambda calculus: they are usually mentioned as examples for topics in evalation strategies and divergence. The main point about these combinators are easy to explain, yet they may look like sort of paradoxical for the beginner. Most notably, the  \(\Omega\) divergence combinator and the \(\textbf{Y}\) fixkombinátor can be regarded as self-referent. For beginners, it is eay to explain what they are expected to behave like, but it is much harder to explain how they can be realized/implemented (how they achieve their working exactly). Their expected reduction behavior is:</p>
+		<p>Even before You meet the topics of recursive functions in lambda calculus, You may have met the famous self-referent combinators in this field: they are usually mentioned as examples for topics in evalation strategies and divergence. The main point about these combinators are easy to explain, yet they may look like sort of paradoxical for the beginner. Most notably, the  \(\Omega\) divergence combinator and the \(\textbf{Y}\) fixkombinátor can be regarded as self-referent. For beginners, it is eay to explain what they are expected to behave like, but it is much harder to explain how they can be realized/implemented (how they achieve their working exactly). Their expected reduction behavior is:</p>
 		\[
 			\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\dots
 		\]
@@ -155,14 +154,14 @@ in fac 5</code></pre>
 		\[
 			\textbf{Y} \equiv \Big(\lambda z f. f\left(z z f\right)\Big) \Big(\lambda z f. f\left(z z f\right)\Big)
 		\]
-		<p>De vajon hogyan lehet első ízben arra rájönni, felfedezni, hogy ez a megfelelő megvalósítás? Talán egy kicsit segít, ha legalább valami tapogatozó fogalomnevet adunk az egész, illetve annak összetevő részkifejezéseinek, és a változó maga is beszédesebb nevet kap:</p>
+		<p>But how were this kind of implementation invented first? What kind of schemes do these definitions follows? Sspecially the role of repetitions may seem unclear. But here I am copying the same lines, but now with more meaningful, intetion-revealing names for the local variable(s), and also providing meaningful names to the subexpressions:</p>
 		\[
 			\begin{aligned}
 				\Omega     &\equiv \underbrace{\left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right) \left(\underbrace{\lambda s^{\frac12}. s^{\frac12} s^{\frac12}}_{\textbf{semiself}}\right)}_{\textbf{self}}\\[9pt]
 				\textbf{Y} &\equiv \underbrace{\Bigg(\;\underbrace{\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)}_{\textbf{semiself}}\;\Bigg) \Bigg(\;\underbrace{\lambda s^{\frac12} f. f\left(s^{\frac12} s^{\frac12} f\right)}_{\textbf{semiself}}\;\Bigg)}_{\textbf{self}}
 			\end{aligned}
 		\]
-		<p>The meaning of all these little <em>ad hoc</em> auxiliary notionsof ours: \(\textbf{self}\) is intended to mean the term just being defined, i.e. the &bdquo;definiendum&rdquo;, the whole complete term being &bdquo;born&bdquo; when the definition process goes into completion. But <em>self-reference</em> has no explicit, syntactically and semantically <em>first-class citizen</em> way to be expressed.Still we can achieve the same expressive power by falling back to the method of <em>indirect (implicit) self-refereence</em>: this is sort of related to Cantor&apo;s famous diagonal argument, a spiritual heir of the same thought. The main idea is that we can express the self by forming it as an application of a subexpression/subterm (&bdquo;semiterm&rdquo;) onto itself. This is what we will call a \(\textbf{semiself}\): a semiself is exactly such a kind of a semiterm intended later to be applied onto itself in order to form a complete whole  \(\textbf{self}\).</p>
+		<p>The meaning of all these little <em>ad hoc</em> auxiliary notions of ours: \(\textbf{self}\) is intended to mean the term just being defined, i.e. the &bdquo;definiendum&rdquo;, the whole complete term being &bdquo;born&bdquo; when the definition process goes into completion. But <em>self-reference</em> has no explicit, syntactically and semantically <em>first-class citizen</em> way to be expressed.Still we can achieve the same expressive power by falling back to the method of <em>indirect (implicit) self-refereence</em>: this is sort of related to Cantor&apo;s famous diagonal argument, a spiritual heir of the same thought. The main idea is that we can express the self by forming it as an application of a subexpression/subterm (&bdquo;semiterm&rdquo;) onto itself. This is what we will call a \(\textbf{semiself}\): a semiself is exactly such a kind of a semiterm intended later to be applied onto itself in order to form a complete whole  \(\textbf{self}\).</p>
 		<p>This will be the main point and idea of this small article, of course discussed a little more formally and in a little more details. Our self-referent &bdquo;self&rdquo; expressions are all implemented a some self-application of a corresponding &bdquo;semiself&rdquo;, their correctness and validity can be seen and proven simply by well-known via beta-reduction, even simply by pen-and-paper. For more laic-friendly notation convention, a lambda-variable binding a semi-felf will be notated as \(s^{\frac12}\). The motivation behind this notation is that any occurrence of a self-applying \(s^{\frac12} s^{\frac12}\) subterm is ment to &bdquo;fuse&rdquo; into a complete \(s\), memorize it by the following analogies: &bdquo;semiself + semiself = self&rdquo; and &bdquo;\(s^{\frac12} + s^{\frac12} = s = \textbf{self}\)&rdquo;:</p>
 		\[
 			\begin{aligned}
@@ -170,6 +169,7 @@ in fac 5</code></pre>
 				\textbf{Y} &\equiv \Bigg(\;\lambda s^{\frac12} f. f\Big(\;\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}} \;f\Big)\Bigg) \Bigg(\;\lambda s^{\frac12} f. f\Big(\;\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}} \;f\Big)\Bigg)
 			\end{aligned}
 		\]
+		<p>We will return to this small menotechnical notational trick in the final section, <q><a href="#halved-self-translation">Halved-self translation</a></q>.</p>
 		<p>Although all these above can be a mnemotechnical help, but  still, all these fail to explain the heuristic path: how did scolars first find out the way to express recursive functions and self-referenc combinators in lambda-calculus? It seems easy to check the definitions, but it seems hard to invent them from scratch. Although i do not know the history of these invention process, but I know my own personal way: so I try to explain my own personal experiences.</p>
 	<p>This personal path of mine is very probably not valuable in the scientific sense: it is almost sure that many other people have invented the same on their own, moreover, there is a good chance that my &bdquo;inventions&rdquo; have been formed by my semi-forgotten reader experiences about Luca Cardelli&apos; &bdquo;object calculus&rdquo; (e.g. Martín Abadi and Luca Cardelli: &bdquo;<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf">An Imperative Object Calculus. Basic Typing and Soundness</a>&rdquo;). Despite of that, this writing is not based directly on Cardelli&apos;s papers: my memories have been very old and unconscious by the time of preparing this writing, thus the thoughts presented here are at least transformed by personal struggle along the learning curves.</p>
 		<ul class="menu">
@@ -280,7 +280,7 @@ in y   (
 
 		<h3 id="self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</h2>
 
-		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; to introduce a self abstractor, entirely to the analogy of lambda-calculus:</p>
+		<p>Our next idea can be, that instead of usage of a reserved \(\boxed{\boxed{\boxed{\textbf{SELF}}}}\) keyword symbol, it would be more &bdquo;mathematical&rdquo; to introduce a \(sigma\) &bdquo;self abstractor&rdquo;, entirely to the analogy of the \(\lambda\) abstractor of the lambda calculus. Both abstractors havein common that they <em>bind</em> a variable (introduce a local variable), and attribute to it a special meaning (formalized by specific operational semantics):</p>
 		<ul>
 			<li>
 				<span>In lambda-calculus, a \(\lambda\) abstractor binds a variable, that gets value by later parameter-passing (\(beta\)-reduction)</span>
@@ -299,8 +299,15 @@ in y   (
 				\]
 			</li>
 			<li>
-				<span>To the complete analogy of this, we would introduce a \(\sigma\) abstactor, binding a variable, that gets value by identifying it with the entire term itself (a so-called &bdquo;self-abstraction&rdquo; or \(sigma\)-reduction).</span>
-				\[\sigma s.\Phi\;\;\rhd_\sigma\;\;\Phi\left[\dfrac{\sigma s.\Phi}{s}\right]\]
+				<span>To the complete analogy of this, we would introduce a \(\sigma\) abstractor, binding a variable, that gets value by identifying it with the entire term itself (a so-called &bdquo;self-abstraction&rdquo; or \(sigma\)-reduction).</span>
+				\[
+					\underbrace{\sigma s.\Phi}_{\textbf{self}}
+					\;\;\rhd_\sigma\;\;
+					\Phi
+					\left[
+						\dfrac{\overbrace{\boxed{\sigma s.\Phi}}^{\textbf{self}}}{s}
+					\right]
+				\]
 			</li>
 		</ul>
 		<p>
@@ -314,12 +321,27 @@ in y   (
 		\[
 			\Omega \;\equiv\; \sigma s. s
 		\]
-		<p>This is exaclty that what enables \(\Omega\) to satisfy its expected sematical behavior:</p>
+		<p>The sigma-reduction rule can be applied to \(\Omega\), and it turns it into itself in a single step:</p>
+		\[
+			\sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \dots
+		\]
+		<p>Thus, we have the above pattern in self-calculus with \(\sigma\)-reduction, i.e.</p>
+		\[
+			\Omega\;\;\rhd_\sigma\;\;\Omega\;\;\rhd_\sigma\;\;\Omega\;\;\rhd_\sigma\;\;\Omega\;\;\rhd_\sigma\;\;\dots
+		\]
+		<p>the exact correponding counterpart of the behavior what we expected of \(\Omega\) in lambda-calculus with \(\beta\)-reduction:</p>
 		\[
 			\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\Omega\;\;\rhd_\beta^+\;\;\dots
 		\]
-		<p>For more complex examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
-		<p>Ennek alapötlete az, hogy amiként a lambda-kalkulusban a lambda-operátor képes változót megkötni, és hatáskörén belül azt afféle lokális változóként bevezetni, amihez aztán a béta-redukció során &bdquo;érték&rdquo; is köthető, ennek mintájára, analógiájára bevezethetnénk a lmandához hasonló operátort, mondjuk egy \(\sigma\)-operátort, amelyet teljesen a lambadoperátor mintjájára használnánk.</p>
+		<p>(Note that the reduction sequences do not consist of zero-step identities: the reduction steps <em>do</em> apply a rule, which happens to provide &bdquo;incidentally &rdquo; a term of the same form.)</p>
+		<p>For sophistication, sometimes I will use a fine distinction in notation:</p>
+		\[
+			\begin{aligned}
+				\Omega     &\equiv \left[\!\left[\sigma\ s\ .\ s\right]\!\right]
+			\end{aligned}
+		\]
+		<p>to denote that \(\sigma s.s\) is not the &bdquo;original&rdquo; \(\Omega\) of lambda-calculus, it is a term of our auxiliary language self-calculus that is intended to be <em>translatable</em> later into &bdquo;pure&rdquo; lambda-calculus. But usually I will omit such fine distinctions for brevity.</p>
+		<p>Although \(\Omega\) is a theoretically interesting example for the use of \(\sigma\)-calculus, but  <em>pure</em> \(sigma\)-calculus with the single \(\sigma\) reduction in itself is only capable of self-reference only, but it lacks any kind of parametrizability / argument-passing. Thus, for more useful and interesting examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#self-abstractor">Hungarian version of this section</a></li>
@@ -327,7 +349,7 @@ in y   (
 		</ul>
 
 		<h3 id="combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
-		<p>We can comnine both abstractors freely in a common formal grammar framework, a combined calculus, where syntac contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
+		<p>We can combine both abstractors freely in a common formal grammar framework, a combined calculus, where syntax contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
 
 		<h4 id="curry-vs-turing-as-lambda-self-order">Fixed-point variants of Curry vs Turing as \(\lambda\sigma\)-abstractors order</h4>
 
@@ -339,23 +361,43 @@ in y   (
 			\end{aligned}
 		\]
 		<p>Of course, they did not use that notation, we will see later the correspondence by the semi-self translation technique. In the literature, \(\textbf{Y}_{\textbf{Curry}}\) is usually denoted simply \(\textbf{Y}\), and \(\textbf{Y}_{\textbf{Turing}}\) is denoted as \(\Theta\).</p>
-		<p>syntactically \(\textbf{Y}_{\textbf{Curry}}\)  looks simpler, but despite of that, after having been translated to their pure lambda-calculus form, it is \(\textbf{Y}_{\textbf{Turing}}\) that has a much simpler semantics. \(\textbf{Y}_{\textbf{Curry}}\) makes use of an additional \(\eta\)-conversion. See Dr Csörnyei Zoltán &apos;s book &bdquo;<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>&rdquo;, section 5.2 (pages 88-90).</p>
+		<p>Syntactically \(\textbf{Y}_{\textbf{Curry}}\)  looks simpler, but despite of that, after having been translated to their pure lambda-calculus form, it is \(\textbf{Y}_{\textbf{Turing}}\) that turns out to have a much simpler semantics. \(\textbf{Y}_{\textbf{Curry}}\) makes use of an additional \(\eta\)-conversion. See Dr Csörnyei Zoltán &apos;s book &bdquo;<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>&rdquo;, section 5.2 (pages 88-90).</p>
 		<p>In both cases, the expected behavior is this: for any term \(f\)</p>
 		\[
 			\textbf{Y} f = f \left(\textbf{Y} f\right)
 		\]
 		<p>where, the = symbol denotes reflexive, symmetric, and transitive closure of either \(\beta\)- or \(\sigma\)-reductions.</p>
-		<p>Lenne egy szintaktikai és egy szemantikai különbség:</p>
-		<dl>
-			<dt>Szemantikailag:</dt>
-			<dd>
-				Ha a \(\sigma\)-operátorral lekötünk egy \(s\)-változót valamilyen, az operátor hatáskörében álló \(\Phi\) kifejezésre, akkor az \(s\) minden \(\Phi\)-beli előfordulása helyébe a &bdquo;szelfet&rdquo; kell érteni, tehát a <em>teljes</em> \(\sigma s.\Phi\) kifejezést! Egyszóval, a \(\sigma\) operátor valóban a <em>közvetlen, explicit</em> önhivatkozás lehetőségét teremti meg! Formalizáltan ezt úgy rögzíthetjük, hogy bevezetünk egy \(\rhd_\sigma\) redukciófogalmat, amelynek szabálya:
-				\[\sigma s.\Phi\;\;\rhd_\sigma\;\;\Phi\left[\dfrac{\sigma s.\Phi}{s}\right]\]
-			</dd>
-			<dt>Szintaktikailag:</dt>
-			<dd>szintaktikailag igazából nem lenne semmi plusz megkötés, szabadon kombinálhatóak a szigma- és a labda-operátorok a nekik megfelelő szabályok szerint, de ez konrétan azt jelenti, hog a \(\sigma\)-kifejezésre <em>nem</em> értelmezünk <em>(függvény)alkalmazás</em>-műveletet, vagyis argumentumként expliciten átadott értéket. Pontosabban formalizálva: a \(\sigma\)-kifejezésre nincs beta-redukció, csak a fent említett &bdquo;szigma-redukció&rdquo;. itt konkrétan ebben az írásban a \(\sigma\)-operátor mindig a legkülső operátor lesz (talán ennél elképzelhető általánosabb felállás is, de itt ez is elég lesz).</dd>
-		</dl>
-		<p>Nézzünk példákat. Elsőnek egy bonyolult példa: rekurzív függvény kifejezése, mégpedig az iskolából  ismert faktoriális-függvényé:</p>
+		<p>
+			Let us check their \(\sigma\)-reduction behavior manually: do they indeed reduce in the expected way?
+			The sequence of the reductions will be a little complicated, so here I will use some auxiliary notatations in arrangement:
+		</p>
+		<ul>
+			<li>Each rule application step wil get into its standalone line (at least in complicated cases).</li>
+			<li>I will denote at each rule application step at the left-hand-side, which part of the expression is affected by the rule (the matching subterm): underlining will denote this (the &bdquo;reducible expression&rdquo;, in short the &bdquo;redex&rdquo;). I take this notation from Dr. Csörnyei Zoltán&apos;s book „<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>”</li>
+			<li>Also on the right-hand-side I will underline the &bdquo;changed&bdquo; (replaced) part.</li>
+		</ul>
+		</p>
+		<p>\(\Omega\)-combinator in \(\sigma\)-calculus reduced with \(\sigma\)-reduction:</p>
+		\[
+			\sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \dots
+		\]
+		<p>this satisifies exactly what we expect from the \(\Omega\) combinator:</p>
+		<p>that is exactly its expected operational semantics (it is diverging, in the strange way that it  &bdquo;reduces&rdquo; into itsef at each reduction step). Thus, our representation of \(\Omega\) in \(\sigma\)-calculus proves correct.</p>
+		<p>Let us see the behavior of the other famous self-referent combinator: the <span class="combinator">Y</span> fixed-point combinator. We will pass an arbitrary (indeterminate) \(F\) argumentum to it. First let us see the \(sigma\) reduction for the Turing-style implementation of the fixed-point combinator, \(\textbf{Y}_{\text{Turing}}\):</p>
+		\[
+			\begin{matrix}
+				\textbf{Y}_{\text{Turing}}\ F                                                              &               &  &  & \\[6pt]
+				|||                                                                        &               &  &  & \\[9pt]
+				\overbrace{\underline{\Big(\sigma s\lambda f.f(sf)\Big)}}^{\textbf{Y}_{\text{Turing}}}\ F  &  \rhd_\sigma  & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}_{\text{Turing}}}\ f\Big)\bigg)}\ F  &  & \\[6pt]
+				& & |||  &  & \\[6pt]
+				& & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}_{\text{Turing}}}\ f\Big)\bigg)\ F}  &  \rhd_\beta  &  \underline{F\Bigg(\overbrace{\Big(\sigma s\lambda f^\prime.(sf^\prime)\Big)}^{\textbf{Y}_{\text{Turing}}}\;F\Bigg)} \\[8pt]
+				& & & & ||| \\[8pt]
+				& & & & F\left(\textbf{Y}_{\text{Turing}}\ F\right)
+			\end{matrix}
+		\]
+		<p>That is exactly that operational behaviour what we expect from the fixed-point combinator. The Turing-inspired-style implementation of Y in sigma-calculus has proven to be correct</p>
+		<p>We can check \(\textbf{Y}_{\text{Curry}}\) in a similar way. I omit it here. Spoiler: The Curry-style implementation is correct too, although the intermediate reduction steps will be somewhat different. Furthermore, \(\textbf{Y}_{\text{Curry}}\) raises some questions related to extensionality, treated correctly by the concept of \(\eta\)-conversion.</p>
+		<p>Now, let us a more complicated example: let us express a recursive function with this combined \(\lambda\sigma\) calculus noration — let the example be the fatorial function known from school math:</p>
 		\[
 			\underbrace{
 				\sigma\ \boxed{s}\ .\
@@ -372,36 +414,8 @@ in y   (
 						\textbf{1}
 			}_{\textbf{fac}}
 		\]
+		<p>To be more precise, that is the Turing-style implementation of the factorial function is self-calculus (see the order of the two kinds of abstractors!). Practice: explore the other, the Turing-style implementation as well! (For analogy, look at the difference of the two implementation styles at the two corresponding implementations of the fixed-point combinator, \(\textbf{Y}_{\text{Curry}}\) vs \(\textbf{Y}_{\text{Turing}}\) &mdash; You can see that the order of the two abstractors are reversed, and the body of the implementations differ accordingly). Practice 2: also check the correctness of both implementations!</p>
 
-		<p>Itt is nézzük meg egyszerűbb felépítésű példák gyanánt a híres-hírhedt önhivatkozó kombinátorokat:</p>
-		\[
-			\begin{aligned}
-				\Omega     &\equiv \left[\!\left[\sigma\ s\ .\ s\right]\!\right]\\
-				\textbf{Y} &\equiv \left[\!\left[\sigma\ s\ .\ \lambda\ f\ .\ f\ \left(s\ f\right)\right]\!\right]
-			\end{aligned}
-		\]
-		<p>
-			Az utóbbi kettőnél nézzük is meg, vajon tényelg jól, az elvárt módon viselkednek-e a rendukció tényleges végrehajára során?
-			Bonyolultabb levezetéseknél soronként egyetlen szabály alkalmazása fog szerepelni.
-			Minden egyes szabály elsütésének bal- és jobboldalán is aláhúzás fogja jelölni a szabály által érintett ráilleszkedő bemeneti és kimeneti <em>redex</em>et. A redex (vagyis az aktuális redukciós szabályra közvetlenül ráilleszkedő részkifejezés) aláhúzással való megjelölésének ötletét, a levezetés ily módon való olvashatóbbá tevését Dr. Csörnyei Zoltán „<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>” c. könyvéből vettem (azzal a pici módosítással, hogy a redukció utáni kifejezésben is megjelölöm az érintett &bdquo;kimeneti&rdquo; redexet).
-		</p>
-		<p>\(\Omega\)-kombinátor szigma-kalkulusbeli változata esetében:</p>
-		\[
-			\sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \sigma s.s \;\;\rhd_\sigma\;\; \dots
-		\]
-		<p>ez megfelel az \(\Omega\)-kombinátor elvárt operacionális szemantikájának (divergáló, deminden lépésben redukálódó önmagába &bdquo;redukálódó&rdquo;).</p>
-		<p>Lássuk a másik önhivatkozó kombinátor, az <span class="combinator">Y</span> viselkedését, konrétan valamely \(F\) argumentummal:</p>
-		\[
-			\begin{matrix}
-				\textbf{Y}\ F                                                              &               &  &  & \\[6pt]
-				|||                                                                        &               &  &  & \\[9pt]
-				\overbrace{\underline{\Big(\sigma s\lambda f.f(sf)\Big)}}^{\textbf{Y}}\ F  &  \rhd_\sigma  & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}}\ f\Big)\bigg)}\ F  &  & \\[6pt]
-				& & |||  &  & \\[6pt]
-				& & \underline{\bigg(\lambda f.f\Big(\overbrace{\big(\sigma s\lambda f^\prime.(sf^\prime)\big)}^{\textbf{Y}}\ f\Big)\bigg)\ F}  &  \rhd_\beta  &  \underline{F\Bigg(\overbrace{\Big(\sigma s\lambda f^\prime.(sf^\prime)\Big)}^{\textbf{Y}}\;F\Bigg)} \\[8pt]
-				& & & & ||| \\[8pt]
-				& & & & F\left(\textbf{Y}\ F\right)
-			\end{matrix}
-		\]
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#combined-lambda-self-calculus">Hungarian version of this section</a></li>
@@ -410,8 +424,60 @@ in y   (
 
 		<h2 id="translation">Translation from self-calculus into lambda-calculus</h2>
 
+		<p>What our ultimate intention and goal is, to establish a translation method</p>
+		\[
+			\left[\!\left[\dots\right]\!\right] : \lambda\sigma\text{-calculus} \to \lambda\text{-calculus}
+		\]
+		<p>so that we can arrange all the above examples in a unific frame</p>
+		\[
+			\begin{aligned}
+				\Omega                     &\equiv \left[\!\left[\sigma\ s\ .\ s\right]\!\right]\\
+				\textbf{Y}_{\text{Turing}} &\equiv \left[\!\left[\sigma\ s\ .\ \lambda\ f\ .\ f\ \left(s\ f\right)\right]\!\right]\\
+				\textbf{Y}_{\text{Curry}}  &\equiv \left[\!\left[\lambda\ f\ .\ \sigma\ s\ .\ f\ s\right]\!\right]
+			\end{aligned}
+		\]
+		<p>where \(\Omega\), \(\textbf{Y}_{\text{Turing}}\) and \(\textbf{Y}_{\text{Curry}}\) are the pure lambda calculus implementations of these combinators, for which our all auxiliary \(\sigma\)-language was just a didactic tool to invent the main idea. We have expressed them temporarily in self-calculus, because it is short and somewhat laic-friendly, but finally we will &bdquo;translate&rdquo; into pure lambda-calculus.</p>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
+			<li><a href="index.html">Back to the main personal page</a></li>
+		</ul>
+
+
 		<h3 id="naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</h2>
 
+		<p>Translation from self-calculus (combined sigma-lambda calculus) into (pure) lambda calculus may seem impossible at first sight. Self calculus assigns the bound variable to &bdquo;self&rdquo; i.e. the complete expression in its sigma-reduction. How can this simulated with parameter passing of lambda calculus? We cannot pass itself to an expression, because an expression cannot stand outside ot itself! (Attila József, a Hungarian poet: <q><cite><a href="https://www.visegradliterature.net/works/hu/J%C3%B3zsef_Attila-1905/Eszm%C3%A9let/en/2024-Consciousness">A cat cannot catch a mouse both inside and outside simultanously</a>.</cite></q>)</p>
+		<p>But maybe we can do it with the following trick: we <em>repeat</em> the expression: we copy it besides itself. Let us try to formalize the idea, I present an example by the recursive function factorial:</p>
+		\[
+			\text{fac} =
+				\begin{cases}
+					1                                    & \text{if } n = 1
+					\\
+					n \cdot \text{fac}\left(n - 1\right) & \text{if } n > 0
+				\end{cases}
+		\]
+		<p>we have seen already that we can express this precisely and correctly in self-calculus:</p>
+		\[
+			\underbrace{
+				\sigma\ \boxed{s}\ .\
+					\lambda n\ .\
+						\left(
+							\textbf{greaterThan}\ n\ \textbf{0}
+						\right)
+						\Bigg(
+							\textbf{times}\ n
+							\Big(
+								\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
+							\Big)
+						\Bigg)
+						\textbf{1}
+			}_{\textbf{fac}}
+		\]
+		<p>Now we try to translate it into <q>pure</q> lambda-calculus:</p>
+		<ol>
+			<li>we simply replace the <q>foreign</q> \(\sigma\)-abstractor to the \(\lambda\)-abstractor,</li>
+			<li>then we copy the exppression bedide itself (i.e., we <q>duplicate</q> it)
+		</ol>
 		\[
 			\Bigg(
 				\underbrace{
@@ -446,7 +512,7 @@ in y   (
 				}_{\textbf{fac}}
 			\Bigg)
 		\]
-		<p>innen \(\beta\)-redukcióval</p>
+		<p>hence with \(\beta\)-reduction</p>
 
 		\[
 			\underbrace{
@@ -464,82 +530,128 @@ in y   (
 			}_{\boxed{\textbf{fac}}}
 		\]
 
-		<p>Ha ezt átgondoljuk, kiderül, hogy ez az irány nem jó. Aznban a faktoriális mint rekurzív függvény kissé túl összetett, nézzük meg itt  híres-hírhedt önhivatkozó kombinátorok példáján mint egyszerűbb felépítésű példán, mi is az, ami nem jó:</p>
-
+		<p>The problem is that if we &bdquo;copy&rdquo; the &bdquo;self&rdquo; beside &bdquo;itself&rdquo;, then the self will cease to be a self: the duplicated self will be the new self, and the original self will be a semiself. Thus, the original idea cannot be valid in its original conception, although maybe it can be fixed somehow.</p>
+		<p>Illustrating the problem with the above example: our result is indeed deceptive, even the auxiliary labeling scheme of</p>
 		\[
-			\begin{aligned}
-				\Omega
-				&\equiv
+			\Bigg(\underbrace{\dots\vphantom{\Bigg(\Bigg)}}_{\text{fac}}\Bigg)
+			\Bigg(\underbrace{\dots\vphantom{\Bigg(\Bigg)}}_{\text{fac}}\Bigg)
+		\]
+		<p>turns out to be deceptive ans seriously misleading: by using this duplication-trick scheme, <span class="emcode">fac</span> becomes the new complete expression, while its two <q>halves</q> get degragated instatinously into a sort of <q>semi-self role</q>, here, a kind of <q>semi-fac</q> (notated here entirely informally with \(\text{fac}^{\frac12}\):</p>
+		\[
+			\underbrace{\Bigg(\overbrace{\dots\vphantom{\Bigg(\Bigg)}}^{\text{fac}^{\frac12}}\Bigg)\Bigg(\overbrace{\dots\vphantom{\Bigg(\Bigg)}}^{\text{fac}^{\frac12}}\Bigg)}_{\text{fac}}
+		\]
+		<p>let us summarize the above in a more formalized way. We tried a translation function</p>
+		\[
+			\left[\!\left[\dots\right]\!\right] : \lambda\sigma\text{-calculus} \to \lambda\text{-calculus}
+		\]
+		<p>with our naively inspired (first-idea) translation formula</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\left(
+						\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+			\
+			\underbrace{
+				\left(
+					\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+		\]
+		<p>which means that</p>
+		<ol>
+			<li>we simply replace the <q>foreign</q> \(\sigma\)-abstractor to the \(\lambda\)-abstractor,</li>
+			<li>then we copy the exppression bedide itself (i.e., we <q>duplicate</q> it)
+		</ol>
+		<p>but this seems to be deceptive and misleading. Let us try to fix at least the auxiliary labeling:</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
 				\underbrace{
 					\left(
-						\lambda\ s\ .\ s
+							\lambda s. \Phi
 					\right)
-				}_{\textbf{self}}
-				\;
+				}_{\textbf{semiself}}
+				\
 				\underbrace{
 					\left(
-						\lambda\ s\ .\ s
+						\lambda s. \Phi
 					\right)
-				}_{\textbf{self}}
-
-				\\
-
-				\textbf{Y}
-				&\equiv
-				\underbrace{
-					\Big(
-						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
-					\Big)
-				}_{\textbf{self}}
-				\;
-				\underbrace{
-					\Big(
-						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
-					\Big)
-				}_{\textbf{self}}
-			\end{aligned}
+				}_{\textbf{semiself}}
+			}_{\textbf{self}}
 		\]
-
-		<p>Nézzük meg, jók-e ezek: írjuk fül ki rendre az \(\Omega\) redukciós lépéssorozatát, és az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozatát is! Úgy viselkedik-e a redukció, ahogy ezektől az önrhivatkozó kombinátoroktól elvárnánk?</p>
+		<p>The labelings will be even clearer if we use the funny pseudomathematical notation \(\textbf{self}^{\frac12}\) instead of &bdquo;\(\textbf{semiself}\)&rdquo;, beecause the funny notation seems to suggest informally a deeper insight:</p>
 		\[
-			\Omega
-			\;\;\equiv\;\;
-			\left(
-				\lambda\ s\ .\ s
-			\right)
-			\left(
-				\lambda\ s\ .\ s
-			\right)
-			\;\;\rhd_\beta\;\;
-			\lambda\ s\ .\ s
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+							\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+				\
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+			}_{\textbf{self}}
 		\]
-		<p>Hát az \(\Omega\) nem. Ez egyetlen lépésben terminált, az igazi \(\Omega\)-nak végtelenségig kellene tartania a redukcióknak. Lássuk most az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozatát:</p>
-		\[
-			\textbf{Y}\ f
-			\;\;\equiv\;\;
-			\Big(
-				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
-			\Big)
-			\Big(
-				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
-			\Big)
-			\ f
-			\;\;\rhd_\beta\;\;
-			f\
-			\Bigg(
-				\Big(
-					\lambda\ s\ f\ .\ f\ \left(s\ f\right)
-				\Big)\
-				f
-			\Bigg)
-			\;\;\rhd_\beta\;\;
-			f\
-			\bigg(
-				\lambda\ f\ .\ f\ \left(f\ f\right)
-			\bigg)
-		\]
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
+			<li><a href="index.html">Back to the main personal page</a></li>
+		</ul>
 
-		<p>Láthatjuk, hogy az \(\textbf{Y}\ f\) kifejezés redukciós lépéssorozata sem az elvárás szerinti.</p>
+		<h3 id="halved-self-translation">Mending the naive idea: the <q>halved-self translation</q> trick</h3>
+		<p>
+			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
+			A hiba végső oka az, ahogy a \(\beta\)-redukciót ténylegesen elvégezzük, kiderül,
+			hogy ahol a szelfet várnánk el, oda pont a szemiszelf (\(\textbf{self}^{\frac12}\)) kerül, pont nem illeszkedik össze a gondolatmenet.
+		</p>
+		<p>The recently intoduced <q>\(\textbf{self}^{\frac12}\) versus <span class="emcode">self</span></q> distinction and its labeling on the (wrong) formula already suggests a rearrangment of the lambda-expressions:</p>
+		<ul>
+			<li>
+				<span>let us use the bound variable to refer to the semiself \(\textbf{self}^{\frac12}\) instead of the self</span>
+				<ul>
+					<li>for clarity&apos;sake let us even rename the bound variable into \(s^{\frac12}\) instead of <span class="mathvar">s</s>!</li>
+				</ul>
+			<li>And two such \(s^{\frac12}\) occurrences in a pair should <q>fuse</q> together into the <q>original</q> <span class="mathvar">s</span> that was meant to play the complete <span="emcode">self</span>'s role:</li>
+		</ul>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+			}_{\textbf{self}}
+		\]
+		<p>&hellip; this seems to fix the <q>degradation of the self into semiself</q> problem mentioned above!</p>
+		<p>
+			Let us remember the menotechnical reading mentioned already (in section <a href="#selfref-combinators">self-referent combinators</a>): let us read \(s^{\frac12} s^{\frac12}\) like <q>semiself and semiself make together a complete self</q>, or simply <q>semiself + semiself = self</q>, or even more compactly \(\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s = \text{self}}\).
+		</p>
+		<hr/>
+
+
+
+
+
+
+
+
+
 		<p>Tehát jó-e mindez? <em>Nem!!!</em> Hamarosan kiderül, miért nem az, de egyelőre nézzük meg, mi lenne a folyománya, ha jó lenne.</p>
 
 		<p>Ha ez jó lenne (nem az!), akkor már írhatnánk is fel a már alakra is szép, egyszerű általános fordítási szabályt szelf-kalkulusról ,,tiszta'' lambda-kalkulusra: testszőleges \(\sigma s.\Phi\) szelf-kalkulus kifejezésre</p>
@@ -639,41 +751,255 @@ in y   (
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 
+		<h2 id="examples">Examples</h2>
+		<p>Let us investigate the problem entirely in details, shown on a concrete example. Let us use for example something simpler, for example the self-referent combinators:</p>
 
-		<h3 id="mend-translation">A fordítás javítása</h2>
-
-		<p>
-			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
-			A hiba végső oka az, ahogy a \(\beta\)-redukciót ténylegesen elvégezzük, kiderül,
-			hogy ahol a szelfet várnánk el, oda pont a szemiszelf kerül, pont nem illeszkedik össze a gondolatmenet.
-		</p>
-		<p>
-		</p>
-
-		<h3 id="halved-self-translation">The &bdquo;halved-self translation&rdquo; technique</h2>
 		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\left(
-					\underbrace{
-						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
-					}_{\textbf{semiself}}
-				\right)
-				\left(
-					\underbrace{
-						\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
-					}_{\textbf{semiself}}
-				\right)
-			}_{\textbf{self}}
+			\begin{aligned}
+				\Omega
+				&\equiv
+				\underbrace{
+					\left(
+						\lambda\ s\ .\ s
+					\right)
+				}_{\textbf{self}}
+				\;
+				\underbrace{
+					\left(
+						\lambda\ s\ .\ s
+					\right)
+				}_{\textbf{self}}
+
+				\\
+
+				\textbf{Y}_{\text{Turing}}
+				&\equiv
+				\underbrace{
+					\Big(
+						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+					\Big)
+				}_{\textbf{self}}
+				\;
+				\underbrace{
+					\Big(
+						\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+					\Big)
+				}_{\textbf{self}}
+			\end{aligned}
 		\]
+
+		<p>Let us check whether these above are correct steps: Let us reduce expressions \(\Omega\) and also expression \(\textbf Y_{\text{Turing}}\; f\) with the above definitions/implementations, and contrast the result with their expected operational semantics! Are they presenting the expected reduction behavior?</p>
+		\[
+			\Omega
+			\;\;\equiv\;\;
+			\left(
+				\lambda\ s\ .\ s
+			\right)
+			\left(
+				\lambda\ s\ .\ s
+			\right)
+			\;\;\rhd_\beta\;\;
+			\lambda\ s\ .\ s
+		\]
+		<p>In the case of our above implementation trial for \(\Omega\), the result is wrong. The above result is a ingle-step termination, but the correct \(\Omega\) should diverge, maintaining an infinite reduction chain (constisting of turning itself into an incidentally indentic term)</p>
+		<p>Now let us see the other example: the reduction series for the tried implementation of \(\textbf{Y}\ f\) expression:</p>
+		\[
+			\textbf{Y}_{\text{Turing}}\ f
+			\;\;\equiv\;\;
+			\Big(
+				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+			\Big)
+			\Big(
+				\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+			\Big)
+			\ f
+			\;\;\rhd_\beta\;\;
+			f\
+			\Bigg(
+				\Big(
+					\lambda\ s\ f\ .\ f\ \left(s\ f\right)
+				\Big)\
+				f
+			\Bigg)
+			\;\;\rhd_\beta\;\;
+			f\
+			\bigg(
+				\lambda\ f\ .\ f\ \left(f\ f\right)
+			\bigg)
+		\]
+
+		<p>We can see that the reductions series of the \(\textbf{Y}_{\text{Turing}}\ f\) expression fails to match its expectations, too.</p>
+
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#halved-self-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 
-		<h2 id="examples">Examples</h2>
+		<h2>Building further &mdash; a kind of conceptual bootstrap</h2>
+		<h3>Building on top of Y &mdash; <q>simplified by self</q></h3>
+		<p>After we have seen that we can define the  <span class="combinator">Y</span> combinator on top of self-calculus (more precisely: on its (semi-halved-self style) translation to \(\lambda\)-calculus), we can forget it as a scaffold. Because almost any (further) practical occurrence of self-reference &mdash; most importantly, recursive functions &mdash; will be implemented on top of <span class="combinator">Y</span>. Despite of the theoretical possibility of implementing recursive functions directly by (semi-halved-self style) translation from self-calculus, we will almost never, as such an implementation seems somewhat lengthy. We use the <span class="combinator">Y</span> combinator as a kind of welcome abstraction layer, a &bdquo;concept library&rdquo; inside the tolkit of \(\lambda\)-calculus that mediates to us all important notions of self-reference in a lambda-friendly manner.</p>
+		<p>Just for curiousity&apos;s sake, here is factorial function translated from its self-calculus formalism:</p>
+		\[
+			\require{mathtools}
+			\begin{multlined}
+				\textbf{fac}
+				\;\;\equiv\;\;
+				\left[\!\!\left[
+					\sigma \overbrace{\boxed s}^{\text{self}} . \lambda n .
+					\left(
+						\textbf{greaterThan}\ n\ \textbf{0}
+					\right)
+					\bigg(
+						\textbf{times}\ n
+						\Big(
+							\overbrace{\boxed s}^{\text{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+						\Big)
+					\bigg)
+					\textbf{1}
+				\right]\!\!\right]
+				\;\;\equiv\;\;
+				\\[24pt]
+				\;\;\equiv\;\;
+				\underbrace{
+					\Bigg(
+						\underbrace{
+							\lambda\ \overbrace{s^\frac12}^{\text{semiself}}\ .\
+								\lambda n\ .\
+									\left(
+										\textbf{greaterThan}\ n\ \textbf{0}
+									\right)
+									\bigg(
+										\textbf{times}\ n
+										\Big(
+											\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+										\Big)
+									\bigg)
+									\textbf{1}
+						}_{\textbf{fac}^{\frac12}}
+					\Bigg)
+					\Bigg(
+						\underbrace{
+							\lambda\ \overbrace{s^\frac12}^{\text{semiself}}\ .\
+								\lambda n\ .\
+									\left(
+										\textbf{greaterThan}\ n\ \textbf{0}
+									\right)
+									\bigg(
+										\textbf{times}\ n
+										\Big(
+											\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+										\Big)
+									\bigg)
+									\textbf{1}
+						}_{\textbf{fac}^{\frac12}}
+					\Bigg)
+				}_{\textbf{fac}}
+			\end{multlined}
+		\]
 
+		<p>&hellip; from which we will hide the details behind the <span class="combinator">Y</span> combinator, delegating the rude work to it. <span class="combinator">Y</span> is a <q>workhorse</q> for expressing alost any kind of self-reference, yielding a clean <q>interface</q>, and in the background it does the work by reduction paths acording the <q>nasty</q> halved-self</q> duplication tricks seen above. The <q>user</q> who calls and uses <span class="combinator">Y</span> can do it by the simple scheme like this:</p>
+		\[
+			\textbf{fac}
+			\;\;\equiv\;\;
+			\textbf{Y}
+			\Bigg(
+				\underbrace{
+					\lambda \overbrace{\boxed s}^{\text{self}} n.
+						\left(
+							\textbf{greaterThan}\ n\ \textbf{0}
+						\right)
+						\bigg(
+							\textbf{times}\ n
+							\Big(
+								\overbrace{\boxed s}^{\text{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+							\Big)
+						\bigg)
+						\textbf{1}
+					\vphantom{\Bigg(\Bigg)}
+				}_{\textbf{fac}/_{\!\textbf{self}}}
+			\Bigg)
+		\]
+		<p>This hides many details indeed. From now on, if we want to implement any kind of recursive function (for the example here <span class="emcode">fac</span>), then we need only to construct its <q>simplified form where &laquo;its <em>self</em> is factored out of it&raquo;</q>, (here notated with \(\textbf{fac}/_{\!\textbf{self}}\) in this example, its exact formation can be read from the example formula above), and afterwards we simply aply the <span class="combinator">Y</span> to this <q><span class="emcode">fac</span>-simplified-by-self</q>, as seen above, and emphasized below in separate lines:</p>
+		\[
+			\begin{aligned}
+				\textbf{fac}
+				&\equiv
+				\textbf{fac}/_{\!\textbf{self}}\;\;\;\;\boxed{\textit{where}}
+				\\[10pt]
+				\textbf{fac}/_{\!\textbf{self}}
+				&\equiv
+				\textbf{Y}
+				\Bigg(
+					\lambda \overbrace{\boxed s}^{\text{self}} n.
+						\left(
+							\textbf{greaterThan}\ n\ \textbf{0}
+						\right)
+						\bigg(
+							\textbf{times}\ n
+							\Big(
+								\overbrace{\boxed s}^{\text{self}} \left(\textbf{minus}\ n\ \textbf{1}\right)
+							\Big)
+						\bigg)
+						\textbf{1}
+					\vphantom{\Bigg(\Bigg)}
+				\Bigg)
+			\end{aligned}
+		\]
+		<p>We will use this for implementing any of the recursive functions, except for <span class="combinator">Y</span> itself, (and possible for a few similar combinators like \(\Omega\). Of course, for <span class="combinator">Y</span> itself we have to &bdquo;fall back&rdquo; to the direct (halved-self translation) method in order to avoid circularity:</p>
+		\[
+			\left[\!\left[\sigma s. \Phi \right]\!\right]
+			\;\;\equiv\;\;
+			\begin{cases}
+				\textbf{Y} \left(\lambda s.\Phi\right)
+				&
+				\text{if } \Phi \not\approx \textbf{Y}
+				\\[24pt]
+				\underbrace{
+					\left(
+						\underbrace{
+							\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+						}_{\textbf{self}^{\frac12}}
+					\right)
+					\left(
+						\underbrace{
+							\lambda s^{\frac12}. \Phi\left[\frac{s^{\frac12} s^{\frac12}}{s}\right]
+						}_{\textbf{self}^{\frac12}}
+					\right)
+				}_{\textbf{self}}
+				&
+				\text{if } \Phi \approx \textbf{Y}
+			\end{cases}
+		\]
+		<h3>The conceptual spiral closes in: analogy between Y and \(\sigma\)</h3>
+		<p>Despite of what has just been said above, we need not to entirely forget good old self-calculus unthankfully. Although we used it here as is a &bdquo;lower-level assembly language &rdquo;for which we built on top of it the &rdquo;high-level API&rdquo; of the <span class="combinator">Y</span> combinator, still, if we look at them from a more mathematical viewpoint, they are more closely related to one another than we might think. It seems that the  <span class="combinator">Y</span> combinator of lambda-calculus shares the very same formalism as the \(\sigma\)-abstractor of self-calculus:
+		\[
+			\begin{aligned}
+				\sigma s.\Phi & \rhd_\sigma \Phi\left[\frac{\sigma s.\Phi}s\right]\\
+				\textbf{Y} \left(\lambda s.\Phi\right)  &\rhd_\beta^+ \Phi \left[\frac{\textbf{Y} \left(\lambda s.\Phi\right)}{s}\right]
+			\end{aligned}
+		\]
+		<p>where does this above come from? Let us contrast this:</p>
+		\[
+			\begin{aligned}
+				\sigma s.\Phi & \rhd_\sigma  \Phi\left[\frac{\sigma s.\Phi}s\right]\\
+				\textbf{Y} f  & \rhd_\beta^+ f \left(\textbf{Y} f\right)
+			\end{aligned}
+		\]
+		<p>&hellip; with this:</p>
+		\[
+			\begin{aligned}
+				\textbf{Y} f  & \rhd_\beta^+ f \left(\textbf{Y} f\right)\\
+				\textbf{Y} \left(\lambda s.\Phi\right)  &\rhd_\beta^+ \Phi \left[\frac{\textbf{Y} \left(\lambda s.\Phi\right)}{s}\right]
+			\end{aligned}
+		\]
+		<p>and we get this:</p>
+		\[
+			\begin{aligned}
+				\sigma s.\Phi & \rhd_\sigma \Phi\left[\frac{\sigma s.\Phi}s\right]\\
+				\textbf{Y} \left(\lambda s.\Phi\right)  &\rhd_\beta^+ \Phi \left[\frac{\textbf{Y} \left(\lambda s.\Phi\right)}{s}\right]
+			\end{aligned}
+		\]
+		<p>I lack the further knowledge needed, so I say only it seems that both formalism share the same underlying idea.</p>
 	</body>
 </html>

@@ -12,6 +12,10 @@ span.emcode {
 	font-family: monospace;
 }
 
+span.mathvar {
+	font-style: italic;
+}
+
 *.meta {
 	font-weight: bold;
 	color: red;
