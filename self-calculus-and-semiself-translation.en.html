@@ -28,7 +28,7 @@
 		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
 			<li>
-				<a href="#self-calculus">&bdquo;Self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
+				<a href="#">Explicit vs implicit self-reference in lambda-calculus? Precursor concepts before fixed-point combinator: &bdquo;self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
 				<ul>
 					<li><a href="#table-of-contents">Table of contents</a></li>
 					<li>
@@ -73,14 +73,21 @@
 						<a href="#translation">Translation from self-calculus into lambda-calculus</a>
 						<ul>
 							<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
-							<li><a href="#halved-self-translation">Mending the naive idea: the <q>halved-self translation</q> trick</a></li>
+							<li><a href="#match-puzzle-pieces">Matching the pieces of the puzzle together</a></li>
+							<li><a href="#halved-self-translation">The <q>halved-self translation</q> trick</a></li>
 						</ul>
 					</li>
-					<li><a href="#examples">Examples</a></li>
+					<li><a href="#examples">Checking examples</a></li>
+					<li>
+						<a href="#conceptual-bootstrap">Building further &mdash; a kind of conceptual bootstrap</a>
+						<ul>
+							<li><a href="#on-top-of-Y">Building on top of Y &mdash; <q>simplified by self</q></a></li>
+							<li><a href="#sigma-Y-analogy">The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</a></li>
+						</ul>
+					</li>
 				</ul>
 			</li>
 		</ul>
-
 		<h2 id="motivation">Motivation</h2>
 
 		<p>This writing attempts to present a well-known topics in a maybe novel way. All elements of this writing are better treated in the literature (see below). Still, I let my writing staying, as this has beeen my own personal way to discover the feeling and the experience of the topics for myself and explaining it to myself. Furthermore, as far as I know, self-calculus, originally used in formalization attempts for On years agoOP (Cardelli), has not yet been used in investigating direct and indirect self-reference in such fields of computer science like lambda-calculus, quines, selfreps, recursive functions. This little writing of mine uses a simplified kind of self-calculus as a heuristic missing link between the hard implementations details of indirect self-reference and the informal familiar treatment of the topics &mdash; a kind of heuristic &bdquo;<em>How someone could have invented it as first</em>&rdquo; reconstruction.</p>
