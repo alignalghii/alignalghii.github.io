@@ -763,8 +763,67 @@ in y   (
 				\right)
 			}_{\textbf{self}}
 		\]
-		<p>which turned out to be wrong. The pieces simply fail to fit together: what we mean to be a conveyer of the topmost expression, the self, instatiousy degrades itself into just a half of it, semiself, by the usage ofthe duplication idea. We know for sure that the duplication idea is good, but fitting the pieces together correctly needs a simple extra step.</p>
-		<p>In order to mend the original idea, we have discovered a notion like <q>semiself</q>, and introduced meaningful, intention-suggesting notations like the <q>\(\textbf{self}^{\frac12}\) versus <span class="emcode">self</span></q> distinction. These suggest a rearrangment of the wrong lambda-formuation into a corrcted one in the following way:</p>
+		<p>which means that</p>
+		<ol>
+			<li>we simply replace the <q>foreign</q> \(\sigma\)-abstractor to the \(\lambda\)-abstractor,</li>
+			<li>then we copy the expression beside itself (i.e., we <q>duplicate</q> it)
+		</ol>
+		<p>but this seems to be deceptive and misleading: it turned out to be wrong. The pieces simply fail to fit together:</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+							\lambda s. \Phi
+					\right)
+				}_{\textbf{semiself}}
+				\
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{semiself}}
+			}_{\textbf{self}}
+		\]
+		<p>&hellip; the problem can be visualized even better with more meningful labelings on the subexpressions: it will be even clearer if we use the funny pseudomathematical notation \(\textbf{self}^{\frac12}\) instead of &bdquo;\(\textbf{semiself}\)&rdquo;, beecause the funny notation seems to suggest informally a deeper insight:</p>
+		\[
+			[\![\sigma s. \Phi]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+				\
+				\underbrace{
+					\left(
+						\lambda s. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+			}_{\textbf{self}}
+		\]
+		<p>&hellip; what we mean to be a conveyor of the topmost expression, the <q><em>self</em></q>, it <q>instantiousy degrades</q> itself into just a half of its former self, by the very usage of the duplication idea! The <span class="mathvar">s</span> variable on the left-hand-side (the self-calculus side) plays an entirely different role than the <span class="mathvar">s</span> variables on the right-hand-side (the lambda-calculus side): the left-hand side <span class="mathvar">s</span> refers to the actual topmost expression (the self), while the right-hand-side <span class="mathvar">s</span> refers to the halved subexpressions (the semiselfs). Let us emphasize this important fact by using a meaningful notation distinction also for the variable, using <span class="mathvar">s</span> for the self-scoped binding, and \(s^{\frac12}\) for the semiself-scoped binding:</p>
+		\[
+			[\![\overbrace{\sigma s. \Phi}^{\textbf{self}}]\!]
+			\equiv
+			\underbrace{
+				\underbrace{
+					\left(
+						\lambda s^{\frac12}. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+				\
+				\underbrace{
+					\left(
+						\lambda s^{\frac12}. \Phi
+					\right)
+				}_{\textbf{self}^{\frac12}}
+			}_{\textbf{self}}
+		\]
+		<p>Of course, these are decorations only, explanatory labelings, but the wrong formula itself has not been fixed with all that, just the cause of the underlying problem has been highlighted with the auxiliary notation tricks.</p>
+		<p>We know for sure that the duplication idea itself is good, but fitting the pieces together correctly needs a simple extra step. The recently introduced meaningful, intention-suggesting notations suggest a rearrangement of the wrong lambda-formuation into a corrected one in the following way:</p>
 		<ul>
 			<li>
 				<span>let us use the bound variable to refer to the semiself \(\textbf{self}^{\frac12}\) instead of the self</span>
@@ -796,225 +855,39 @@ in y   (
 		\]
 
 		<p>Let us remember the menotechnical reading mentioned already (in section <a href="#selfref-combinators">self-referent combinators</a>): let us read \(s^{\frac12} s^{\frac12}\) like <q>semiself and semiself make together a complete self</q>, or simply <q>semiself + semiself = self</q>, or even more compactly \(\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}}\).</p>
-		<hr/>
-
-
-
-
-		<p>Let us summarize the above in a more formalized way. We tried a translation function</p>
-		\[
-			\left[\!\left[\dots\right]\!\right] : \lambda\sigma\text{-calculus} \to \lambda\text{-calculus}
-		\]
-		<p>with our naively inspired (first-idea) translation formula</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\left(
-						\lambda s. \Phi
-				\right)
-			}_{\textbf{self}}
-			\
-			\underbrace{
-				\left(
-					\lambda s. \Phi
-				\right)
-			}_{\textbf{self}}
-		\]
-		<p>which means that</p>
-		<ol>
-			<li>we simply replace the <q>foreign</q> \(\sigma\)-abstractor to the \(\lambda\)-abstractor,</li>
-			<li>then we copy the exppression bedide itself (i.e., we <q>duplicate</q> it)
-		</ol>
-		<p>but this seems to be deceptive and misleading. Let us try to fix at least the auxiliary labeling:</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\underbrace{
-					\left(
-							\lambda s. \Phi
-					\right)
-				}_{\textbf{semiself}}
-				\
-				\underbrace{
-					\left(
-						\lambda s. \Phi
-					\right)
-				}_{\textbf{semiself}}
-			}_{\textbf{self}}
-		\]
-		<p>The labelings will be even clearer if we use the funny pseudomathematical notation \(\textbf{self}^{\frac12}\) instead of &bdquo;\(\textbf{semiself}\)&rdquo;, beecause the funny notation seems to suggest informally a deeper insight:</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\underbrace{
-					\left(
-							\lambda s. \Phi
-					\right)
-				}_{\textbf{self}^{\frac12}}
-				\
-				\underbrace{
-					\left(
-						\lambda s. \Phi
-					\right)
-				}_{\textbf{self}^{\frac12}}
-			}_{\textbf{self}}
-		\]
-		<ul class="menu">
-			<li><a href="#top">Jump to top of this page</a></li>
-			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
-			<li><a href="index.html">Back to the main personal page</a></li>
-		</ul>
-
-		<h3 id="halved-self-translation">The <q>halved-self translation</q> trick</h3>
-		<p>
-			Ezek azonban még mindig nem a jó kifejezések, hiszen tulajdonképp magukon a kifejezéseken nem is változtattunk semmit, éppen csak a kapcsos magyarázó jelek pontosításával rámutattunk a hibára.
-			A hiba végső oka az, ahogy a \(\beta\)-redukciót ténylegesen elvégezzük, kiderül,
-			hogy ahol a szelfet várnánk el, oda pont a szemiszelf (\(\textbf{self}^{\frac12}\)) kerül, pont nem illeszkedik össze a gondolatmenet.
-		</p>
-		<p>The recently intoduced <q>\(\textbf{self}^{\frac12}\) versus <span class="emcode">self</span></q> distinction and its labeling on the (wrong) formula already suggests a rearrangment of the lambda-expressions:</p>
-		<ul>
-			<li>
-				<span>let us use the bound variable to refer to the semiself \(\textbf{self}^{\frac12}\) instead of the self</span>
-				<ul>
-					<li>for clarity&apos;sake let us even rename the bound variable into \(s^{\frac12}\) instead of <span class="mathvar">s</s>!</li>
-				</ul>
-			<li>And two such \(s^{\frac12}\) occurrences in a pair should <q>fuse</q> together into the <q>original</q> <span class="mathvar">s</span> that was meant to play the complete <span="emcode">self</span>'s role:</li>
-		</ul>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\left(
-					\underbrace{
-						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{\textbf{self}}}{s}\right]
-					}_{\textbf{self}^{\frac12}}
-				\right)
-				\left(
-					\underbrace{
-						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{\textbf{self}}}{s}\right]
-					}_{\textbf{self}^{\frac12}}
-				\right)
-			}_{\textbf{self}}
-		\]
-		<p>&hellip; this seems to fix the <q>degradation of the self into semiself</q> problem mentioned above!</p>
-		<p>
-			Let us remember the menotechnical reading mentioned already (in section <a href="#selfref-combinators">self-referent combinators</a>): let us read \(s^{\frac12} s^{\frac12}\) like <q>semiself and semiself make together a complete self</q>, or simply <q>semiself + semiself = self</q>, or even more compactly \(\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}}\).
-		</p>
-		<hr/>
-
-
-
-
-
-
-
-
-
-		<p>Tehát jó-e mindez? <em>Nem!!!</em> Hamarosan kiderül, miért nem az, de egyelőre nézzük meg, mi lenne a folyománya, ha jó lenne.</p>
-
-		<p>Ha ez jó lenne (nem az!), akkor már írhatnánk is fel a már alakra is szép, egyszerű általános fordítási szabályt szelf-kalkulusról ,,tiszta'' lambda-kalkulusra: testszőleges \(\sigma s.\Phi\) szelf-kalkulus kifejezésre</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\left(
-						\lambda s. \Phi
-				\right)
-			}_{\textbf{self}}
-			\
-			\underbrace{
-				\left(
-					\lambda s. \Phi
-				\right)
-			}_{\textbf{self}}
-		\]
-
-		<p>Majdnem jó gondolatmenet, de egy javítható részletben mégis hibás. Még nem illeszkednek össze hézagmentesen a részletek. valójában a definiálandó \(\textbf{fac}\) nem rendre a két-két részkifejezés, hanem a két részkifejezésből alkotott teljes nagy kifejezés lenne! Valahogy így:</p>
-		\[
-			\underbrace{
-				\Bigg(
-					\underbrace{
-						\lambda\ \boxed{s}\ .\
-							\lambda n\ .\
-								\left(
-									\textbf{greaterThan}\ n\ \textbf{0}
-								\right)
-								\bigg(
-									\textbf{times}\ n
-									\Big(
-										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
-									\Big)
-								\bigg)
-								\textbf{1}
-					}_{\textbf{fac}^{\frac12}}
-				\Bigg)
-				\Bigg(
-					\underbrace{
-						\lambda\ \boxed{s}\ .\
-							\lambda n\ .\
-								\left(
-									\textbf{greaterThan}\ n\ \textbf{0}
-								\right)
-								\bigg(
-									\textbf{times}\ n
-									\Big(
-										\boxed{s} \left(\textbf{minus}\ n\ \textbf{1}\right)
-									\Big)
-								\bigg)
-								\textbf{1}
-					}_{\textbf{fac}^{\frac12}}
-				\Bigg)
-			}_{\textbf{fac}}
-		\]
-		<p>A kívánt faktoriális-függvény (\(\textbf{fac}\)) tehát a teljes nagy kifejezés, ő itt a ,,szelf''. A két részkifejezés nem maga a kívánt \(\textbf{fac}\) nem ők játsszák a szelf szerepét, ők afféle ,,szemiszelf'', és jelölésben is különböztessük meg valamiféle rendszerezett módon: jelöljük úgy, hogy \(\textbf{fac}^{\frac12}\), a kis feles-kitevő különböztesse meg mindig a félkifejezést az egésztől, a szemiszelfet a mindenkori szelftől!</p>
-		<p>Általános módon felírva valahogy így:</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\underbrace{
-					\left(
-							\lambda s. \Phi
-					\right)
-				}_{\textbf{semiself}}
-				\
-				\underbrace{
-					\left(
-						\lambda s. \Phi
-					\right)
-				}_{\textbf{semiself}}
-			}_{\textbf{self}}
-		\]
-		<p>vagy tömörebben, a &bdquo;\(\textbf{semiself}\)&rdquo; helyett a tömörebb és a modulárisabb \(\textbf{self}^{\frac12}\) jelöléssel:</p>
-		\[
-			[\![\sigma s. \Phi]\!]
-			\equiv
-			\underbrace{
-				\underbrace{
-					\left(
-							\lambda s. \Phi
-					\right)
-				}_{\textbf{self}^{\frac12}}
-				\
-				\underbrace{
-					\left(
-						\lambda s. \Phi
-					\right)
-				}_{\textbf{self}^{\frac12}}
-			}_{\textbf{self}}
-		\]
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#naive-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 
-		<h2 id="examples">Examples</h2>
-		<p>Let us investigate the problem entirely in details, shown on a concrete example. Let us use for example something simpler, for example the self-referent combinators:</p>
-
+		<h2 id="examples">Checking examples</h2>
+		<p>Let us investigate the old wrong translation formula on a concrete examples. Let us use for example something simple, for example the self-referent combinators.</p>
+		<p>Their definition in self-calculus:</p>
+		\[
+			\begin{aligned}
+				\Omega                       &\;\;\equiv\; \sigma  s. s                          \\
+				\textbf{Y}_{\textbf{Curry}}  &\;\;\equiv\; \lambda f. \sigma  s. fs              \\
+				\textbf{Y}_{\textbf{Turing}} &\;\;\equiv\; \sigma  s. \lambda f. f\left(sf\right)
+			\end{aligned}
+		\]
+		<p>If we use the wrong translation formula</p>
+		\[
+			[\![\overbrace{\sigma s. \Phi}^{\textbf{self}}]\!]
+			\equiv
+			\underbrace{
+				\left(
+						\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+			\
+			\underbrace{
+				\left(
+					\lambda s. \Phi
+				\right)
+			}_{\textbf{self}}
+		\]
+		<p>to translate them into lambda-calculus, we get the following (wrong) translations:</p>
 		\[
 			\begin{aligned}
 				\Omega
@@ -1049,7 +922,7 @@ in y   (
 			\end{aligned}
 		\]
 
-		<p>Let us check whether these above are correct steps: Let us reduce expressions \(\Omega\) and also expression \(\textbf Y_{\text{Turing}}\; f\) with the above definitions/implementations, and contrast the result with their expected operational semantics! Are they presenting the expected reduction behavior?</p>
+		<p>Let us check whether these above are indeed wrong translations: let us reduce expressions \(\Omega\) and also expression \(\textbf Y_{\text{Turing}}\; f\) with the above definitions/implementations, and contrast the result with their expected operational semantics! Are they presenting the expected reduction behavior?</p>
 		\[
 			\Omega
 			\;\;\equiv\;\;
@@ -1090,6 +963,93 @@ in y   (
 		\]
 
 		<p>We can see that the reductions series of the \(\textbf{Y}_{\text{Turing}}\ f\) expression fails to match its expectations, too.</p>
+		<p><strong>Practice</strong>: do the same also for \(\textbf Y_{\text{Curry}}\; f\)!</p>
+		<p><strong>Practice 2</strong>: check also the mended, corrected translation formula</p>
+		\[
+			[\![
+				\underbrace{
+					\sigma \overbrace{s}^{\textbf{self}}. \Phi
+				}_{\textbf{self}}
+			]\!]
+			\;\;\equiv\;\;
+			\underbrace{
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+				\left(
+					\underbrace{
+						\lambda s^{\frac12}. \Phi\left[\frac{\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}}{s}\right]
+					}_{\textbf{self}^{\frac12}}
+				\right)
+			}_{\textbf{self}}
+		\]
+		<p>for all the three famous self-referent combinators!</p>
+		<p><strong>Help</strong>: The self-calculus formulae (again) together with their translation into pure lambda-calculus according to the corrected translation formula:</p>
+		\[
+			\begin{aligned}
+				\Omega\;\;\;\;
+				&\equiv
+				&\Big[\!\!\Big[\overbrace{\vphantom{\Big[\Big]}\sigma  s. s}^{\textbf{self}}\Big]\!\!\Big]
+				&\;\;\;\;\equiv\;\;\;\;
+				\underbrace{
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ .\ \overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+					\;
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ .\ \overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+				}_{\textbf{self}}
+
+				\\[24pt]
+
+				\textbf{Y}_{\text{Curry}}\;\;\;\;
+				&\equiv
+				&\Big[\!\!\Big[\overbrace{\vphantom{\Big[\Big]}\lambda f. \sigma  s. fs}^{\textbf{self}}\Big]\!\!\Big]
+				&\;\;\;\;\equiv\;\;\;\;
+				\lambda\ f\ .\ 
+				\underbrace{
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ .\ f\ \big(\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}\big)
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+					\;
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ .\ f\ \big(\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}\big)
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+				}_{\textbf{self}}
+
+				\\[24pt]
+
+				\textbf{Y}_{\text{Turing}}\;\;\;\;
+				&\equiv
+				&\Big[\!\!\Big[\overbrace{\vphantom{\Big[\Big]}\sigma  s. \lambda f. f\left(sf\right)}^{\textbf{self}}\Big]\!\!\Big]
+				&\;\;\;\;\equiv\;\;\;\;
+				\underbrace{
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ f\ .\ f\ \big(\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}\ f\big)
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+					\;
+					\underbrace{
+						\Big(
+							\lambda\ s^{\frac12}\ f\ .\ f\ \big(\overbrace{\boxed{s^{\frac12} s^{\frac12}}}^{s\;=\;\textbf{self}}\ f\big)
+						\Big)
+					}_{\textbf{self}^{\frac12}}
+				}_{\textbf{self}}
+			\end{aligned}
+		\]
+
 
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
