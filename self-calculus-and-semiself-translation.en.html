@@ -1057,8 +1057,8 @@ in y   (
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
 
-		<h2>Building further &mdash; a kind of conceptual bootstrap</h2>
-		<h3>Building on top of Y &mdash; <q>simplified by self</q></h3>
+		<h2 id="conceptual-bootstrap">Building further &mdash; a kind of conceptual bootstrap</h2>
+		<h3 id="on-top-of-Y">Building on top of Y &mdash; <q>simplified by self</q></h3>
 		<p>After we have seen that we can define the  <span class="combinator">Y</span> combinator on top of self-calculus (more precisely: on its (semi-halved-self style) translation to \(\lambda\)-calculus), we can forget it as a scaffold. Because almost any (further) practical occurrence of self-reference &mdash; most importantly, recursive functions &mdash; will be implemented on top of <span class="combinator">Y</span>. Despite of the theoretical possibility of implementing recursive functions directly by (semi-halved-self style) translation from self-calculus, we will almost never, as such an implementation seems somewhat lengthy. We use the <span class="combinator">Y</span> combinator as a kind of welcome abstraction layer, a &bdquo;concept library&rdquo; inside the tolkit of \(\lambda\)-calculus that mediates to us all important notions of self-reference in a lambda-friendly manner.</p>
 		<p>Just for curiousity&apos;s sake, here is factorial function translated from its self-calculus formalism:</p>
 		\[
@@ -1199,7 +1199,7 @@ in y   (
 		</ul>
 
 
-		<h3>The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</h3>
+		<h3 id="sigma-Y-analogy">The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</h3>
 		<p>Despite of what has just been said above, we need not to entirely forget good old self-calculus unthankfully. Although we used it here as is a &bdquo;lower-level assembly language &rdquo;for which we built on top of it the &rdquo;high-level API&rdquo; of the <span class="combinator">Y</span> combinator, still, if we look at them from a more mathematical viewpoint, they are more closely related to one another than we might think. It seems that the  <span class="combinator">Y</span> combinator of lambda-calculus shares the very same formalism as the \(\sigma\)-abstractor of self-calculus:
 		\[
 			\begin{aligned}
