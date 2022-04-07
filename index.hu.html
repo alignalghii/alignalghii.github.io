@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 	<head>
 		<meta charset="UTF-8"/>
 		<title>Személyes főoldal: projektumaim és egyéb szakmai dolgok bemutató oldala</title>
@@ -30,16 +30,25 @@
 			<li><a href="#old-hs">Régi Haskell-projektumaim</a></li>
 		</ul>
 
+		<h2 id="intro-history">Bevezetés, személyes történelem</h2>
+
+		<p>Ez az  oldal programmozói tevékenységem és készségeim összefoglaló oldala akar lenni, jelen változatban azonban kiemelten kap szerepet a legutóbbi néhány év, melynek során hagyományos webprogramozói munkámban némi szünetet tartva, régi Haskell-tudásomat megpróbáltam új szintre emelni, hogy nagyobb projektek architekturális mintáira, fejlettebb tervezési mintákra is rálássak.</p>
+		<p>A fejlődés fenntarthatóságának érdekében (<q><em>low-hanging fruits</em></q>-szindróma elkerülése) igyekeztem fenntartani a kategóriaelméleti, topológiai, típuselméleti alapok folyamatos tanulását is, és perspektívát kapni a Haskell és a modern formális módszerek kapcsolatáról, a tételbizonyító rendszerek működéséről is (Agda).</p>
+		<p>Bár a gyakorlatias mintaprojektek terén nem született annyi felmutatható Haskell-eredmény, mint szerettem volna, de megvalósult Haskellben néhány kisebb mini-programyelv interpreter, továbbá egy web-API kliens, és ezentúl két az előbbiekhez képest embrionális szakaszban maradt webalkalmazás is. Mindezek az alábbi technológiák alkalmazását is példázzák: zipper-adatszerkezetek (<q>kifejezésfák navigálható fókusz-lyukakkal</q>), nyíl (arrow) formalizmus (sokszor csak mint egyszerű paraméteres monászok, akár teljesen nem is formalizált Kleisli-monászok formájában), illetve kisebb monásztranszformálós architektúrák (viszonylag triviális, nem túl bonyolult kiépítésben)</p>
+		<p>Ezelőtti tevékenységem: backend webprogramozás nagyobbrészt PHP, kisebbrészt JavaScript nyelven. E gyakorlatiasabb korszak egy évtizedig tartott. Előtte (az <q>őskorban</q>) szintén Haskell-programozással foglalkoztam, ezáltal pályám egy sajátos spirális futott be, a Haskellből kiindulva, onnan egy évtizedig a <q>hagyományos</q> gyakorlati webprogramzás világába elkanyarodva, és a végén &mdash; átfogóbb matematikai rálátás igényével &mdash; a Haskell világába visszakanyarodva.</p>
+		<p>A két <q>világ</q> közti kapcsolatként lassanként elkezdtek a deklaratív, funkcionális programpzási stílus <q>betörni</q> PHP és JavaScript kódjaimba is: algebrai adattípusokat (<code>Maybe</code>, <code>Either</code>) sztályörökléssel megvalósítva (a Scala-ból ismert <q>case object</q> technikával), sőt a PHP <em>trait</em>-jei révén még akár kisebb Haskell típusosztályok (<code>Monad</code>) megvalósításával is.</p>
+
 		<h2 id="math">Matematika, és személyes viszonyulásom hozzá</h2>
+
+		<p>Gyerekként fizikus szerettem  volna lenni, sajnos nem maradtam meg mellette, később a matematika töltötte be ugyanezt a szereet az életemben, hogy mindenre rányomja bélyegét &mdash; és ez mindmáig tart.</p>
+		<p>Ugyanakkor az inkább az elmúlt egy-fél évben történt, hogy a Haskell programozás a matematika távolabbi területeit is kívánatossá tette számomra, olyasvalamit, ami nem tartozik szorosan a Haskellhez <q>közvetlenül</q> kötődő <q>Szentháromsághoz</q> (kategóriaelmélet, típuselmélet, matematikai logika). Főleg a kategóriaelmélet makacs ellenállása velem szemben inspirált engem arra, hogy a hozzá vezető utat a topológia és a csoportelmélet megismerésével próbáljam <q>kipárnázni</q>. E téren tudományos igényű írásra nem lennék képes, de személyes élményeimet az alábbi reflexiós írásban próbáltam összefoglalni:</p>
 		<ul>
 			<li><a href="Haskell-and-math.hu.html">Haskell és matematika (és ahogy én viszonyulok hozzájuk)</a>. Rövid személyes írás a témáról. Hogyan képes a Haskell és a matematika kölcsönösen erősíteni egymást, és miért nélkülözhetetlen a matematika egésze iránti nyitottság megtartása?</li>
 		</ul>
-		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#math">E szakasz angol változata</a></li>
-		</ul>
 
 		<h3 id="selfref">Minták az önhivatkozás témakörében</h3>
+		<p>Egy témakör, amely a 2000-es évtized közepe-vége óta foglalkoztat, amelynek a matematikai logikában, de a lambda-kalkulusban is megvan a lenyomata: az <em>önhivatkozás</em> témaköre, a maga paradoxonjaival. A funkcionális programozás terén persze a rekurzív függvények terén jelenik ez meg, ehhez kötődik még az adott nyelv pontos operatív szemantikája, kiértékelésrendje, illeve annak formális modellezése, amely már a topológia területére is átnyúlik.</p>
+		<p>E témák terén inkább csak az operatív szematikai elméleti keretekig jutottam, e téren írásaim már nemcsak személyes jellegűek, de tudományosan nem jelentős értékűek, viszont esetleg didaktikus értékük lehet későbbi tovbbfejlesztés során. Létezik benne kisebb saját formalizmus, azonban az viszonylag triviálisan összeszedhető a témát ismerő közöség számára is:</p>
 		<ul>
 			<li><a href="self-calculus-and-semiself-translation.hu.html">&bdquo;Szelf-kalkulus&rdquo; és &bdquo;felezett-szelf fordítás&rdquo;</a>: az önreferencia közvetett formája — vajon hogyan lehetségesek rekurzív függvények a tiszta lambda-kalkulusban a közvetlen önhivatkozás lehetősége nélkül is?</li>
 			<li><a href="let-rec.hu.html">A let-rec kifejezés szemantikája(i) és lambda-kalkulusra való fordítása(i)</a></li>
