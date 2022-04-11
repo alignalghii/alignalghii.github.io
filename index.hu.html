@@ -65,18 +65,9 @@
 			<li><a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a> is a tiny pure-JavaScript web-app project to present an <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">ad-hoc usage of monadic style</a> in vanilla JavaScript. This is a very lightweight project, somewhat old: much nicer ways exist to use Haskell-inspired concepts in JavaScript and PHP.</li>
 		</ul>
 
-		<h2 id="intro-history">Bevezetés, személyes történelem</h2>
+		<h2>Egyes kiragadott projektek bővebb részletezése, tematizálása</h2>
 
-		<p>Ez az  oldal programmozói tevékenységem és készségeim összefoglaló oldala akar lenni, jelen változatban azonban kiemelten kap szerepet a legutóbbi néhány év, melynek során hagyományos webprogramozói munkámban némi szünetet tartva, régi Haskell-tudásomat megpróbáltam új szintre emelni, hogy nagyobb projektek architekturális mintáira, fejlettebb tervezési mintákra is rálássak.</p>
-		<p>A fejlődés fenntarthatóságának érdekében (<q><em>low-hanging fruits</em></q>-szindróma elkerülése) igyekeztem fenntartani a kategóriaelméleti, topológiai, típuselméleti alapok folyamatos tanulását is (<a href="#math">→ matematika</a>), és perspektívát kapni a Haskell és a modern formális módszerek kapcsolatáról, a tételbizonyító rendszerek működéséről is (<a href="">→ Agda</a>).</p>
-		<p>Bár a gyakorlatias mintaprojektek terén nem született annyi felmutatható Haskell-eredmény, mint szerettem volna, de megvalósult Haskellben néhány kisebb mini-programyelv (logikai kalkulus) értelmezőprogramja, továbbá egy web-API kliens, és ezentúl két az előbbiekhez képest embrionális szakaszban maradt webalkalmazás is. Mindezek az alábbi technológiák alkalmazását is példázzák: zipper-adatszerkezetek (<q>kifejezésfák navigálható fókusz-lyukakkal</q>), nyíl (arrow) formalizmus (sokszor csak mint egyszerű paraméteres monászok, akár teljesen nem is formalizált Kleisli-monászok formájában), illetve kisebb monásztranszformálós architektúrák (viszonylag triviális, nem túl bonyolult kiépítésben)</p>
-		<p>Ezelőtti tevékenységem: backend webprogramozás nagyobbrészt PHP, kisebbrészt JavaScript nyelven. E gyakorlatiasabb korszak egy évtizedig tartott. Előtte (az <q>őskorban</q>) szintén Haskell-programozással foglalkoztam, ezáltal pályám egy sajátos spirális futott be, a Haskellből kiindulva, onnan egy évtizedig a <q>hagyományos</q> gyakorlati webprogramzás világába elkanyarodva, és a végén &mdash; átfogóbb matematikai rálátás igényével &mdash; a Haskell világába visszakanyarodva.</p>
-		<p>A két <q>világ</q> közti kapcsolatként lassanként elkezdtek a deklaratív, funkcionális programpzási stílus <q>betörni</q> PHP és JavaScript kódjaimba is: algebrai adattípusokat (<code>Maybe</code>, <code>Either</code>) osztályörökléssel megvalósítva (a Scala-ból ismert <q>case object</q> technikával), sőt a PHP <em>trait</em>-jei révén még akár kisebb Haskell típusosztályok (<code>Monad</code>) megvalósításával is. Ezeknek az <q>átvett</q> technikáknak az egyik gyakorlati terméke egy alaprajzszerkesztő kis webalkalmazás, (kliensodali JavaScript-es grafikus szerkesztő), amelynek fő matematikai <q>motorja</q> a Fourier-Motkin féle kiküszöbölési eljárás (lineáris egyenlőtlenség-rendszert megoldó algoritmust), illetve ennek sokszögek ütközés-vizsgálatára való alkalmazása. Az eredmény egy viccessen lassúcska, de teljes ütközésvizsgálatot végző alaprajzszerkesztő, szoba- és bútoralakzatokat fizikailag realisztikusan összetologató webalkalmazás.</p>
-	<p>E JavaScript-projektben magát a Fourier-Motzkin-algoritmust eredetileg egy az egyben Haskellben írtam meg (és onnan ültettem át JavaScriptre), de e matematikai motort körülvevő üzleti logika is rengeteg Haskell-ihlette adatstruktúrát és immutábilis, változatlan adatszerkezetet, sőt helyenként valódi monász-architektúrát tudott magába foglalni, még úgy is, hogy azokat <q>közvetlenül</q> JavaScriptben írtam.Egyszóval: egyszerű algebrai adattípusok, kisebb típusosztályok szintjéig képes vagyok JavaScriptben, sőt, PHP-ban is közvetlenül funkcionális, deklaratív megodásokat létrehozni. Ugyannakkor végzetes hiányosságnak bizonyult, hogy az üzleti logika ennél nagyobb képtékű, architekturális szintű megragadására <q>a két világ</q> egyikéből sem sikerült termékeny, kellően rugalmas és skálázható megközelítést kidolgoznom, ez később a projekt megfeneklését okozta. E súlyos hiányosságomnak az orvoslását célozta egy későbbi, immár teljesen funkcionális személetben írt, fő architektúrájában monásztranszmformálók mentén felépített tisztán Haskell-projekt.</p>
-		<p>Amiben még a matematika erősen rányomta bélyegét programozási stílusomra, az a tesztelés. Bár kevés dicsekednivalóm van: a szabványos, bevett tesztelőeszközök helyett az ad hoc összebütykült <span class="emcode">bash</span>-scriptek és a szövegfeldolgozó Linux-eszközök, <span class="emcode">perl</span>-, sőt <span class="emcode">AWK</span>- és <span class="emcode">sed</span>-scriptek világa ragadott inkább meg. Ezek közös sarokpontja az <em>állapotgép</em>, <em>állapotautomata</em> fogalma volt, amely egyben egy formális nyelvtant is meghatároz, így ezek világa általában is érdekelt (ezekből a leggyakorlatiasabb eredményem REST API-s webalkalmazások <q>curl-grep</q> stílusú automata tesztelése volt).</p>
-		<p>Egyébként gyakorlottság szempontjából nem tartom magam gyakorlott tesztelőnek, bár az Agda axiomatikus szemléletmódja mint a tesztfogalom afféle végletekig elvitt megtestesülése szintén vonzani tud: tesztelhető invariáns tulajdonságok, algebrai összefüggések meglátása. Azonban  Agda-bizonyítási képességeim nagyságrendben kb. az induktív típuscsaládok kisebb/közepes léptékű alkalmazásáig terjednek (Eq, Fin, Vec, bizonyítás-kifejezések), de a szövevényesebb vagy komolyabb formális módszerek módszeres alkalmazását még nem tudnám átlátni, bár szeretném mielőbb megszerezni e tudást.</p>
-
-		<h2 id="recent">Legfrissebb Haskell-projektumaim. Monásztranszformálók (monad transformer) használata</h2>
+		<h3 id="recent">Legfrissebb Haskell-projektumaim. Monásztranszformálók (monad transformer) használata</h3>
 		<p>Az oldalon még sok szó lesz matematikáról, de az oldal fő célját szem előtt tartva elsőnek mégis a dolgok közepéba vágva, legfrissebb Haskell-projektem bemutatása következik:</p>
 		<ul>
 			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs"><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">Parancssori kliensalkalmazás</a> a WikiMédia-projektcsalád kereső-API szolgáltásához</a>. Mintaprojektum annak bemutatására, mire is jó a &bdquo;monásztranszformálók&rdquo; (&bdquo;monad transformers&rdquo;) technikája. Személyes megismerési utam feléjük.</li>
@@ -86,7 +77,7 @@
 			<li><a href="index.html#recent">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="math">Matematika, és személyes viszonyulásom hozzá</h2>
+		<h3 id="math">Matematika, és személyes viszonyulásom hozzá</h3>
 
 		<p>Gyerekként fizikus szerettem  volna lenni, sajnos nem maradtam meg mellette, később a matematika töltötte be ugyanezt a szeretetet az életemben, hogy mindenre rányomja bélyegét &mdash; és ez mindmáig tart.</p>
 		<p>Ugyanakkor az inkább az elmúlt egy-fél évben történt, hogy a Haskell programozás a matematika távolabbi területeit is kívánatossá tette számomra, olyasvalamit, ami nem tartozik szorosan a Haskellhez <q>közvetlenül</q> kötődő <q>Szentháromsághoz</q> (kategóriaelmélet, típuselmélet, matematikai logika). Főleg a kategóriaelmélet makacs ellenállása velem szemben inspirált engem arra, hogy a hozzá vezető utat a topológia és a csoportelmélet megismerésével próbáljam <q>kipárnázni</q>. E téren tudományos igényű írásra nem lennék képes, de személyes élményeimet az alábbi reflexiós írásban próbáltam összefoglalni:</p>
@@ -107,7 +98,7 @@
 			<li><a href="index.html#selfref">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="calculi">Mini programnyelvek/kalkulusok implementációi. Típusderiváltak (zipper) használata</h2>
+		<h3 id="calculi">Mini programnyelvek/kalkulusok implementációi. Típusderiváltak (zipper) használata</h3>
 		<ul>
 			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">Kombinátorlogikai értelmezőprogram</a>. Egy lusta kiértékelésű mini funkcionális programnyelvecske sajátkezű megvalósítása értelmezőprogramként, Haskell nyelven implementálva. Egy minimalisztikus (mindazonáltal Turing-teljes) funkcionális programnyelv, amely minimalisztikus mivolta ellenére is rendelkezik elvileg mindazokkal az előnyökkel, amelyeket a lusta kiértékelési stratégia nyújt a Miranda, Clean, Haskell nyelvben. A projektum szolgáltatása mellett az azr megvalósító forráskódja is érdekes:  törekszik a lehető legnagyobb fogalmi tisztaságra (a <em>zipper</em> néven ismert adatszerkezet-technikát használja, ezzel átlátható módon valósítja meg a „legbalsó legkülső” redukálási stratégiát, amely a lusta kiértékelés sarkköve). Így a főalgoritmus minden összetettsége ellenére is fogalmilag egyszerű tud maradni. A fogalmi egyszerűség megtartása végett ez a projektum nem használ monász-transzformálókat, de nyitott arra, hogy a projektum későbbi elágazásai ilyenekkel árnyalják az algoritmust. maga a projekt alapjellege is szinte sugallja az ezt motiváló lehetőségek hozzáépítését, ezek legkézenfekvőbbike például a nyomkövetési naplózás, továbbá ennek részeként a végtelen körben futó „lefagyó” programok elkapása lépésszámlálási ellenőrzéssel).</li>
 		</ul>
@@ -116,7 +107,7 @@
 			<li><a href="index.html#calculi">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="testing">Tesztelés</h2>
+		<h3 id="testing">Tesztelés</h3>
 		<ul>
 		</ul>
 		<ul class="menu">
@@ -124,7 +115,7 @@
 			<li><a href="index.html#testing">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="onliner">Haskell &bdquo;egysorosaim&rdquo;, &bdquo;proof-of-concept&rdquo;-projektumaim, vagy egyéb extramini-projektumok</h2>
+		<h3 id="onliner">Haskell &bdquo;egysorosaim&rdquo;, &bdquo;proof-of-concept&rdquo;-projektumaim, vagy egyéb extramini-projektumok</h3>
 		<ul>
 		</ul>
 		<ul class="menu">
@@ -132,7 +123,7 @@
 			<li><a href="index.html#onliner">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="webapp">Webalkalmazás funkcionális nyelven</h2>
+		<h3 id="webapp">Webalkalmazás funkcionális nyelven</h3>
 		<ul>
 			<li>Kliensoldali túlsúlyú webalkalmazás példája. JavaScript-megvalósítás Haskell tervezési koncepciók alapján. Megvalósítási technikák: <span class="emcode">Maybe</span> és <span class="emcode">Either</span> algebrai adatszerkezetek Scala-stílusú <em>case object</em>-ek révén, <span class="emcode">Monad</span> (és <span class="emcode">Eq</span> stb&hellip;) típusosztályok pedig PHP-stílusú <em>trait</em>-ek révén. JavaScript esetében mindez prototípus-öröklödési technikán keresztül.</li>
 			<li>Szerveroldali túlsúlyú webalkalmazás példája</li>
@@ -144,10 +135,21 @@
 			<li><a href="index.html#webapp">E szakasz angol változata</a></li>
 		</ul>
 
-		<h2 id="old-non-hs">Régi nem-Haskell projektumaim</h2>
+		<h3 id="old-non-hs">Régi nem-Haskell projektumaim</h3>
 			<li><a href="old-projects.html">Régi referenciamunkái, hobbiprojektumaim.</a> (csak angol változatban). PHP vebalkalmazásaim közül nhány kisebb hobbipéldány, saját házilagos keretrendszerrel.</li>
-		<h2 id="old-hs">Régi Haskell-projektumaim</h2>
+		<h3 id="old-hs">Régi Haskell-projektumaim</h3>
 		<ul>
 		</ul>
+
+		<h2 id="intro-history">Bevezetés, személyes történelem</h2>
+
+		<p>Ez az  oldal programmozói tevékenységem és készségeim összefoglaló oldala akar lenni, jelen változatban azonban kiemelten kap szerepet a legutóbbi néhány év, melynek során hagyományos webprogramozói munkámban némi szünetet tartva, régi Haskell-tudásomat megpróbáltam új szintre emelni, hogy nagyobb projektek architekturális mintáira, fejlettebb tervezési mintákra is rálássak.</p>
+		<p>A fejlődés fenntarthatóságának érdekében (<q><em>low-hanging fruits</em></q>-szindróma elkerülése) igyekeztem fenntartani a kategóriaelméleti, topológiai, típuselméleti alapok folyamatos tanulását is (<a href="#math">→ matematika</a>), és perspektívát kapni a Haskell és a modern formális módszerek kapcsolatáról, a tételbizonyító rendszerek működéséről is (<a href="">→ Agda</a>).</p>
+		<p>Bár a gyakorlatias mintaprojektek terén nem született annyi felmutatható Haskell-eredmény, mint szerettem volna, de megvalósult Haskellben néhány kisebb mini-programyelv (logikai kalkulus) értelmezőprogramja, továbbá egy web-API kliens, és ezentúl két az előbbiekhez képest embrionális szakaszban maradt webalkalmazás is. Mindezek az alábbi technológiák alkalmazását is példázzák: zipper-adatszerkezetek (<q>kifejezésfák navigálható fókusz-lyukakkal</q>), nyíl (arrow) formalizmus (sokszor csak mint egyszerű paraméteres monászok, akár teljesen nem is formalizált Kleisli-monászok formájában), illetve kisebb monásztranszformálós architektúrák (viszonylag triviális, nem túl bonyolult kiépítésben)</p>
+		<p>Ezelőtti tevékenységem: backend webprogramozás nagyobbrészt PHP, kisebbrészt JavaScript nyelven. E gyakorlatiasabb korszak egy évtizedig tartott. Előtte (az <q>őskorban</q>) szintén Haskell-programozással foglalkoztam, ezáltal pályám egy sajátos spirális futott be, a Haskellből kiindulva, onnan egy évtizedig a <q>hagyományos</q> gyakorlati webprogramzás világába elkanyarodva, és a végén &mdash; átfogóbb matematikai rálátás igényével &mdash; a Haskell világába visszakanyarodva.</p>
+		<p>A két <q>világ</q> közti kapcsolatként lassanként elkezdtek a deklaratív, funkcionális programpzási stílus <q>betörni</q> PHP és JavaScript kódjaimba is: algebrai adattípusokat (<code>Maybe</code>, <code>Either</code>) osztályörökléssel megvalósítva (a Scala-ból ismert <q>case object</q> technikával), sőt a PHP <em>trait</em>-jei révén még akár kisebb Haskell típusosztályok (<code>Monad</code>) megvalósításával is. Ezeknek az <q>átvett</q> technikáknak az egyik gyakorlati terméke egy alaprajzszerkesztő kis webalkalmazás, (kliensodali JavaScript-es grafikus szerkesztő), amelynek fő matematikai <q>motorja</q> a Fourier-Motkin féle kiküszöbölési eljárás (lineáris egyenlőtlenség-rendszert megoldó algoritmust), illetve ennek sokszögek ütközés-vizsgálatára való alkalmazása. Az eredmény egy viccessen lassúcska, de teljes ütközésvizsgálatot végző alaprajzszerkesztő, szoba- és bútoralakzatokat fizikailag realisztikusan összetologató webalkalmazás.</p>
+	<p>E JavaScript-projektben magát a Fourier-Motzkin-algoritmust eredetileg egy az egyben Haskellben írtam meg (és onnan ültettem át JavaScriptre), de e matematikai motort körülvevő üzleti logika is rengeteg Haskell-ihlette adatstruktúrát és immutábilis, változatlan adatszerkezetet, sőt helyenként valódi monász-architektúrát tudott magába foglalni, még úgy is, hogy azokat <q>közvetlenül</q> JavaScriptben írtam.Egyszóval: egyszerű algebrai adattípusok, kisebb típusosztályok szintjéig képes vagyok JavaScriptben, sőt, PHP-ban is közvetlenül funkcionális, deklaratív megodásokat létrehozni. Ugyannakkor végzetes hiányosságnak bizonyult, hogy az üzleti logika ennél nagyobb képtékű, architekturális szintű megragadására <q>a két világ</q> egyikéből sem sikerült termékeny, kellően rugalmas és skálázható megközelítést kidolgoznom, ez később a projekt megfeneklését okozta. E súlyos hiányosságomnak az orvoslását célozta egy későbbi, immár teljesen funkcionális személetben írt, fő architektúrájában monásztranszmformálók mentén felépített tisztán Haskell-projekt.</p>
+		<p>Amiben még a matematika erősen rányomta bélyegét programozási stílusomra, az a tesztelés. Bár kevés dicsekednivalóm van: a szabványos, bevett tesztelőeszközök helyett az ad hoc összebütykült <span class="emcode">bash</span>-scriptek és a szövegfeldolgozó Linux-eszközök, <span class="emcode">perl</span>-, sőt <span class="emcode">AWK</span>- és <span class="emcode">sed</span>-scriptek világa ragadott inkább meg. Ezek közös sarokpontja az <em>állapotgép</em>, <em>állapotautomata</em> fogalma volt, amely egyben egy formális nyelvtant is meghatároz, így ezek világa általában is érdekelt (ezekből a leggyakorlatiasabb eredményem REST API-s webalkalmazások <q>curl-grep</q> stílusú automata tesztelése volt).</p>
+		<p>Egyébként gyakorlottság szempontjából nem tartom magam gyakorlott tesztelőnek, bár az Agda axiomatikus szemléletmódja mint a tesztfogalom afféle végletekig elvitt megtestesülése szintén vonzani tud: tesztelhető invariáns tulajdonságok, algebrai összefüggések meglátása. Azonban  Agda-bizonyítási képességeim nagyságrendben kb. az induktív típuscsaládok kisebb/közepes léptékű alkalmazásáig terjednek (Eq, Fin, Vec, bizonyítás-kifejezések), de a szövevényesebb vagy komolyabb formális módszerek módszeres alkalmazását még nem tudnám átlátni, bár szeretném mielőbb megszerezni e tudást.</p>
 	</body>
 </html>
