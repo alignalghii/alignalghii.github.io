@@ -31,6 +31,38 @@
 			<li><a href="#old-hs">My old Haskell projects</a></li>
 		</ul>
 
+		<h2 id="recent">My most recent Haskell projects. Using monad transformers</h2>
+		<p>&hellip; showing my most recent knowledge and coding style</p>
+		<ul>
+			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
+			<li>The already mentioned, new, yet less featureful, but conceptually clean combinatory logic interpreter, with well-organized clean sourcecode</li>
+		</ul>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#recent">Hungarian version of this section</a></li>
+		</ul>
+
+		<h2 id="testing">Testing</h2>
+		<ul>
+			<li>Unit testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/UnitTest.hs">sample</a> with its two spec files <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeriesSpec.hs">effectless spec</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeries.hs">effectless</a>) and <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeriesSpec.hs">effectful</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeries.hs">effectful</a>) as part of my <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">client program project</a> to the WikiMedia search API. It uses Hspec as a test framework.</li>
+			<li>Integration testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/IntegrationTest.hs">sample</a> as part of my client program project to the WikiMedia search API. It uses custom Haskell code as test framework.</li>
+			<li>Non-functional testing or other special Haskell tests (lazyness, infinite runaway): <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/LazinessDemo.hs">sample</a> as part of my client program project to the WikiMedia search API. It uses parallelity: the unsafe code is run in one thread and it is controlled by another thread.</li>
+		</ul>
+
+		<h2 id="text-processing">Testing with shell scripting and text-processing tools</h2>
+		<p>The probably infamous &bdquo;Swiss army knife&rdquo; hacky do-in-yourself tool for testing &bdquo;legacy&rdquo; applications (those not tightly developed for testing): using shell scripts forcibly opening up and exploring an interface to the legacy app. E.g. in case of web apps, by &bdquo;curl&rdquo;-ing it (or forcing any other kind of text reactions frofm it to prepared inputs), and analyizing these with text-processing tools. Infamous &bdquo;curl-grep&rdquo; testing of web API-s can be enhanced by using instead of grep a more sophisticated (Turing complete) text-processing language: e.g. sed, AWK, Perl, Raku. These famous <em>data-driven</em> languages open up a state-machine approach for specifying expected behaviors.</p>
+		<p>In simplest throw-away such DIY test frameworks, the testing itself can be done by diff-ing the piped result of AWK/Perl/`sed` scripts against perpared etalon/expectation files.</p>
+		<p>The above samples present such little test framework for testing such custom non-standard tasks like checking the validity of small self-made document-formatting tools, auxiliary tools for document maintence, implemented via orchestrated and fine-tuned Linux scripting tools.</p>
+		<ul>
+			<li>A worked-out (sub)project with a very detailed <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts#auxiliary-text-check-and-filter-scripts">README doc</a>. The sourcecode of this <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts">auxiliary subproject itself</a> is  part of this very GitHub Pages personal profile page that You are reading now! It uses Bash, Perl, AWK and sed.  In summary: Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be organized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.</li>
+			<li>Another, smaller <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/tree/main/aux-scripts"> (sub)project</a> for a test framework is also an auxiliary part of a bigger project (the already mentioned client program project to the WikiMedia search API). Also its test framework subproject uses Bash, AWK and sed.</li>
+		</ul>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#testing">Hungarian version of this section</a></li>
+		</ul>
+
+
 		<h2 id="math">Mathematics, my relationship with math</h2>
 		<ul>
 			<li><a href="Haskell-and-math.en.html">Haskell and mathematics (and the way I relate to them)</a>. A short personal writing about the topic. How can Haskell and mathematics strengthen each other mutually, and why is it necessary to keep an openness towards the whole of mathematics?</li>
@@ -65,36 +97,8 @@
 			<li><a href="index.hu.html#calculi">Hungarian version of this section</a></li>
 		</ul>
 
-		<h2 id="recent">My most recent Haskell projects. Using monad transformers</h2>
-		<p>&hellip; showing my most recent knowledge and coding style</p>
-		<ul>
-			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
-			<li>The already mentioned, new, yet less featureful, but conceptually clean combinatory logic interpreter, with well-organized clean sourcecode</li>
-		</ul>
-		<ul class="menu">
-			<li><a href="#top">Jump to top of this page</a></li>
-			<li><a href="index.hu.html#recent">Hungarian version of this section</a></li>
-		</ul>
 
-		<h2 id="testing">Testing</h2>
-		<ul>
-			<li>Unit testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/UnitTest.hs">sample</a> with its two spec files <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeriesSpec.hs">effectless spec</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeries.hs">effectless</a>) and <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeriesSpec.hs">effectful</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeries.hs">effectful</a>) as part of my <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">client program project</a> to the WikiMedia search API. It uses Hspec as a test framework.</li>
-			<li>Integration testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/IntegrationTest.hs">sample</a> as part of my client program project to the WikiMedia search API. It uses custom Haskell code as test framework.</li>
-			<li>Non-functional testing or other special Haskell tests (lazyness, infinite runaway): <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/LazinessDemo.hs">sample</a> as part of my client program project to the WikiMedia search API. It uses parallelity: the unsafe code is run in one thread and it is controlled by another thread.</li>
-		</ul>
 
-		<h2 id="text-processing">Testing with shell scripting and text-processing tools</h2>
-		<p>The probably infamous &bdquo;Swiss army knife&rdquo; hacky do-in-yourself tool for testing &bdquo;legacy&rdquo; applications (those not tightly developed for testing): using shell scripts forcibly opening up and exploring an interface to the legacy app. E.g. in case of web apps, by &bdquo;curl&rdquo;-ing it (or forcing any other kind of text reactions frofm it to prepared inputs), and analyizing these with text-processing tools. Infamous &bdquo;curl-grep&rdquo; testing of web API-s can be enhanced by using instead of grep a more sophisticated (Turing complete) text-processing language: e.g. sed, AWK, Perl, Raku. These famous <em>data-driven</em> languages open up a state-machine approach for specifying expected behaviors.</p>
-		<p>In simplest throw-away such DIY test frameworks, the testing itself can be done by diff-ing the piped result of AWK/Perl/`sed` scripts against perpared etalon/expectation files.</p>
-		<p>The above samples present such little test framework for testing such custom non-standard tasks like checking the validity of small self-made document-formatting tools, auxiliary tools for document maintence, implemented via orchestrated and fine-tuned Linux scripting tools.</p>
-		<ul>
-			<li>A worked-out (sub)project with a very detailed <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts#auxiliary-text-check-and-filter-scripts">README doc</a>. The sourcecode of this <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts">auxiliary subproject itself</a> is  part of this very GitHub Pages personal profile page that You are reading now! It uses Bash, Perl, AWK and sed.  In summary: Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be organized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.</li>
-			<li>Another, smaller <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/tree/main/aux-scripts"> (sub)project</a> for a test framework is also an auxiliary part of a bigger project (the already mentioned client program project to the WikiMedia search API). Also its test framework subproject uses Bash, AWK and sed.</li>
-		</ul>
-		<ul class="menu">
-			<li><a href="#top">Jump to top of this page</a></li>
-			<li><a href="index.hu.html#testing">Hungarian version of this section</a></li>
-		</ul>
 
 		<h2 id="onliner">My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</h2>
 		<ul>
