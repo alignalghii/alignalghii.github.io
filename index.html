@@ -42,6 +42,17 @@
 			<li><a href="index.hu.html#recent">Hungarian version of this section</a></li>
 		</ul>
 
+		<h2 id="calculi">Implementations of mini programming languages/calculi. Using zippers</h2>
+		<ul>
+			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
+			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
+			<li>A super-concise implementation (reduction algorithm), but only in early steps, not having any user interface.</li>
+		</ul>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#calculi">Hungarian version of this section</a></li>
+		</ul>
+
 		<h2 id="testing">Testing</h2>
 		<ul>
 			<li>Unit testing: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/UnitTest.hs">sample</a> with its two spec files <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeriesSpec.hs">effectless spec</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeries.hs">effectless</a>) and <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeriesSpec.hs">effectful</a> (which is inspecting <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeries.hs">effectful</a>) as part of my <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">client program project</a> to the WikiMedia search API. It uses Hspec as a test framework.</li>
@@ -85,20 +96,6 @@
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="index.hu.html#selfref">Hungarian version of this section</a></li>
 		</ul>
-
-		<h2 id="calculi">Implementations of mini programming languages/calculi. Using zippers</h2>
-		<ul>
-			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
-			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
-			<li>A super-concise implementation (reduction algorithm), but only in early steps, not having any user interface.</li>
-		</ul>
-		<ul class="menu">
-			<li><a href="#top">Jump to top of this page</a></li>
-			<li><a href="index.hu.html#calculi">Hungarian version of this section</a></li>
-		</ul>
-
-
-
 
 		<h2 id="onliner">My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</h2>
 		<ul>
