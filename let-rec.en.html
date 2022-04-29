@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>The let-rec construct</title>
+		<title>The let-rec construct and its semantics</title>
 
 		<link rel="stylesheet" href="assets/main.css"/>
 		<link rel="stylesheet" href="assets/menu.css"/>
@@ -19,7 +19,7 @@
 	<body>
 		<ul class="menu">
 			<li><a href="let-rec.hu.html">Hungarian version of this page</a></li>
-			<li><a href="index.hu.html">Back to personal main page</a></li>
+			<li><a href="index.html">Back to personal main page</a></li>
 		</ul>
 		<h1 id="letrec">The let-rec construct</h1>
 
@@ -77,6 +77,12 @@
 			\equiv
 			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
 		\]
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="let-rec.hu.html#intro">Hungarian version of the first two sections</a></li>
+			<li><a href="index.html">Back to the main personal page</a></li>
+		</ul>
+
 		<h2 id="exampl">Examples</h2>
 		<h3 id="ff-wo-a">The fixedpoint-free case, and without using argumements</h3>
 		<p>At first, let us see a simple example for the simplest case. A rather intuitive (although inexact) expression to tell how many days have passed in the last three years:</p>
@@ -164,5 +170,10 @@ in fac 5</code></pre>
 			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{f}\ n\ .\ \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)}_{\textbf{fac}}\right) 5
 		\]
 		<p>that is the translation of the factorial function into pure lambda calculus.</p>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="let-rec.hu.html#pld">Hungarian version of the <q>Examples</q> section</a></li>
+			<li><a href="index.html">Back to the main personal page</a></li>
+		</ul>
 	</body>
 </html>
