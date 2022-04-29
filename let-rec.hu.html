@@ -27,7 +27,7 @@
 		<h2>Fordítása tiszta lambda-kalkulusra</h2>
 		<p>Az elébb említettnek negfelelően létezik egy rekurzív (fixpontos) és egy nemrekurzív (fixpontmentes) használati kontextus, alább ezek bemutatása következik.</p>
 		<p>Fontos előzetesen megemlítendő dolog még, hogy az oldal a rekurzív/fixpontos eset szemantikáját és fordítástechnikáját az ún. <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixpontkombinátorra</a> építve mutatja be. Elvileg létezik egy alpvetőbb, alacsonabbszintű fordítástechnika is, — részleteit ld. a &bdquo;<a href="self-calculus-and-semiself-translation.hu.html">felezett szelf-kalkulus</a>&rdquo; oldalon — de mivel magát az <span class="combinator">Y</span>-fixkombinátort is épp ezzel valósítjuk meg, ezért az áttekinthetőséget kívánó eseteket többnyire a magasabb szintűnek tekintett <span class="combinator">Y</span>-kombinátor közvetítésével építjük fel.</p>
-		<p>A <em>let-rec</em> témaköre primitív és unalmas témának tűnik felületesen, de hogy valójában milyen fontos is a szemantikájának a pontos megértése, az kellemetlenül vissza tus köszönöni a bonyolultabb esetekben, például Wouter Swierstra <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribete grammars matter</a> cikkének az elsőre legmisztikusabbnak tűnő része a &bdquo;<em>credit card transformation</em> rész (&bdquo;tie the recursive knot&rdquo;), amelynek mögött pontosan a let-rec értelmezésének egy nem annyira triviális, ún. lusta szematikájú esete áll. Erről a mű tömören ír, egyéni megértési célból a dolgot megpróbáltam személyesen egy külön személyes<a href="">Haskell-projekt és leírás</a> keretében kibontani.</p>
+		<p>A <em>let-rec</em> témaköre primitív és unalmas témának tűnik felületesen, de hogy valójában milyen fontos is a szemantikájának a pontos megértése, az kellemetlenül vissza tus köszönöni a bonyolultabb esetekben, például Wouter Swierstra <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribete grammars matter</a> cikkének az elsőre legmisztikusabbnak tűnő része a &bdquo;<em>credit card transformation</em> rész (&bdquo;tie the recursive knot&rdquo;), amelynek mögött pontosan a let-rec értelmezésének egy nem annyira triviális, ún. lusta szematikájú esete áll. Erről a mű tömören ír, egyéni megértési célból a dolgot megpróbáltam személyesen egy külön személyes<a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">Haskell-projekt és leírás</a> keretében kibontani  (ld. a hozzá tartozó <a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars#readme">README dokumetációs</a> is).</p>
 		<h3>Fixpontos vs fixpontmentes eset</h3>
 		\[
 			\left[\!\left[\textbf{let }f = \Phi\textbf{ in }\Gamma\right]\!\right]
@@ -71,7 +71,7 @@
 		\[
 			\underbrace{\mathbf{Y} \left(\lambda\ \boxed{o}\ .\ \boxed{o}\right)}_{\Omega}
 		\]
-		<p>illetve aki szreti a kombinátorokat, és ismeri az \(\mathbf I :\equiv \lambda x\ .\ x\) kombinátort (a Haskell <span class="emcode">id</span>), az azonnal az alábbi egyszerű alakban is szemlélelheti:
+		<p>illetve aki szereti a kombinátorokat, és ismeri az \(\mathbf I :\equiv \lambda x\ .\ x\) kombinátort (a Haskell <span class="emcode">id</span>), az azonnal az alábbi egyszerű alakban is szemlélelheti:
 		\[
 			\underbrace{\mathbf{Y}\ \mathbf{I}}_{\Omega}
 		\]
@@ -130,9 +130,10 @@ in fac 5</code></pre>
 				\Gamma\left[\dfrac{\textbf{Y}\left(\lambda f . \Phi\right)}{f}\right] & \text{ha } f \in \text{FVar}\left(\Phi\right)
 			\end{cases}
 		\]
-		<p>fordítási szabálynak az \(f \in \text{FVar}\left(\Phi\right)\) esetága alapján:</p>
+		<p>fordítási szabálynak az \(f \in \text{FVar}\left(\Phi\right)\) esetága alapján, így megkapkuk:</p>
 		\[
 			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{f}\ n\ .\ \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)}_{\textbf{fac}}\right) 5
 		\]
+		<p>és ez a faktoriális-függvény tiszta lambda-kalkulusra való fordítása.</p>
 	</body>
 </html>

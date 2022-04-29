@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
 		<title>The let-rec construct</title>
@@ -21,8 +21,127 @@
 			<li><a href="let-rec.hu.html">Hungarian version of this page</a></li>
 			<li><a href="index.hu.html">Back to personal main page</a></li>
 		</ul>
-		<h1>The let-rec construct</h1>
+		<h1 id="letrec">The let-rec construct</h1>
 
-		<div class="meta">Under constuction. See the Hungarian version.</div>
+		<p>This little writing tries to present the so-called <em>let-rec</em> construct of Haskell and other functional languages. More precisely said, it presents the <em>lazy</em> let-rec, and the way it expresses two distinct functionalities: substitution and recursion.</p>
+		<ul>
+			<li>In its simpler usage, it can be used to introduce local variables and local function inside an expression: it can bind a variable locally inside the expression in its scope, without affecting any global defintions outside of its scope. In Haskell, syntactically it is expressed by the <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct.</li>
+			<li>The local function can be also recursive.</li>
+		</ul>
+		<p>Coq users may notice that these are two distinct functionalities: in its Gallina sublanguage the notion of locally bound variables, or locally defined functions are expressed by a more foundamental let-substutution, but recursion in local functions are treated by a distinct keyword construct explicitly emphasizing fixpoint reliance. Althogh less explicitly also Agda makes a separation of the two concepts. And also lambda-calculus itself, the underlying mathematical foundation treats these functionalities separately: substitution by beta-reduction, and recursion by a fixpoint combinator.</p>
+		<p>Thus, Haskell&apos;s <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct is a <q>workhorse centaur</q> unifying two distinct roles. It can be used both for the simpler, non-recursive name substituton for defining local functions, but also enables expressing recursion directly. In the latter case, the recursive usage is not marked explicitly syntactically by a distinct keyword, only by the context: whenever a local definition&apos;s right-hand-side contains a variable of the same name that is the left-hand-side itself (i.e. the very name which is just being defined), then the interpretation of the <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct is meant to be of a recursive. And in Haskell, this is achieved by <span class="emcode">let</span> &hellip; <span class="emcode">in</span> being of lazy-evaluation semantics.</p>
+		<p>This writing, this little site tries to present the mentioned  possible <q>usage contexts</q> of Haskell&apos;s <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct, making the distinct underlying mathematics explicit, presenting them as cases of translation techniques with their semantics.</p>
+
+		<h2 id="trans">Its translation into pure lambda calculus</h2>
+		<p>As said above, there is a recursive (fixedpoint-based) and another, non-recursive (fixedpoint-free) usage context of Haskell&apos;s <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct, explained in details below.</p>
+		<p>Important to mention: this writing presents the semantics and translation technique of the recursive/fixed-point-based usage context  of <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct by defining it explicitly with the <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixed-point combinator</a> of lambda calculus. Theoretically recursion could be defined also without the fixed-point combinator, using a more primitive, lower-lever, implicit recursion trick instead &mdash; but because the <span class="combinator">Y</span>-fixed-point combinator itself is defined by this low-level trick, thus we can regard <span class="combinator">Y</span>-as a kind of high-level API hiding implementation details, and proceed with omitting the low-level technique. I delegate writing about this in another little wrinting of mine: <q><a href="self-calculus-and-semiself-translation.hu.html">halved-self calculus</a></q>.</p>
+		<p>The topic of the <em>let-rec</em> construct may seem uninteresting superficially, but understanding its sematnics maybe a key to understand articles in several interesting and deep topics. For example: Wouter Swierstra&apos;s article <q><a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribete grammars matter</a></q> discussig a very interesting theory and technique for declarative programming, building up a seemingly mysterious effect step by step, but the key part of his atticle may ramin a mystery without understanding exact sematics of the lazy recursive let-rec variant of Haskell. This is the  &bdquo;<em>credit card transformation</em> pasrt in the article (&bdquo;tie the recursive knot&rdquo;), in which lazy evaluation plays a non-trivial role. In this point, Wouter Swierstra&apos;s article does not go into the low-level technical details. I try to show my personal way of understanding this part, and show the exact deductions in pure lambda calculus. I made a standalone <a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">little Haskell project</a> for this demonstartion goal (see also its <a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars#readme">README documentation</a>).</p>
+		<h3 id="vs">The <q>fixedpoint-based case vs the fixedpoint-free case</h3>
+		\[
+			\left[\!\left[\textbf{let }f = \Phi\textbf{ in }\Gamma\right]\!\right]
+			:\equiv
+			\begin{cases}
+				\Gamma\left[\dfrac{\Phi}{f}\right]                                  & \text{ha } f \notin \text{FVar}\left(\Phi\right)
+				\\
+				\\
+				\Gamma\left[\dfrac{\textbf{Y}\left(\lambda f . \Phi\right)}{f}\right] & \text{ha } f \in \text{FVar}\left(\Phi\right)
+			\end{cases}
+		\]
+		<p>We can translate it into pure lambda calculus in two ways (there are two ways to find a pure lambda calculus term/experssion corrensponding to it). This depends on whether the name of the local variable defined by <span class="emcode">let</span> appears also on the right-hand-side of the local definition, or not. that is exaclty what is what decides what is the actual underlying mathematics behind our <span class="emcode">let</span>&hellip;<span class="emcode">in</span>&hellip;: it can be either a simple substitution, but in the other. recursive case this is augmented by an <q>additional</q> fixedpoint-building, thus an underlying <span class="combinator">Y</span> so-called <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixed-point combinator</a> may hide below it. In summary: we use the same syntactical construct for expressing two rather distinct semantical fields: either for simply substituting constants (possibly including locally defined functions defined in a simple, nonrecursive way), or also defining functions locally with recursion.</p>
+		<p>The <a href="https://coq.inria.fr/">Coq proof assistant</a> (its sublanguage called <em>Gallina</em>) makes a nice clear distionction for the two functionalities: for the first, simple case it uses the <span class="emcode">Definition</span> keyword, and for the augmented, recursive case the explicit <span class="emcode">Fixpont</span> keyword. Let us be more precise: these are the global-scope variants, in let-rec like expressions the keywords <span class="emcode">fun</span> and <span class="emcode">fix</span> are used, respectively.</p>
+		<h3 id="arg-conv">Argument-notation convention</h3>
+		<p>in the local bindings for an expression, the substitutions for the local variables can be functions to (either defined recursively or not). Thus, in both cases the following convention applies:</p>
+		\[
+			\left(\textbf{let } f\ x_1\ \dots\ x_n = \Phi\textbf{ in }\Gamma\right)
+			\equiv
+			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
+		\]
+		<h2 id="exampl">Examples</h2>
+		<h3 id = "ff-wo-a">The fixedpoint-free case, and without using argumements</h3>
+		<p>At first, let us see a simple example for the simplest case. A rather intuitive (although inexact) expression to tell how many days have passed in the last three years:</p>
+		<pre><code class="language-haskell">let years = 3 in 365 * years</code></pre>
+		<p>Assuming that we have already established the notion of natural numbers and multiplications in pure lambda calculus terms (for example with <a href="https://en.wikipedia.org/wiki/Church_encoding#Church_numerals">Church numerals</a>, both for the numeric constants <span class="emcode">3</span>  and <span class="emcode">365</span> and for the operation of multiplication <span class="emcode">times</span> szorzás), then the above expression is exactly the</p>
+		\[
+			\left(
+				\textbf{times}\ \textbf{365}\ y
+			\right)
+			\left[\dfrac{\textbf{3}}{y}\right]
+		\]
+		<p>substitution. We can use the corresponding lambda term directly, but we may make our translation it more modular and parametrizable, by using the \(\beta\)-reduction, as we know that substtution is underlying \(\beta\)-reduction:
+		\[\left(\lambda y\ .\ \textbf{times}\ \textbf{365}\ y\right)\ \textbf{3}\]
+
+		<h3 id="fb-wo-a">The fixedpoint-based case, and without using arguments</h3>
+
+		<p>This will be a simple example, having only theoretical importance. Its evaluation (reduction chain) never terminate, it is <q>diverging</q>, i.e. falling into infinite loop on the low level. This is the (in)famous \(\Omega\) combinator:</p>
+
+		<pre><code class="language-haskell">let omega = omega in omega</code></pre>
+		<p>indeed, it has no <em>normal form</em>, no final <q>evaluation value</q>, it is diverging. Despite of the naughty sematical behavour, in some aspects this is the simplest example of self-reference in lambda calculus, and also its syntactical form is the simplest and nicest in its genre (among the other self-referent examples):</p>
+		\[
+			\underbrace{\mathbf{Y} \left(\lambda\ \boxed{o}\ .\ \boxed{o}\right)}_{\Omega}
+		\]
+		<p>&hellip; people who like combinators and know the \(\mathbf I :\equiv \lambda x\ .\ x\) combinator of combinatory logics (in Haskell, the <span class="emcode">id</span> function), they can regard \(\Omega\) as the fixed-point of the identity function/combinator:
+		\[
+			\underbrace{\mathbf{Y}\ \mathbf{I}}_{\Omega}
+		\]
+		<p>The deep realtionship between \(\Omega\) and \(\mathbf{I}\) via the fixed-point-building can be expreessed also in Haskell: <code class="language-haskell">let omega = omega in omega</code>.</p>
+		<p>Due to its simple syntactical form, \(\Omega\) is one of the few recursive constructs, whose definition in pure lambda calculus term is <em>not</em> built on top of the az <span class="combinator">Y</span>-<a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixedpoint combinator</a>, instead of that, it is usually constructed with with a much lower-lever trick, a kind of implicit, indirect self-reference technique. Implicite self-reference is a much pattern similar to the famous <q>diagonal argument</q>, first invented by the ancent Greeks in logical paradoxes and made explicite in Cantor&apos; naive set theory and its paradoxes, alongside with the approach to self-reference in mathematical logics like the so-called <em>quine</em> trick. I try to summarize my personal experiences during my learning curve here: <q><a href="self-calculus-and-semiself-translation.hu.html">halved self-calculus</a></q>, a kind of intermediary mini-language and a translation technique of recursive and self-referent patterns into pure lambda calculus.</p>
+
+		<p>Now let us proceed to practical, more useful examples for contructing recursive functions, and let us begin with the simplest ones among those that can terminate eat least potentially. We will see terms evaluating into an infinite list without providing a halting condition, but we can cut off a finite beginning slice feeding it into a slicing function (lazy evaluation allows this!)</p>
+		<p>Thus, we can provide terms for infinite lists without worrying about a halting condition parameter, as we can post-process these further into finite slices afterwords too.</p>
+
+		<p>An example for an infinite list of 8&apos;s (and slicing off as many as we want):</p>
+
+		<pre><code class="language-haskell">let eights = 8 : eights in take 10 ones</code></pre>
+		<p>whose evaluated result is <code class="language-haskell">[8, 8, 8, 8, 8, 8, 8, 8, 8]</code>. We can translate this little program into pure lambda calculus this way as below:</p>
+		\[
+			\textbf{take}\ \textbf{10}
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{e}\ .\ \mathbf{cons}\ \textbf{8}\ \boxed{e}\right)}_{\textbf{eights}}\right)
+		\]
+
+		<p>Another example: the infinite list of the natural numbers themselves:</p>
+
+		<pre><code class="language-haskell">let nats = 0 : map succ nats in take 10 nats</code></pre>
+		<p>whose evaluated result is <code class="language-haskell">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code>. We can translate this little program into pure lambda calculus this way as below:</p>
+
+		\[
+			\textbf{take}\ \textbf{10}
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{n}\ .\ \mathbf{cons}\ \textbf{0}\ \left(\mathbf{map}\ \mathbf{succ}\ \boxed{n}\right)\right)}_{\textbf{nats}}\right)
+		\]
+
+		<h3 id="fb-w-a">The fixedpoint-based case, and with using arguments</h3>
+
+		<p>Now let us see more complicated, but more practical and real-life examples. Here we will proceed to familiar recursive functions with  a clear halting consitions, thus, they get simple fiite arguments and provide simple finite results. Let us see a well-known familiar example from school mathematics: the factorial function. How can we define it in Haskell with a <q>local</q> let-rec expression:</p>
+
+		<pre><code class="language-haskell">let fac n = if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>Let us remember the argument-notational convention in let-rec expression (mentioned in a <a href="#arg-conv">section above</a>), i.e. the rewrite rule, summarized again below:</p>
+		\[
+			\left(\textbf{let } f\ x_1\ \dots\ x_n = \Phi\textbf{ in }\Gamma\right)
+			\equiv
+			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
+		\]
+		<p>&hellip; according to this, our little Haskell let-rec experssion fot the factorial function above can be rewritten to this <q>lower-level</q> <q>core-Haskell-language</q> form below:</p>
+		<pre><code class="language-haskell">let fac = \n -> if n == 0
+                then 1
+                else n * fac (n - 1)
+in fac 5</code></pre>
+		<p>and this form is easier to translate to purle lambda calculus, just use our main tranllsational formula:</p>
+		\[
+			\left[\!\left[\textbf{let }f = \Phi\textbf{ in }\Gamma\right]\!\right]
+			:\equiv
+			\begin{cases}
+				\Gamma\left[\dfrac{\Phi}{f}\right]                                  & \text{ha } f \notin \text{FVar}\left(\Phi\right)
+				\\
+				\\
+				\Gamma\left[\dfrac{\textbf{Y}\left(\lambda f . \Phi\right)}{f}\right] & \text{ha } f \in \text{FVar}\left(\Phi\right)
+			\end{cases}
+		\]
+		<p>and from this translation formula, use the case of the \(f \in \text{FVar}\left(\Phi\right)\) side condition, thus we get:</p>
+		\[
+			\left(\underbrace{\mathbf{Y} \left(\lambda\ \boxed{f}\ n\ .\ \left(\mathbf{greaterThan}\ n\ 0\right) \left(\mathbf{times}\ n\ \left(\boxed{f} \left(\mathbf{minus}\ n\ 1\right)\right) 1\right)\right)}_{\textbf{fac}}\right) 5
+		\]
+		<p>that is the translation of the factorial function into pure lambda calculus.</p>
 	</body>
 </html>
