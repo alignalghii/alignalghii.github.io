@@ -23,6 +23,27 @@
 		</ul>
 		<h1 id="letrec">The let-rec construct</h1>
 
+		<h2 id="toc">Table of contents</h2>
+		<ul>
+			<li><a href="#intro">Introduction, scope of writing</a></li>
+			<li>
+				<a href="#trans">Its translation into pure lambda calculus</a>
+				<ul>
+					<li><a href="#vs">The <q>fixedpoint-based case vs the fixedpoint-free case</a></li>
+					<li><a href="#arg-conv">Argument-notation convention</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#exampl">Examples</a>
+				<ul>
+					<li><a href="#ff-wo-a">The fixedpoint-free case, and without using argumements</a></li>
+					<li><a href="#fb-wo-a">The fixedpoint-based case, and without using arguments</a></li>
+					<li><a href="#fb-w-a">The fixedpoint-based case, and with using arguments</a></li>
+				</ul>
+			</li>
+		</ul>
+
+		<h2 id="intro">Introduction, scope of writing</h2>
 		<p>This little writing tries to present the so-called <em>let-rec</em> construct of Haskell and other functional languages. More precisely said, it presents the <em>lazy</em> let-rec, and the way it expresses two distinct functionalities: substitution and recursion.</p>
 		<ul>
 			<li>In its simpler usage, it can be used to introduce local variables and local function inside an expression: it can bind a variable locally inside the expression in its scope, without affecting any global defintions outside of its scope. In Haskell, syntactically it is expressed by the <span class="emcode">let</span> &hellip; <span class="emcode">in</span> &hellip; construct.</li>
@@ -57,7 +78,7 @@
 			\left(\textbf{let } f = \lambda x_1\ \dots\ x_n\ . \Phi\textbf{ in }\Gamma\right)
 		\]
 		<h2 id="exampl">Examples</h2>
-		<h3 id = "ff-wo-a">The fixedpoint-free case, and without using argumements</h3>
+		<h3 id="ff-wo-a">The fixedpoint-free case, and without using argumements</h3>
 		<p>At first, let us see a simple example for the simplest case. A rather intuitive (although inexact) expression to tell how many days have passed in the last three years:</p>
 		<pre><code class="language-haskell">let years = 3 in 365 * years</code></pre>
 		<p>Assuming that we have already established the notion of natural numbers and multiplications in pure lambda calculus terms (for example with <a href="https://en.wikipedia.org/wiki/Church_encoding#Church_numerals">Church numerals</a>, both for the numeric constants <span class="emcode">3</span>  and <span class="emcode">365</span> and for the operation of multiplication <span class="emcode">times</span> szorzás), then the above expression is exactly the</p>
