@@ -55,11 +55,11 @@ Although **`sed`** seems to be like an „assembly” language among those langu
 
 #### Table-of-contents generator for Markdown
 
-The tool is expected to be able to generating a table-of-contents for a large Markdown file automatically out of its `# ...`, `## ...`, `### ...` etc. section headers. The table-of-contents will a nested listing reflecting the section hierarchy consisting of section links, named accordingly with the section names and linked to them with appropriate section link names as in GitHub Markdown.
+The tool is expected to be able to generating a table-of-contents for a large Markdown file automatically out of its *`# Section`* and *`## Subsection`* and *`### Subsubsection`* etc. section headers systematically. The table-of-contents will a nested listing reflecting the section hierarchy consisting of section links, named accordingly with the section names and linked to them with appropriate section link names as in GitHub Markdown.
 
 The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.expectation.dat) file.
 
-An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`](table-of-contents-generator-for-markdown.sed). It exactly satisfies the specificationm at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this *`sed`* implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to *`sed`*,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
+An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`](table-of-contents-generator-for-markdown.sed). It exactly satisfies the specification at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this **`sed`** implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to **`sed`**,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
 
 
 [Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
