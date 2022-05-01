@@ -8,7 +8,7 @@
 
 - [Introduction](#introduction)
 - [Features / tools](#features--tools)
-    - [Table-of-contents generator](#table-of-contents-generator)
+    - [Table-of-contents generator for HTML](#table-of-contents-generator-for-html)
     - [MathJax extractor](#mathjax-extractor)
     - [MathJax janitor](#mathjax-janitor)
         - [User-friendly implementations](#user-friendly-implementations)
@@ -33,7 +33,7 @@ Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be al
 
 First the little auxiliary tools are describes. The common test framework above them proving their correctness comes afterwards.
 
-### Table-of-contents generator
+### Table-of-contents generator for HTML
 
 This is probably the most characteristic and most complex tool of all the other examples.
 
@@ -41,9 +41,9 @@ The tool is expected to be able to generating a table-of-contents for a large HT
 
 In more details: it finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used automatically for the generated href of the link (so that the reader can jump from the ToC to any section directly). If the section header does not have an id, then the generated ToC item `<li><a href="#">...</a></li>` will have its section link as an empty "#", waiting for filling it out by hand (human assistance) later.
 
-The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator/simple.expectation.dat) file.
+The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator-for-html/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator-for-html/simple.expectation.dat) file.
 
-An implementation can be seen in [`table-of-contents-generator.awk`](table-of-contents-generator.awk). It exactly satisfies the specification. Maybe it is not too reader-friendly, still, it is much more reader-friendly than the **`sed`** variant, [`table-of-contents-generator.sed`](table-of-contents-generator.sed).
+An implementation can be seen in [`table-of-contents-generator-for-html.awk`](table-of-contents-generator-for-html.awk). It exactly satisfies the specification. Maybe it is not too reader-friendly, still, it is much more reader-friendly than the **`sed`** variant, [`table-of-contents-generator-for-html.sed`](table-of-contents-generator-for-html.sed).
 
 Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the translation process.
 
