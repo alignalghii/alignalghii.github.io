@@ -8,7 +8,9 @@
 
 - [Introduction](#introduction)
 - [Features / tools](#features--tools)
-    - [Table-of-contents generator for HTML](#table-of-contents-generator-for-html)
+    - [Table-of-contents generators](#table-of-contents-generators)
+        - [Table-of-contents generator for HTML](#table-of-contents-generator-for-html)
+        - [Table-of-contents generator for Markdown](#table-of-contents-generator-for-markdown)
     - [MathJax extractor](#mathjax-extractor)
     - [MathJax janitor](#mathjax-janitor)
         - [User-friendly implementations](#user-friendly-implementations)
@@ -33,11 +35,13 @@ Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be al
 
 First the little auxiliary tools are describes. The common test framework above them proving their correctness comes afterwards.
 
-### Table-of-contents generator for HTML
+### Table-of-contents generators
+
+#### Table-of-contents generator for HTML
 
 This is probably the most characteristic and most complex tool of all the other examples.
 
-The tool is expected to be able to generating a table-of-contents for a large HTML file automatically out of its `<h1>`, ... `<h4>` ... etc. headers. The table-of-contents must be a possibly nested `<ul>` listing. Nesting must be correct valid HTML5, and it must be also nicely indented.
+The tool is expected to be able to generating a table-of-contents for a large HTML file automatically out of its `<h1>`, ... `<h4>` ... etc. section headers. The table-of-contents must be a possibly nested `<ul>` listing. Nesting must be correct valid HTML5, and it must be also nicely indented.
 
 In more details: it finds HTML `<h...>` tags and turn them into `<li><a href="#...">...</a></li>` format. If the section header has an id, it will be used automatically for the generated href of the link (so that the reader can jump from the ToC to any section directly). If the section header does not have an id, then the generated ToC item `<li><a href="#">...</a></li>` will have its section link as an empty "#", waiting for filling it out by hand (human assistance) later.
 
@@ -48,6 +52,15 @@ An implementation can be seen in [`table-of-contents-generator-for-html.awk`](ta
 Both implementations work with  maintaining a state storing hierarchy level and indentation infos governing the translation process.
 
 Although **`sed`** seems to be like an „assembly” language among those languages for text processing, still, it can give a very drastic insigths into the philosophy of such [data-driven languages](https://en.wikipedia.org/wiki/Data-driven_programming), a huge topics having connections with state machines, event-driven programming, aspect-orinted programming.
+
+#### Table-of-contents generator for Markdown
+
+The tool is expected to be able to generating a table-of-contents for a large Markdown file automatically out of its `# ...`, `## ...`, `### ...` etc. section headers. The table-of-contents will a nested listing reflecting the section hierarchy consisting of section links, named accordingly with the section names and linked to them with appropriate section link names as in GitHub Markdown.
+
+The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.expectation.dat) file.
+
+An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`](table-of-contents-generator-for-markdown.sed). It exactly satisfies the specificationm at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this *`sed`* implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to *`sed`*,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
+
 
 [Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
 
