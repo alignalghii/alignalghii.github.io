@@ -43,10 +43,10 @@
 		<p>&hellip; showing my most recent knowledge and coding style in theorem provers and Martin-Löf type theory</p>
 		<ul>
 			<li>
-				<span><a href="https://github.com/alignalghii/vector-algebra-in-Agda">Vector algebra in Agda</a> (see also its <a href="https://github.com/alignalghii/vector-algebra-in-Agda#readme">README documentation</a>). Long-term goal is to write a collision detection engine (using the Furier-Motzkin elimination), and making theorems and correctness proofs about it. Of course, this goal is very distant. Current achievement:</span>
+				<span><a href="https://github.com/alignalghii/vector-algebra-in-Agda">Vector algebra in Agda</a> (see also its <a href="https://github.com/alignalghii/vector-algebra-in-Agda#readme">README documentation</a>). Long-term goal is to write a collision detection engine (using the <a href="https://en.wikipedia.org/wiki/Fourier%E2%80%93Motzkin_elimination">Fourier-Motzkin elimination</a>), and making theorems and correctness proofs about it. Of course, this goal is very distant. Current achievements:</span>
 				<ul>
 					<li>I successfully proved in pure Agda that the <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix/Transposition.agda#L50">matrix transposition operation is a self-inverse operation</a>, a so-called involution: done twice is like not done at all.</li>
-					<li>I made two alternative definitions for matrix transpsosition, and proved in Agda that the <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix/TranspositionAlternative.agda#L36">two approaches are equivalent</a>, despite of having rather orthogonal, distinct inductive structure. The proofs use several restricted tricks of the general *function extensionality* problem.</li>
+					<li>I made two alternative definitions for matrix transpsosition, and proved in Agda that the <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix/TranspositionAlternative.agda#L36">two approaches are equivalent</a>, despite of having rather orthogonal, distinct inductive structure. The proofs use several restricted tricks of the general <em>function extensionality</em> problem.</li>
 				</ul>
 			</li>
 			<li><a href="https://github.com/alignalghii/beyond-Haskell">Beyond Haskell</a>. A very early Agda project without definite goals. Presents a coding and proof style, but no particular achievments. Has some interesting parts, and a few existentially quantified theorems about even/odd natural numbers (<a href="https://github.com/alignalghii/beyond-Haskell/blob/main/Theorems/NatModulo.agda#L32">every even number has a half</a>).</li>
@@ -55,17 +55,13 @@
 		<h2 id="recent">My most recent Haskell projects. Using monad transformers</h2>
 		<p>&hellip; showing my most recent knowledge and coding style</p>
 		<ul>
-			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a>. A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
-			<li>The already mentioned, new, yet less featureful, but conceptually clean combinatory logic interpreter, with well-organized clean sourcecode</li>
-		</ul>
-		<ul class="menu">
-			<li><a href="#top">Jump to top of this page</a></li>
-			<li><a href="index.hu.html#recent">Hungarian version of this section</a></li>
+			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">A client app to MediaWiki&apos;s search API</a> (see also its <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README</a>). A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
+			<li>An implementation of a mini functional programming language, i.e. a combinatory logic interpreter, with well-organized clean sourcecode. See below in details:</li>
 		</ul>
 
 		<h2 id="calculi">Implementations of mini programming languages/calculi. Using zippers</h2>
 		<ul>
-			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a>. My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
+			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">A combinatory logic evaluator</a> (see also its <a href="https://github.com/alignalghii/CL-zipper-RWS#readme">README</a>). My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check).</li>
 			<li>An old, but more featureful combinatory logic interpreter, more user-friendly in use, but with somewhat old and tangled sourcecode</li>
 			<li>A super-concise implementation (reduction algorithm), but only in early steps, not having any user interface.</li>
 		</ul>
