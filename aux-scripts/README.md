@@ -59,7 +59,7 @@ The tool is expected to be able to generating a table-of-contents for a large Ma
 
 The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.expectation.dat) file.
 
-For example, out of the the following sample Markdown file
+For example, out of the the following sample Markdown file:
 ```markdown
 # Floor plan designer
 ...
@@ -78,7 +78,7 @@ For example, out of the the following sample Markdown file
 ### Used languages (currently)
 ...
 ```
-it extracts a table-of-contents section like this:
+it generates a table-of-contents section like this:
 ```markdown
 - [Floor plan designer](#floor-plan-designer)
     - [Project goal](#project-goal)
