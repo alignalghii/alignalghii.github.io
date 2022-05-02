@@ -59,7 +59,68 @@ The tool is expected to be able to generating a table-of-contents for a large Ma
 
 The exact specification of the expected translation can be seen by comparing the [source sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.source.dat) file with the [expectation sample](unit-test-fixtures/table-of-contents-generator-for-markdown/simple.expectation.dat) file.
 
-An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`](table-of-contents-generator-for-markdown.sed). It exactly satisfies the specification at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this **`sed`** implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to **`sed`**,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
+For example, out of the the following sample Markdown file
+```markdown
+# Floor plan designer
+...
+## Project goal
+...
+## Collision detection
+...
+### Most basic ideas:
+...
+### Anticipation of falling
+...
+### The natural sliding effect
+...
+## Architecture, design patterns, current state of development
+...
+### Used languages (currently)
+...
+```
+it extracts a table-of-contents section like this:
+```markdown
+- [Floor plan designer](#floor-plan-designer)
+    - [Project goal](#project-goal)
+    - [Collision detection](#collision-detection)
+        - [Most basic ideas:](#most-basic-ideas)
+        - [Anticipation of falling](#anticipation-of-falling)
+        - [The natural sliding effect](#the-natural-sliding-effect)
+    - [Architecture, design patterns, current state of development](#architecture-design-patterns-current-state-of-development)
+        - [Used languages (currently)](#used-languages-currently)
+```
+
+An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`](table-of-contents-generator-for-markdown.sed):
+```sed
+#!/bin/sed -n -f
+
+/^#/ {
+	s/^\(#*\)#\s*\(.*\)/\1[\2](#\2)/;
+
+	: tab
+        /^\(\ *\)#\(#*\)/ s/#/    /;
+	t tab;
+
+	s/^\ */&- /;
+
+	: link-tolowercase
+	s/(#\([^)]*\)A\([^)]*\))/(#\1a\2)/;
+	s/(#\([^)]*\)B\([^)]*\))/(#\1b\2)/;
+	...
+	s/(#\([^)]*\)Z\([^)]*\))/(#\1z\2)/;
+	s/(#\([^)]*\) \([^)]*\))/(#\1-\2)/;
+	t link-tolowercase;
+
+	: link-allowedsymbols
+	s/(#\([^)]*\)[^a-zA-Z0-9_-]\([^)]*\))/(#\1\2)/;
+	t link-allowedsymbols;
+
+	p;
+}
+
+```
+
+It exactly satisfies the specification at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this **`sed`** implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to **`sed`**,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
 
 
 [Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
