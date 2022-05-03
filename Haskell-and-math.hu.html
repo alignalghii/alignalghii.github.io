@@ -22,8 +22,18 @@
 		</ul>
 		<h1>Haskell és matematika</h1>
 		<img id="bind-op-ad" src="assets/bind-op-ad.png"/>
+		<h2 id="toc">Tartalom</h2>
+		<ul>
+			<li><a href="#intro">Bevezetés</a></li>
+			<li><a href="#motiv">Motiváló kérdések</a></li>
+			<li><a href="#topology">A topológia fölemlítése</a></li>
+			<li><a href="#analogy">Egy mélynek ígérkező analógia</a></li>
+			<li><a href="#distinction">Egy rejtve maradó finom fogalmi elkülönülés</a></li>
+		</ul>
+		<h2 id="intro">Bevezetés</h2>
 		<p>Haskell és matematika. És az én viszonyom hozzájuk.</p>
 		<p>Tömören: persze érdekel a matematika a maga saját önálló okán is, valójában azonban eredetileg a fizika volt az ami vonzott, a Haskell és a matematika inkább járulékosan jött. A fizika — Isten számítógépe, a matematika meg az ehhez való programnyelve. A Haskell előnye, hogy — nagyon helyesen — megpróbál ezekhez legalább közelíteni szellemiségben. Ehhez képes minden más az mellékes — piaci helyzet, vagy hogy egyáltalán hogy valami működik-e a hétköznapi életben.</p>
+		<h2 id="motiv">Motiváló kérdések</h2>
 		<p>Gyakorlatiasabbra fordítva a szót, két érdekes kérdést emelnék ki, amik hosszabban megfogtak:</p>
 		<ul>
 			<li>Mi felel meg az UML-nek a Haskell programozó világában?</li>
@@ -33,6 +43,7 @@
 		<p>
 			A monász-transzformálók által nyújtott „lazy coupling” meghaladása terén egyetlen régi emlékem  van, Wouter Swierstra „<a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>” cikkének az elolvasása, és felületes kipróbálása az akkoriban még háttérbe nem szorult <a href="https://hackage.haskell.org/package/uuagc">UUAGC</a> compileren. A dolgot mélyebben igazából nem, csak felületetesen értettem már akkoriban is, mára pedig nagyrészt elfelejtettem. A lényeg, hogy az attribútumnyelvtanok képesek olyan funkcionális „kötőanyagot” nyújtani, amellyel szinte az aspektusorientált programozás eredeti vízióinak megfelelő teljes szétválasztása érhető el a programok egyes aspektusainak. Mindenesetre akármi is van, a végső igazság valószínűleg mindeképp az lehet, hogy a matematika és annak modernebb alapkutatásai lehetnek képesek olyan fajta teljes lazy coupling-ot nyújtani, amire önmagában a Haskell sem képes, de ami víziója, szemelélete révén a programozás egészét húzni, vezetni tudja.
 		</p>
+		<h2 id="topology">A topológia fölemlítése</h2>
 		<p>Az alábbiakban leírom, mi is vonz engem mostanában a topológiában, amelyet sajnos teljesen elhanyagoltam, és újra kellene tanulnom.</p>
 		<ul>
 			<li>Formális szemantika. Kiértékelési stratégák, lusta kiértékelés. A topológiát felhasználó domain-szemantikáról felületes dolgokon kívül nem tudok még sokat. Gyakorlati téren egyetlen eredményem egy lusta kiértékelést megvalósító interpreter-program kombinatorikus logikára. Több ilyen próbálkozásom volt, a legújabb változatok a zipper-adatszerkezetre épülnek, <a href="https://github.com/alignalghii/CL-zipper-RWS">ebből a legletisztultabb változat ez</a>.</li>
@@ -58,6 +69,7 @@
 			<li>Idempontencia \(\text c(\text cA) \subset \text cA\): ha egy gyümölcsre visszavarázsolom a héját, akkor másodszorra már nem kell és nem is lehet tovább „növelni”, mert a bőrét immár visszakapott gyümölcsön már nincsenek befoltozandó hiányosságok — a „bőr” csak olyan kopasz foltokra tud visszanőni, ahol a gyümölcs ténylegesen kopasz volt.</li>
 			<li>Monotonitás \(A \subset B \to \text cA \subset \text cB\): a tartalmazás mint viszony „megtartja” a gyümülcs „bőrősségét”, vagyis hámozott-kopasz és bőrös-héjcafatos foltosságának alapszerkezetét.</li>
 		</ul>
+		<h2 id="analogy">Egy mélynek ígérkező analógia</h2>
 		<p>
 			Az egész persze azért érdekes itt, mert a fenti három összefüggésnek kézenfekvőnek látszanak az analóg megfelelői a funkcionális programozás <em>monász</em>-fogalmának terén is:
 			<pre><code class="language-haskell">
@@ -72,6 +84,7 @@
 				join   = concat
 			</code></pre>
 		</p>
+		<h2 id="distinction">Egy rejtve maradó finom fogalmi elkülönülés</h2>
 		<p>
 			A Haskell-kód alapján a <code>fmap</code> enyhén kilógni látszik a sorból: őt nem a <code>Monad</code>, hanem a <code>Functor</code> típusosztály deklarálja:
 			<pre><code class="language-haskell">
