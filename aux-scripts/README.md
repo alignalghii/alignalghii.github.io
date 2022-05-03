@@ -1,4 +1,7 @@
-[See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 # Auxiliary text-check-and-filter scripts
 
@@ -28,7 +31,10 @@ The „features” are the little tools themselves: small auxiliary scripts for 
 
 Such a tool can be done either in sed, AWK, Perl, Raku etc., but it should be also welcome if any such auxiliary tool's correctness could be tested. Unit testing of such a custom self-made tool is itself a self-made mini-framework, in simplest way a shell script organizing and diffing piped results from text-processing tools.
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 ## Features / tools
@@ -123,7 +129,10 @@ An implementation can be seen in [`table-of-contents-generator-for-markdown.sed`
 It exactly satisfies the specification at least for the simple cases in my projects and in the unit test framework fixture. Although it could be implemented easier in AWK or Perl, this **`sed`** implementation is funnier due to its low-level “regexp assembly” nature. Besides the state machine approach and the regexp-event-driven-programming pattern generally characteristic to **`sed`**,  it specifically exemplifies the conditional branching construct of this funny low-level but still Turing-complete language.
 
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 ### MathJax extractor
@@ -158,7 +167,10 @@ while (<>) {
 }
 ```
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 #### Challenging implementation
@@ -196,7 +208,10 @@ This is not so obscure as it seems first (see the comments in the [source code](
 
 Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be oranized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 ### MathJax janitor
@@ -244,7 +259,10 @@ p;
 
 See details in the respective [Perl source file](skip-empty-lines-inside-mathjax.pl) and [Sed source file](skip-empty-lines-inside-mathjax.sed).
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 ## Unit test for the correctness of features themselves
@@ -283,7 +301,10 @@ Unit test
 me@my-computer:~/Documents/my-blog/alignalghii.github.io$
 ```
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
 
 
 ### Test framework
@@ -322,4 +343,7 @@ for feature in filter-mathjax-contents skip-empty-lines-inside-mathjax;
 done;
 ```
 
-[Up to table-of-contents of this page](#readme) ||| [See the shell programs and tools](#top) ||| [Go to the main personal homepage](https://alignalghii.github.io/)
+---
+[[Up to table-of-contents of this page]](#readme) •|||• [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
+
+---
