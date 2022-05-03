@@ -1,4 +1,3 @@
----
 [[See the shell programs and tools]](#top) •|||• [[Go to the main personal homepage]](https://alignalghii.github.io/)
 
 ---
