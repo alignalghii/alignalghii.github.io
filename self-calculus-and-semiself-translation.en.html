@@ -28,63 +28,57 @@
 		<h2 id="table-of-contents">Table of contents</h2>
 		<ul>
 			<li>
-				<a href="#">Explicit vs implicit self-reference in lambda-calculus? Precursor concepts before fixed-point combinator: &bdquo;self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</a>
+				<a href="#motivation">Motivation</a>
 				<ul>
-					<li><a href="#table-of-contents">Table of contents</a></li>
+					<li><a href="#bibliography">Bibliography</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#introduction">Introduction: implementation of recursive functions in lambda calculus</a>
+				<ul>
 					<li>
-						<a href="#motivation">Motivation</a>
+						<a href="#recursive-functions">Recursive functions. The seemingly paradox.</a>
 						<ul>
-							<li><a href="#bibliography">Bibliography</a></li>
+							<li><a href="#hints">How do we know that this is not a real paradox? Hints and analogies.</a></li>
 						</ul>
 					</li>
+					<li><a href="#selfref-combinators">Famous self-referent combinators of lambda calculus</a></li>
+					<li><a href="#summary-thoughts">Summary of the main thoughts</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#exploration-curve-gradual-calculus-building">Stages of a gradual calculus building process on our exploration/learning curve</a>
+				<ul>
 					<li>
-						<a href="#introduction">Introduction: implementation of recursive functions in lambda calculus</a>
+						<a href="#definitional-equation">Definitional equation</a>
 						<ul>
-							<li>
-								<a href="#recursive-functions">Recursive functions. The seemingly paradox.</a>
-								<ul>
-									<li><a href="#hints">How do we know that this is not a real paradox? Hints and analogies.</a></li>
-								</ul>
-							</li>
-							<li><a href="#selfref-combinators">Famous self-referent combinators of lambda calculus</a></li>
-							<li><a href="#summary-thoughts">Summary of the main thoughts</a></li>
+							<li><a href="#let-rec">The let-rec construct</a></li>
 						</ul>
 					</li>
+					<li><a href="#self-keyword">Special self constant/keyword</a></li>
+					<li><a href="#self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</a></li>
 					<li>
-						<a href="#exploration-curve-gradual-calculus-building">Stages of a gradual calculus building process on our exploration/learning curve</a>
+						<a href="#combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</a>
 						<ul>
-							<li>
-								<a href="#definitional-equation">Definitional equation</a>
-								<ul>
-									<li><a href="#let-rec">The let-rec construct</a></li>
-								</ul>
-							</li>
-							<li><a href="#self-keyword">Special self constant/keyword</a></li>
-							<li><a href="#self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</a></li>
-							<li>
-								<a href="#combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</a>
-								<ul>
-									<li><a href="#curry-vs-turing-as-lambda-self-order">Fixed-point variants of Curry vs Turing as \(\lambda\sigma\)-abstractors order</a></li>
-								</ul>
-							</li>
+							<li><a href="#curry-vs-turing-as-lambda-self-order">Fixed-point variants of Curry vs Turing as \(\lambda\sigma\)-abstractors order</a></li>
 						</ul>
 					</li>
-					<li>
-						<a href="#translation">Translation from self-calculus into lambda-calculus</a>
-						<ul>
-							<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
-							<li><a href="#match-puzzle-pieces">Matching the pieces of the puzzle together</a></li>
-							<li><a href="#halved-self-translation">The <q>halved-self translation</q> trick</a></li>
-						</ul>
-					</li>
-					<li><a href="#examples">Checking examples</a></li>
-					<li>
-						<a href="#conceptual-bootstrap">Building further &mdash; a kind of conceptual bootstrap</a>
-						<ul>
-							<li><a href="#on-top-of-Y">Building on top of Y &mdash; <q>simplified by self</q></a></li>
-							<li><a href="#sigma-Y-analogy">The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</a></li>
-						</ul>
-					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#translation">Translation from self-calculus into lambda-calculus</a>
+				<ul>
+					<li><a href="#naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</a></li>
+					<li><a href="#match-puzzle-pieces">Matching the pieces of the puzzle together</a></li>
+					<li><a href="#halved-self-translation">The <q>halved-self translation</q> trick</a></li>
+				</ul>
+			</li>
+			<li><a href="#examples">Checking examples</a></li>
+			<li>
+				<a href="#conceptual-bootstrap">Building further &mdash; a kind of conceptual bootstrap</a>
+				<ul>
+					<li><a href="#on-top-of-Y">Building on top of Y &mdash; <q>simplified by self</q></a></li>
+					<li><a href="#sigma-Y-analogy">The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</a></li>
 				</ul>
 			</li>
 		</ul>
