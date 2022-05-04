@@ -18,10 +18,12 @@
 		<script>hljs.highlightAll();</script>
 	</head>
 	<body>
+		<hr/>
 		<ul class="menu">
 			<li><a href="self-calculus-and-semiself-translation.hu.html">Hungarian version of this page</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 		<h1>Explicit vs implicit self-reference in lambda-calculus? Precursor concepts before fixed-point combinator: &bdquo;self-calculus&rdquo; and &bdquo;halved-self translation&rdquo;</h1>
 
 
@@ -94,11 +96,13 @@
 			<li>The focus about direct vs indirect self-reference, and its biological analogies, and its importance in mathematical logics and paradoxes: all these topics come from papers like <a href="https://www.scientificamerican.com/article/go-forth-and-replicate-2008-02/">self-reproduction machine</a> of Conway&apos;s cellular automata, and also from David Madore&apos;s article on <a href="http://www.madore.org/~david/computers/quine.html">Quines (self-replicationg programs)</a></li>
 			<li>The formalism of lambda calculus, notations, concepts come from Dr Csörnyei Zoltán &apos;s book &bdquo;<a href="https://www.interkonyv.hu/konyvek/Lambda%20kalkulus/">Lambda-kalkulus. A funkcionális programozás alapjai</a>&rdquo;</li>
 		</ul>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#motivation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h2 id="introduction">Introduction: implementation of recursive functions in lambda calculus</h2>
 
@@ -127,11 +131,13 @@ in fac 5</code></pre>
 		<p>People who have an interest in biological analogies know about a kind of <em>indirect</em>/<em>implicit</em> self-reference in programming, manifested in the <a href="https://www.scientificamerican.com/article/go-forth-and-replicate-2008-02/">self-reproduction machine</a> of Conway&apos;s cellular automata, following very strong biological analogies. The main idea is that Conway&apos;s self-replication machine contains a kind of DNA part, which can govern assemblage. The machine assemblages its own copy by following the rules encoded in its own DNA. By how is replicated the DNA part? It cannot contain itself! But it does not need to contain itself. The DNA part is simply copied. Self-replication can be down partly by rule-governed assemblage, partly by simple copying of the rule tape. This kind-of self-replication does not need an explicit, direct self-concept: the concept of self is implemented implicitly, in an emergent way.</p>
 		<p>The same idea is realized in the so-called <em>quine</em>s, or <em>self-reps</em>: programs that can print out their own sourcecode listing without resorting to any direct (operating-system misusing) tool. Quines are based on the idea of self-quotation, a logical approach very similar and related to the diagonal argument and to many logical paradoxes. See David Madore&apos;s article on <a href="http://www.madore.org/~david/computers/quine.html">Quines (self-replicationg programs)</a>.</p>
 		<p>In this writing, these interesting achievements of the 20th century mathematics are not mentioned any deeper, and only some thoughts restricted to the realm of lambda-calculus will be presented.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#recursive-functions">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 
 		<h3 id="selfref-combinators">Famous self-referent combinators of lambda calculus</h3>
@@ -174,11 +180,13 @@ in fac 5</code></pre>
 		<p>We will return to this small menotechnical notational trick in the final section, <q><a href="#halved-self-translation">Halved-self translation</a></q>.</p>
 		<p>Although all these above can be a mnemotechnical help, but  still, all these fail to explain the heuristic path: how did scolars first find out the way to express recursive functions and self-referenc combinators in lambda-calculus? It seems easy to check the definitions, but it seems hard to invent them from scratch. Although i do not know the history of these invention process, but I know my own personal way: so I try to explain my own personal experiences.</p>
 	<p>This personal path of mine is very probably not valuable in the scientific sense: it is almost sure that many other people have invented the same on their own, moreover, there is a good chance that my &bdquo;inventions&rdquo; have been formed by my semi-forgotten reader experiences about Luca Cardelli&apos; &bdquo;object calculus&rdquo; (e.g. Martín Abadi and Luca Cardelli: &bdquo;<a href="http://lucacardelli.name/Papers/PrimObjImpSIPL.A4.pdf">An Imperative Object Calculus. Basic Typing and Soundness</a>&rdquo;). Despite of that, this writing is not based directly on Cardelli&apos;s papers: my memories have been very old and unconscious by the time of preparing this writing, thus the thoughts presented here are at least transformed by personal struggle along the learning curves.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h3 id="summary-thoughts">Summary of the main thoughts</h3>
 
@@ -189,11 +197,13 @@ in fac 5</code></pre>
 			<li>Afterwards, we will demonstrate that such a &bdquo;self-calculus&rdquo; is just a syntactic sugar: it does not transcend pure lambda calculus in expressive power. We will present a technique (&bdquo;<em>halved-self translation</em>&rdquo;) that translates self-calculus to pure lambda calculus.</li>
 		</ol>
 		<p>After all that, we will see that &bdquo;halved-self translation&rdquo; is a rather expensive technique in terms of compactness, thus we will &bdquo;factor out&rdquo; the complicated part into a common function, (which will turn out to be the famous Y fixed-point combinator). thus separateing the wary parts in the name of conceptual modularity and reuse. In short: Y will be defined via  the &bdquo;halved-self translation&rdquo; technique, and any other recusrive functions will be defined via the <span class="combinator">Y</span> combinator.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#summary-thoughts">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h2 id="exploration-curve-gradual-calculus-building">Stages of a gradual calculus building process on our exploration/learning curve</h2>
 
@@ -239,11 +249,13 @@ in y   (
                            then n * self (n - 1)
                            else 1
        )</code></pre>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#definitional-equation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h3 id="self-keyword">Special self constant/keyword</h2>
 
@@ -273,11 +285,13 @@ in y   (
 			\end{aligned}
 		\]
 		<p>We can say in a polite way with euphemism, that this symbolism could not yield too much insight, abstracton and deeper understanding, and did not help much to invent the idea how to express self-reference in pure lambda calculus. Despite of this weaknesses, this was a first step and we can continue stepping further in this spirit, exploring the pure mathematics behind self-reference and finding how pure math can provide an indirect, implicit way to express it by pure means.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#self-keyword">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 
 		<h3 id="self-abstractor">Special self-abstraction and binding of a self-variable: the self-calculus</h2>
@@ -344,11 +358,13 @@ in y   (
 		\]
 		<p>to denote that \(\sigma s.s\) is not the &bdquo;original&rdquo; \(\Omega\) of lambda-calculus, it is a term of our auxiliary language self-calculus that is intended to be <em>translatable</em> later into &bdquo;pure&rdquo; lambda-calculus. But usually I will omit such fine distinctions for brevity.</p>
 		<p>Although \(\Omega\) is a theoretically interesting example for the use of \(\sigma\)-calculus, but  <em>pure</em> \(sigma\)-calculus with the single \(\sigma\) reduction in itself is only capable of self-reference only, but it lacks any kind of parametrizability / argument-passing. Thus, for more useful and interesting examples, we will have to combine \(\lambda\) and \(\sigma\) calculus into a sort of combined \(\lambda\sigma\)-calculus.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#self-abstractor">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h3 id="combined-lambda-self-calculus">Combined \(\lambda\) and \(\sigma\) calculus: the \(\lambda\sigma\)-calculus.</h2>
 		<p>We can combine both abstractors freely in a common formal grammar framework, a combined calculus, where syntax contains both \(\lambda\) and \(\sigma\) abstractors, and semantics contains both (\beta\)-reduction and \(\sigma\)-reduction.</p>
@@ -418,11 +434,13 @@ in y   (
 		\]
 		<p>To be more precise, that is the Turing-style implementation of the factorial function is self-calculus (see the order of the two kinds of abstractors!). Practice: explore the other, the Turing-style implementation as well! (For analogy, look at the difference of the two implementation styles at the two corresponding implementations of the fixed-point combinator, \(\textbf{Y}_{\text{Curry}}\) vs \(\textbf{Y}_{\text{Turing}}\) &mdash; You can see that the order of the two abstractors are reversed, and the body of the implementations differ accordingly). Practice 2: also check the correctness of both implementations!</p>
 
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#combined-lambda-self-calculus">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h2 id="translation">Translation from self-calculus into lambda-calculus</h2>
 
@@ -439,11 +457,13 @@ in y   (
 			\end{aligned}
 		\]
 		<p>where \(\Omega\), \(\textbf{Y}_{\text{Turing}}\) and \(\textbf{Y}_{\text{Curry}}\) are the pure lambda calculus implementations of these combinators, for which our all auxiliary \(\sigma\)-language was just a didactic tool to invent the main idea. We have expressed them temporarily in self-calculus, because it is short and somewhat laic-friendly, but finally we will &bdquo;translate&rdquo; into pure lambda-calculus.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 
 		<h3 id="naive-translation">A naive (invalid, but corrigable) translation technique from self-calculus into lambda-calculus</h2>
@@ -626,11 +646,13 @@ in y   (
 
 		<p>Spoiler warning: the next section begins with the solution!</p>
 
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#selfrep-combinators">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h3 id="halved-self-translation">The <q>halved-self translation</q> trick</h3>
 		<p>Spoiler! warning! What about this:</p>
@@ -856,11 +878,13 @@ in y   (
 		\]
 
 		<p>Let us remember the menotechnical reading mentioned already (in section <a href="#selfref-combinators">self-referent combinators</a>): let us read \(s^{\frac12} s^{\frac12}\) like <q>semiself and semiself make together a complete self</q>, or simply <q>semiself + semiself = self</q>, or even more compactly \(\underbrace{\boxed{s^{\frac12} s^{\frac12}}}_{s\;=\;\textbf{self}}\).</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#naive-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h2 id="examples">Checking examples</h2>
 		<p>Let us investigate the old wrong translation formula on a concrete examples. Let us use for example something simple, for example the self-referent combinators.</p>
@@ -1052,11 +1076,13 @@ in y   (
 		\]
 
 
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#halved-self-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 		<h2 id="conceptual-bootstrap">Building further &mdash; a kind of conceptual bootstrap</h2>
 		<h3 id="on-top-of-Y">Building on top of Y &mdash; <q>simplified by self</q></h3>
@@ -1193,11 +1219,13 @@ in y   (
 				\text{if } \Phi \approx \textbf{Y}
 			\end{cases}
 		\]
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#halved-self-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 
 
 		<h3 id="sigma-Y-analogy">The conceptual spiral closes in: indirect analogy, deeper connection between Y and \(\sigma\)</h3>
@@ -1230,10 +1258,12 @@ in y   (
 			\end{aligned}
 		\]
 		<p>I lack the further knowledge needed, so I say only it seems that both formalism share the same underlying idea.</p>
+		<hr/>
 		<ul class="menu">
 			<li><a href="#top">Jump to top of this page</a></li>
 			<li><a href="self-calculus-and-semiself-translation.hu.html#halved-self-translation">Hungarian version of this section</a></li>
 			<li><a href="index.html">Back to the main personal page</a></li>
 		</ul>
+		<hr/>
 	</body>
 </html>
