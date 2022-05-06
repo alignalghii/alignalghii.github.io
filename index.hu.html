@@ -1,155 +1,172 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Személyes főoldal: projektumaim és egyéb szakmai dolgok bemutató oldala</title>
+		<title>Személyes főoldal: projektjem oldala</title>
 		<link rel="stylesheet" href="assets/menu.css"/>
 		<link rel="stylesheet" href="assets/code.css"/>
 	</head>
 	<body>
+		<hr/>
 		<ul class="menu">
-			<li><a href="index.html">E személyes főoldal angol változata</a></li>
+			<li><a href="index.hu.html">E személyes főoldal angol változata</a></li>
 		</ul>
+		<hr/>
 
-		<h1>Személyes főoldal: projektumaim és egyéb szakmai dolgok bemutató oldala</h1>
+		<h1>Személyes főoldal: projektjem oldala</h1>
 
 		<h2>Tartalom</h2>
 		<ul>
 			<li>
-				<a href="#math">Matematika, és személyes viszonyulásom hozzá</a>
+				<a href="#">Személyes főoldal: projektjem oldala</a>
 				<ul>
-					<li><a href="#selfref">Minták az önhivatkozás témakörében</a></li>
+					<li><a href="#">Table of contents</a></li>
+					<li><a href="#Agda">My most recent projects at all: two very young Agda projects</a></li>
+					<li><a href="#recent">My most recent Haskell projects. Using monad transformers</a></li>
+					<li><a href="#calculi">Implementations of mini programming languages/calculi. Using zippers</a></li>
+					<li><a href="#Haskell-inspired">A Haskell-inspired project, implemented in PHP and JavaScript</a></li>
+					<li><a href="#testing">Testing</a></li>
+					<li><a href="#text-processing">Testing with shell scripting and text-processing tools</a></li>
+					<li>
+						<a href="#math">Mathematics, my relationship with math</a>
+						<ul>
+							<li><a href="#selfref">Samples about self-reference</a></li>
+						</ul>
+					</li>
+					<li><a href="#onliner">My Haskell one-liners, proof-of-concept projects, or other kind of extra-mini projects</a></li>
+					<li><a href="#webapp">Functional web apps</a></li>
+					<li><a href="#old-non-hs">My old non-Haskell projects</a></li>
+					<li><a href="#old-hs">My old Haskell projects</a></li>
 				</ul>
 			</li>
-			<li><a href="#calculi">Mini programnyelvek/kalkulusok implementációi. Típusderiváltak (zipper) használata</a></li>
-			<li><a href="#recent">Legfrissebb Haskell-projektumaim. Monásztranszformálók (monad transformer) használata</a></li>
-			<li><a href="#testing">Tesztelés</a></li>
-			<li><a href="#onliner">Haskell &bdquo;egysorosaim&rdquo;, &bdquo;proof-of-concept&rdquo;-projektumaim, vagy egyéb extramini-projektumok</a></li>
-			<li><a href="#webapp">Webalkalmazás funkcionális nyelven</a></li>
-			<li><a href="#old-non-hs">Régi nem-Haskell projektumaim</a></li>
-			<li><a href="#old-hs">Régi Haskell-projektumaim</a></li>
 		</ul>
 
-		<h2>Projektek önkényes (nagyjából <q>erősorrendben</q> való) előrebocsátása</h2>
+		<h2 id="Agda">Legújabb mindenkori projektjeim: két nagyon újonc Agda-projekt</h2>
+		<p>&hellip; azt mutatja be, mivel fogalkoztam a legutóbbi hónapban: tudásom és kódolási stílusom tételbizonyíto rendszerekben, Martin-Löf tíuselméletben</p>
 		<ul>
-			<li><a href="">Kliensalkalmazás</a> a Wikimédia kereső REST API-felületéhez. Haskell nyelven, Wreq könyvtárral, és a monász-transzformer tervezési mintával/architektúrával, Arrow / Kleisli-monász formalizmus eseti használata.</li>
-			<li><a href="collision-detection/principles.html">Floor plan editor</a>: a graphics editor web-application for real estate emplyees to help them drawing the floor plans of theirflats. JavaScript on the font-end client-side, and PHP backend. Its most important feature and component, <q>math/physics engine</q> is the collision detection of the world being drawn: rooms, pieces of furniture, windows and doors all collide and slide on each other wen moved realistically. I designed the collision detection Haskell based on Fourier-Motzkin elimination. Lényegi része, motorja az üsközésvizsgálat (<q>fizikai motor</q>), amely Haskellben készült és lett tesztelve. Másik fontos jellegzetessége, hogy kilens oldali része, a JavaScript-szerkesztő maga is az MVC tervezési mintát követi egy házilagos keretrendszerben, kontrollerekkel, sőt afféle <a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/public/app.js">router</a> is létezik egyfajta esemény-nyelvre, ezzel együtt <a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/public/app.js">az analógia szinte teljes</a> a szerver oldali rész klasszikus MVC-architektúrájával. Harmadik fontos vonása a PHP, lletve a javaScript helyenként tiszta Haskell tervezési mintákat vesz át: algebrai adatszerekezetek, monászok, ezek megvalósítására a Scala-ból ismeretes <q>case object</q> technika öröklődéssel való imitálását használja, ebből a legfőbb példák <a href="https://github.com/alignalghii/functional-design-upon-imperative-substrate">külön helyre kiválogatva</a> itt láthatóak együtt.</li>
-			<li><a href="">Értelmezőprogram</a> egy mini funkcionális programnyelvre (kombinatorikus logika). Fő tervezési minta: zipper adatszerekezet (<q>lyukas/mozgatható fókuszú lista</q>)</li>
-			<li><a href="self-calculus-and-semiself-translation.en.html">Szelf-kalkulus. Matematikai írás</a> az önhivatkozás matematikájáról, megvalósításáról tiszta lambda-calculusban. A Quine-féle gondolatkör egy didaktikus módon testreszabott mini-formalizmusán/kalkulusán keresztül mutatja be a fixpont-kombinátorok megvalósítását, részleteit.</li>
-			<li><a href="">A let-rec konstrukció</a> és annak szemantikája Haskell-ben. Az Agdától eltérően, Haskellban a let ... in kifejezés nemcsak helyi változók behelyettesítését végzi, rekurzív szerkezeteket is létrehozhat. Ennek pontos matematikai hátteréről szól a cikk.</li>
-			<li><a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars#readme">Kis matematikai kiegészítő írásom</a>, amely közvetlenül kapcsolódik Wouter Swiestra attríbútumnyelvtanokról szóló <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">népszerűsítő cikkéhez</a>. Swiestra cikkének egyik legkülönösebb pontja éppen egy rekurzív <span class="emcode">let</span> kifejezés értelmezésével kapcsolatos, annak látszólag paradox viselkedését említi meg. A saját cikkem ezt a szálat vezeti végig részleteiben: a látszólagos paradoxon lépésről lépésre való felodását mutatja meg a lambda-kalkulus szokásos fogalomrendszerében, lépésenként bemutatva béta-redukciós helyettesítéseket. maga az írás amúgy nem más, mint egy hozzá tartozó <a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">külön kis mini-projekt README-dokumentációja, a projekt példa-Haskell-forráskódokat tartalmaz.</li>
 			<li>
-				<span>My tiny first Agda-prjects:</span>
+				<span><a href="https://github.com/alignalghii/vector-algebra-in-Agda" target="_blank">Vektoralgebra Agdában</a> (lásd még a részletes <a href="https://github.com/alignalghii/vector-algebra-in-Agda#readme">README dokumentációt</a> is). A projekt hosszútávú célja, hogy helyességbizonyítási támogatást nyújtson egy ütközésvizsgálati virtuálisfizika-könyvtárhoz (az ún.  <a href="https://en.wikipedia.org/wiki/Fourier%E2%80%93Motzkin_elimination" target="_blank">Fourier-Motzkin kiköszöbölési</a> eljárás alapján): lehessen tételeket felállítani és bizonyítani a témakör egésze terén. Természetesen e cél elérése még távol áll e projekttől. A jelenleg is megvalósult eredmények:</span>
 				<ul>
-					<li><a href="https://github.com/alignalghii/vector-algebra-in-Agda">vector-algebra-in-Agda</a>: the future goal of this my project is to prove such advanced linear algebra theorems like the Fourier-Motzkin elimination: my final ultimate goal is to make a collision detection software that has been formally verified completely in Agda. The floorplan graphics editor webapp mentioned above is exactly such a candidate in my future plans. As for the current daily TODO goals: I am proving currently by formal methods in Agda that matrix transpose is an involution (i.e. a self-inverse operation): the transpose of transpose of a matrix is the original matrix itself. Not achieved yet, but several lemmas already proved on the way. Its nices parts are probably <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix.agda">the matrix structure and its yet under-construction proofs of a few theorems.</a>, and maybe also the proofs of the <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Functor.agda">functor rules</a> for vector-map. The tiny project uses an alternative definition of transpose different from the standard recursive definition (e.g. from the one hinted in Ulf Norell &amp; James Chapman: <q><cite><a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf">Dependently typed programming in Agda</a></cite></q>, Exercise 2.9): my approach is rather orthogonal to the standard one, so the usual base-and-proceed definitory steps become standalone subtheorems / lemmas, and conversely, my definition replaces familiar lemmas for free.</li>
-					<li>Another Agda-project (<a href="">beyond-Haskell</a>), the forrunner project of the previously mentioned linear algebra project. This forrunner is much more primitive, without too much value and without a definite goal. Still, it deviates somewhat from the standard notations, and that can be inspirative in establishing a notation convention. The most original part is where it proves extremely simple existientially quantified theorems in modular arithmetic.</li>
+					<li>Sikeresen bizonyytottam tisztán Agdában, hogy a <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix/Transposition.agda#L50" target="_blank">mátrix-transzponálás az ún. ön-inverz művelet operation</a>, másszóval <a>involúció</q>: kétszer egymás után végzett mátrixtranszponálás épp az eredeti mátrixot adja vissza.</li>
+					<li>Két különböző de egyenértékű alternatív definíciót adtam a mátrixtranszponálás megvalósítására, és bebizonyítottam Agdában, hogy <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Vec/Matrix/TranspositionAlternative.agda#L36" target="_blank">e két megközelítés valóban egyenértékű</a>, mindamellet hogy ezek meglehetősen ortogonális, független építkezésmódú megközelítések (így indukciós felépülési szerkezetük is teljesen különböző). A különböző indukcós szerkezt miatt a bizonyítások érintik az ún. <em>függvény-extenzionalitás</em> (funExt) problémakörét, és mivel ez az Agdában általánosságban nincs támogatva, így a bizonyítás ennek a korlátozott, konkrét strukturákra testreszabott változatát használja, amelyenek az Agdában több érdekes megjelenési példája is van.</li>
+					<li>Első kísérletem arra, hogy legalább az <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Rational/Unsigned.agda" target="_blank">előjel néküli racionális számokat definiáljam Agdában</a>, miközben két velük megjelenő új kihívást kell a típusrendszer szintjén, típusbiztosan megoldani: 1) a racionális számok ábrázolásában 0-nevezőt típusbiztos megszorításnak fordítási időben is kell kizárni tudnia, és 2) a racionális számok azonosságát az ábrázolási forma ekvivalenciaosztályain értelmezzük &mdas; egy adott racionális számot több ekvivalens alak képviseli. Mindkét elébbi kihívás felett egy új további kihívást hoz az előjeles racionális számok felé való továbbépítkezés, ennek típusbiztos megvalósítását az alábbi <a href="https://github.com/alignalghii/vector-algebra-in-Agda/blob/main/Rational/Base.agda" target="_blank">this kind of <q>ráépítkezős</q> tervezési mintával</a> igyekeztem megoldani.</li>
 				</ul>
 			</li>
-			<li>
-				<span><a href="">Ad hoc tesztelő keretrendszer Linux eszközökkel</a>. Intentionally outside of any standard test framework tool. Despite possibe disadvantages, it can be didactic</span>
-				<ul>
-					<li>about usage of Linux shell language and text-processing tools,</li>
-					<li>due to its focus on <em>state machines</em> / <em>formal grammars</em>,</li>
-					<li>it can help to develop an attitude towards finding invariants and algebraic proeprties to be tested, a goal which reaches an ultimate level in Agda, thus a good forerunner attitude.</li>
-				</ul>
-			</li>
-			<li>
-				<span>PHP + JavaScript: <a href="https://github.com/alignalghii/free-gallery">a <q>web gallery</q> of flats</a> for a real estate agency (in 2017). The web-app <a href="">is hosted and can be seen and used alive</a>. Here the public (non-proprietary) variant can be seen, with replaced free placeholder images. Two important tech details:</span>
-				<ul>
-					<li>It has its own standalone, custom-made DIY <q>web framework</q>; this has even its own auxiliary console subapplication for some managements tasks like DB creation, table setup etc. made from <a href="https://github.com/alignalghii/free-gallery/tree/master/lib-console">bash scripts arranged somewhat modular around</a> a central command reader and interpreter (<a href="">also in bash</a>). Otherwise, the framework follows MVC-pattern done in <a href="https://github.com/alignalghii/free-gallery/tree/master/app">plain PHP with household tools</a>.</li>
-					<li>Inobtrusive JavaScript: althogh images are handled by client-side JavaScript, switching it off automatically replaces every JavaScript functionality with visually the same effect with classical server-side PHP implementation &mdash; of course it may be slow or unpleasant</a>.</li>
-				</ul>
-			</li>
-			<li>A very small haskell web app for investigated a simple logical game, and a desktop Haskell app to help solving a logical puzzle.</li>
-			<li>My Haskell ancient times (2006): XML-processing with arrows (HXT library). Data parsing from sites with tables of business data: Parsec, recursive parsers.</li>
-			<li><a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a> is a tiny pure-JavaScript web-app project to present an <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">ad-hoc usage of monadic style</a> in vanilla JavaScript. This is a very lightweight project, somewhat old: much nicer ways exist to use Haskell-inspired concepts in JavaScript and PHP.</li>
+			<li><a href="https://github.com/alignalghii/beyond-Haskell" target="_blank">A Haskell nyelven túl</a>. Határozott célkitűzések nélküli, nagyon korai Agda-projekt. Arra alkalmas lehet, hogy stílusjegyeimet bemutassa az Agda-kódolás, az intuicionista bizonyításterén. Az egyébként a bevezető szintű tételek szintjét meg nem haladó anyag az alkalmazott jlölési stílus, egyedi konvenciók terén mutat néhány érdekes részt, továbbá az egzisztenciális kvantorok használatában is tartalmaz néhány egyébként igen minimalisztikus példát, például: induktívan váltakozóan definiált páros és páratlan számok, illetve (<a href="https://github.com/alignalghii/beyond-Haskell/blob/main/Theorems/NatModulo.agda#L32" target="_blank">minden így definiált páros szám felbontható két azonos <q>félrész</q> összegére</a> (minden párosnak van fele).</li>
 		</ul>
 
-		<h2>Egyes kiragadott projektek bővebb részletezése, tematizálása</h2>
-
-		<h3 id="recent">Legfrissebb Haskell-projektumaim. Monásztranszformálók (monad transformer) használata</h3>
-		<p>Az oldalon még sok szó lesz matematikáról, de az oldal fő célját szem előtt tartva elsőnek mégis a dolgok közepéba vágva, legfrissebb Haskell-projektem bemutatása következik:</p>
+		<h2 id="recent">Haskell-projektjeim közül a legfrissebbek. Az ún. <q>monásztranszformálók</q> használata</h2>
+		<p>&hellip; ezek mutatják be legújabban kialakult kódolási stílusomat és tudásomat Haskell terén</p>
 		<ul>
-			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs"><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">Parancssori kliensalkalmazás</a> a WikiMédia-projektcsalád kereső-API szolgáltásához</a>. Mintaprojektum annak bemutatására, mire is jó a &bdquo;monásztranszformálók&rdquo; (&bdquo;monad transformers&rdquo;) technikája. Személyes megismerési utam feléjük.</li>
+			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs" target="_blank">Kliensalaklmazás a Wikipédia keresőfelületének API-jához</a> (lásd még a részletes <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README dokumentációt</a>). Mintaprojekt, amely eredetileg a monásztranszformálók bemutatásának afféle motiváló példájaként indult el. Bemutatja azt a személyes tanulási utamat is, ahogy e fogalommal megismerkedtem.</li>
+			<li>Egy funkcionális mini-programnyelv interpreteres megvalósítása, valójában egy kombinátorlogikai interpreter. Ez is viszonylag friss projekt, így alaklmas legutóbb kialakult programzási stílusom bemutatására. A műfajban (kalkulusok, kombinátorlogika megvalósítása) több korábbi kisprojektem is van (a legrégebbi közülük 2004-es), így ezek leírását külön alfejezetben is ld. alább részletesebben:</li>
 		</ul>
+
+		<h2 id="calculi">Mini programnyelvek (<q>kalkulusok</q>) megvalósítása interpreterként. Háttér: zipper-adatstruktúrák használata</h2>
+		<ul>
+			<li>
+				<span><a href="https://github.com/alignalghii/CL-zipper-RWS" target="_blank">Egy kombinátorlogikai kifjezéseket kiértékelő program &mdash; lényegében interpreter</a> (lásd részleteiben a <a href="https://github.com/alignalghii/CL-zipper-RWS#readme">README dokumentációt</a> is). Saját interpreterem egy mini és lusta kiértékelésű funcionális kalkulusnyelvre, Haskellben megvalósítva. Minimalisztikus, de  Turing-teljes funkcionális programnyelv, ha normál-sorrendi kiértékelési/redukciós stratégia révén a lusta adatszerkezetek és kiértékelés minden előnyét tudja nyújtani elvileg.</span>
+				<br/>
+				<span>Magát a technikai megvalósítási részleteket is igyekeztem lehetőleg tiszta koncepciók alapján megírni: a kifejezésfák redukciós lépéseinek követését az ún zipper-adatszerkezet képezi le (<q>lyukas / fókuszálható</q> fastruktúra a lustaságot biztosító ún. <em>legbalsó-legkülső</em> redukciós stratégia megvalósítására). Bár a fő megvalósító agoritmus mindenképp összetett, de a zipper adatszerkezet révén fogalmilag egyszerű és kompakt egységbe fogható össze.
+				<br/>
+				A megvalósítás nem alkalmaz jelnleg monászttranszformálókat: a fogalmi egyszerűség végett ún. <q>hatások</q> nem szerpelnek a kis programnyelv-kalkulus szolgáltatásai között, de a projekt maga természetes módon adja magát egy ilyyen irányú továbbfejlesztés felé is, aés erre rengeteg ezt motiváló kilátás van: pl. nyomkövetési funkció (log, &mdash; író-monász), lépészámlálási funkció (végtelen divergálás elkaphatósága, esetleg éta-konverziós funExt-bővítés &mdash; állapot-monász, ), meta- és lokális változók (állapot-monász), konfigurálhatóság (olvasó-monász).</span>
+			</li>
+			<li>Van egy sokkal korábbi, már elég öreg forráskódú és stílusú, kissé darabosabb tsztaságú kombinátorlogikai iterpreterem is, de ez viszont az évek feljesztései alatt sokkal több funkcionalitást nyújt, mint az elébbeni újabb, tisztább forráskódú változat. Ennek megfelelően felhasználóbarátabb is, nyújt bizonyos komputerlagebrai szolgáltatásokat is: a definiált kombinátorok elnevezhetőek, az összetett kombinátorokat szerkezetelemzi és beszédes nevű összetevőkre bontva írja ki.</li>
+			<li>Egy harmadik kombinátorlogikai interpreter pedig még teljesen kísérleti jellegű: forráskódja még a zipperadatstruktúrás változaténál is letisztultabb és tömörebb (a redukálási algoritmus termén), viszont még teljesen higányzanak a felhasználói felületek, a mgemgjelenítés, szóval minden más rész.</li>
+		</ul>
+		<hr/>
 		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#recent">E szakasz angol változata</a></li>
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#calculi">Hungarian version of this section</a></li>
 		</ul>
+		<hr/>
 
-		<h3 id="math">Matematika, és személyes viszonyulásom hozzá</h3>
+		<h2 id="Haskell-inspired">Egy Haskell által ihletett projekt, de PHP-ban és JavaScript-ben megvalósítva</h2>
+		<p><a href="https://github.com/alignalghii/loosely-coupled-figure-editor" target="_blank">Alaprajztervező</a> (lásd még a <a href="https://github.com/alignalghii/loosely-coupled-figure-editor#readme">README dokumentációt</a>): egy vektorgrafikus szerkesztőprogramot nyújtó webalkalmazás ingatlanirodák allalmazottainak munkáinak segítésére: a vállalt lakások alaprajzainak önálló elkészítése. JavaScript a frontenden kilensoldalon, és pHP backend.<br/>Legfontosabb vonása és komponense a <q>matematikai-fizikai motor</q> azaz egy ütközésvizsgáló a rajzolt világ <q>tárgyai</q> között: zobák, bútorok, nyílászárók mind a saját szabályuk szerint ütköznek, részben a felhasználói célszerűség, részben a fizikai realizmus elveit követve: a tárgyak elvágólagosan is elrendezhetőek kényelmesen, és egymás felületén relisztikusan elcsúsztathatóak. Az ütközésvizsgálót eredetileg Haskellben terveztem egyszerű, optimalizációmentes, de világos matematikai háttérrel (az ismert ún. Fourier-Moztkin kiküszöbölési eljárás lekódolásával), és innen lett átültetve JavaSceipt kódba a Scala és Smalltalk programozók által ismert case-object technika révén, amely a Haskell algebrai adattípusait szinte gépiesen képes örökődő oztályhierarchiák nyelvére átültetni.
+<!--Lényegi része, motorja az üsközésvizsgálat (<q>fizikai motor</q>), amely Haskellben készült és lett tesztelve. Másik fontos jellegzetessége, hogy kilens oldali része, a JavaScript-szerkesztő maga is az MVC tervezési mintát követi egy házilagos keretrendszerben, kontrollerekkel, sőt afféle <a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/public/app.js">router</a> is létezik egyfajta esemény-nyelvre, ezzel együtt <a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/public/app.js">az analógia szinte teljes</a> a szerver oldali rész klasszikus MVC-architektúrájával.--> ennek megfelelően a kódban a PHP, lletve a JavaScript modulok is helyenként tiszta Haskell tervezési mintákat vesz át: algebrai adatszerekezetek, monászok, ezek megvalósítására a Scala-ból ismeretes <q>case object</q> technika öröklődéssel való imitálását használja, ebből a legfőbb példák <a href="https://github.com/alignalghii/functional-design-upon-imperative-substrate">külön helyre kiválogatva</a> itt láthatóak együtt.</p>
 
-		<p>Gyerekként fizikus szerettem  volna lenni, sajnos nem maradtam meg mellette, később a matematika töltötte be ugyanezt a szeretetet az életemben, hogy mindenre rányomja bélyegét &mdash; és ez mindmáig tart.</p>
-		<p>Ugyanakkor az inkább az elmúlt egy-fél évben történt, hogy a Haskell programozás a matematika távolabbi területeit is kívánatossá tette számomra, olyasvalamit, ami nem tartozik szorosan a Haskellhez <q>közvetlenül</q> kötődő <q>Szentháromsághoz</q> (kategóriaelmélet, típuselmélet, matematikai logika). Főleg a kategóriaelmélet makacs ellenállása velem szemben inspirált engem arra, hogy a hozzá vezető utat a topológia és a csoportelmélet megismerésével próbáljam <q>kipárnázni</q>. E téren tudományos igényű írásra nem lennék képes, de személyes élményeimet az alábbi reflexiós írásban próbáltam összefoglalni:</p>
+		<h2 id="testing">Tesztelés</h2>
 		<ul>
-			<li><a href="Haskell-and-math.hu.html">Haskell és matematika (és ahogy én viszonyulok hozzájuk)</a>. Rövid személyes írás a témáról. Hogyan képes a Haskell és a matematika kölcsönösen erősíteni egymást, és miért nélkülözhetetlen a matematika egésze iránti nyitottság megtartása?</li>
+			<li>Egységtesztelés: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/UnitTest.hs" target="_blank">minta</a> két Spec-állománnyal <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeriesSpec.hs" target="_blank">effectless spec</a> (ez az <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectless/PaginationConceptSeries.hs" target="_blank">effectless</a> modult teszteli), továbbá az <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeriesSpec.hs" target="_blank">effectful spec</a> (ez pedig az <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/PaginationStateMachines/Effectful/PaginationConceptSeries.hs" target="_blank">effectful</a> modult teszteli) &mdash; mindez a már említett <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs">Wikipédia-kereső-API-hoz írt kilensprogram</a> része. A felhasznált teszt-keretrendszer: a Hspec.</li>
+			<li>Integrációs tesztelés: <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/IntegrationTest.hs" target="_blank">sample</a> &mdash; ez is része a már elmített Wikipédia-kereső-API-hoz írt kilensprogramnak. Az integrációs teszt nem használ külön szabványos tesztkeretrendszert, hanem e céllra írt egyedi Haskell-kódot.</li>
+			<li>Nem-funkcionális tesztelés, illetve más különleges esetű Haskell-tesztek  (lusta kiértékelődésvizsgálata, végtelen lefagyás/divergálás vizsgálata): <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/blob/main/src/MetaFeatures/LazinessDemo.hs" target="_blank">sample</a> &mdash; ez is része a már elmített Wikipédia-kereső-API-hoz írt kilensprogramnak. e különleges dolgok teszteléséhez természetesen <em>párhuzamosságot</em> használtam: az <q>unsafe</q> kód külön szálban fut, és egy másik külön szál felügyeli őt a teszt éredkében.</li>
 		</ul>
 
-		<h3 id="selfref">Minták az önhivatkozás témakörében</h3>
+		<h2 id="text-processing">Shell-szkriptekkel, héjprogramokkal végzett eseti testreszabott tesztelés, szövegfeldolgozó eszközök</h2>
+		<p>A híres-hírhedt <q>svájcibicska</q>, hackelős-házilagos teszteszköz <q>legacy</q> alkalmazások tesztelésére (vagyis maleyket nem fejleszettek folyamotosan tesztelésre nyitottságra): egyedi testreszabott shlell-szkriptek <q>törik fel</q>, <q>nyitják meg</q> őket (néha erőből is) hogy felkutassák a felhasználó felületet vagy más kívülről elérhető vagy feltörhető felületét a legacy alkalmazásnak.<br/>Például webalkalmazások esetében, a felhasználó felület kovetkezetes  &bdquo;curl&rdquo;-scriptes lekérdezése (avagy szöveges reaglás bármi módon való kifacsarása módszeresen előkészített inputok alapján), és a ki-curl-özött válaszok szövegfeldolgozó eszközökkel, scriptekkel való elemzése. A hyres-hírhedt &bdquo;curl-grep&rdquo; stylusú web-API-testelés, ami skálázható-bővíthető a válszok grep helyett a Turing-teljes sed , AWK, Perl vag Raku révén való feldolgozásával. Raku. E híres <em>data-driven</em> nyelvek közptonti foglama egyfajta <q>állapotgép</q>, <q>állapot-automtata</q>, amely egy formális nyelvtant határoz meg, és alkalmas lehet az tesztben elvárt viselkedés, protokoll specifikációjára.</p>
+		<p>A legegyszerűbb efféle <q>eldobható</q>, alkalmilag testreszabott tesztelési módszer megvalósítható tiszta bash-scriptekben is_ diff-összehasonlítva a tesztelendő alkalmazásból kifacsart választ elemző szövegfeldolgozó  AWK/Perl/`sed` szriptek kimenetét az előre elkészített etalon/elvárási állományokkal.</p>
+		<p>Az alábbi példák a fentiekhez képest egy egyszerűbb helyzetet mutatnak be. Nem webalkalmásnak, hanem egy kis saját szövegesdokumentumgondozó segédszript-rendszer helyességének teszteléséről lesz szó. Az alábbi példák egy kis tesztkeretrendszert mutatnak be egyedi, eseti, nemszabványos helyzetek tesztelésére: nagy HTM és markdown-dokumentumok karbantartását szolgáló szövegátalakító szriptek (pl. automata  tartalomjegyzékgenerálás) helyességének tesztelése, mindez sed, perl, bash eszközök által.</p>
+		<ul>
+			<li>A worked-out <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts" target="_blank">ad hoc (self-hacked) unit test framework (sub)project</a>, together with its very detailed <a href="https://github.com/alignalghii/alignalghii.github.io/tree/master/aux-scripts#readme">README doc</a>. This auxiliary subproject is  part of this very GitHub Pages personal profile page that You are reading now! It uses Bash, Perl, AWK and sed.  In summary: Sed is a challenging twin and parallel to AWK and Perl, and all these three tools are very versatile for custom task in checking or maintaining texts or streams. Together  with the „glue” / „orchestrating” power of shell scripts (Bash or Perl), this can be organized together into very custom-made ad hoc test framworks adaptable for any imaginable situations.</li>
+			<li>Another, a much smaller and less worked-out <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs/tree/main/aux-scripts" target="_blank"> (sub)project</a> for a test framework is also an auxiliary part of a bigger project (the already mentioned client program project to the WikiMedia search API). Also its test framework subproject uses Bash, AWK and sed.</li>
+		</ul>
+		<hr/>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#testing">Hungarian version of this section</a></li>
+		</ul>
+		<hr/>
+
+
+		<h2 id="math">Matematika, és a hozzá való viszonyom</h2>
+		<ul>
+			<li><a href="Haskell-and-math.en.html">Haskell and mathematics (and the way I relate to them)</a>. A short personal writing about the topic. How can Haskell and mathematics strengthen each other mutually, and why is it necessary to keep an openness towards the whole of mathematics?</li>
+			<li><a href="https://github.com/alignalghii/loosely-coupled-figure-editor/tree/master/floor-plan-designer/doc/haskell" target="_blank">My rather ad-hoc collision detection solution with Fourier-Motzkin elimination</a>. A nicer and cleaner sourcecode could be achieved with Agda, at least for documentation purposes, because vectors and matrices are apt to be represented with dependent-types. <a href="https://github.com/alignalghii/vector-algebra-in-Agda#readme">The already mentioned Agda project for this</a> is still in infancy, having only theorems about the row-and-column algebra of matrices, transposition, arithmetic.</li>
+			<li>A proof in category theory, read on Quora, but formalized into  Gentzen-tysle deduction proof tree by myself</li>
+		</ul>
+		<hr/>
+		<ul class="menu">
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#math">Hungarian version of this section</a></li>
+		</ul>
+		<hr/>
+
+		<h3 id="selfref">Minták az önhivatkozás témakörében: matematikai, logikai vagy lambda-kalkulusbeli ún. önhivatkozási konstrukciók példái</h3>
 		<p>Egy témakör, amely a 2000-es évtized közepe-vége óta foglalkoztat, amelynek a matematikai logikában, de a lambda-kalkulusban is megvan a lenyomata: az <em>önhivatkozás</em> témaköre, a maga paradoxonjaival. A funkcionális programozás terén persze a rekurzív függvények terén jelenik ez meg, ehhez kötődik még az adott nyelv pontos operatív szemantikája, kiértékelésrendje, illeve annak formális modellezése, amely már a topológia területére is átnyúlik.</p>
 		<p>E témák terén inkább csak az operatív szematikai elméleti keretekig jutottam, e téren írásaim már nemcsak személyes jellegűek, de tudományosan nem jelentős értékűek, viszont esetleg didaktikus értékük lehet későbbi tovbbfejlesztés során. Létezik benne kisebb saját formalizmus, azonban az viszonylag triviálisan összeszedhető a témát ismerő közöség számára is:</p>
 		<ul>
-			<li><a href="self-calculus-and-semiself-translation.hu.html">&bdquo;Szelf-kalkulus&rdquo; és &bdquo;felezett-szelf fordítás&rdquo;</a>: az önreferencia közvetett formája — vajon hogyan lehetségesek rekurzív függvények a tiszta lambda-kalkulusban a közvetlen önhivatkozás lehetősége nélkül is?</li>
-			<li><a href="let-rec.hu.html">A let-rec kifejezés szemantikája(i) és lambda-kalkulusra való fordítása(i)</a></li>
-			<li><a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars">Személyes kezdőlépéseim az attribútumnyelvtanokkal való kísérletetésre</a>. Személyes Haskell példaprojekt annak kiderítésére, hogy Wouter Swierstra &bdquo;<em>Why attribete grammars matter</em>&rdquo; cikkének az elsőre legmisztikusabbnak tűnő része, a &bdquo;credit-card transformation&rdquo; (&bdquo;tie the recursive knot&rdquo;) milyen szemantikával értelmeződik pontosan.</li>
+			<li><a href="self-calculus-and-semiself-translation.en.html">A szelf-kalkulus, és a felezett-szelf fordítástechnika</a>: rekurzív függvények megvalósítása a kombinátorlogikában. Heurisztikus út az Y fixpont-kombinátor megvalósításának megértéséhez, általánosításához. Az ún <q>közvetett önhivatkozás</q> (talán Quine írhatta le először logikailag , fizikai kontextusban pedig esetleg Neuman).</li>
+			<li><a href="file:///home/physis/Documents/my-blog/alignalghii.github.io/let-rec.en.html">Egy pick  íráspróbálkozásom a híres lusta let-rec szerkezet pontos szemantikájának megadására tiszta lambda-kalkulusban.</a> (a rekurzív let-rec Haskell-változata). A lusta let-rec szerkezet önmagában is fontos, de Swiestra  attribútumnyelvtanokat népszerűsítő cikkének kulcsmozzanata is erre támaszkodik (<q>hitelkártya-művelet</q>, <q>a csomó bezárul</q>).</li>
+			<li><a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars" target="_blank">Személes első lépéseim, tanulási kanyarom</a>  Wouter Swierstra alábbi cikkének megértésében:  <a href="https://wiki.haskell.org/The_Monad.Reader/Issue4/Why_Attribute_Grammars_Matter">Why attribute grammars matter</a>. Egyben egy kis saját személyes miniprojektet is bemutatok, amelynek feladata, hogy Swiestra cikkének talán legnehezebben érthető és legkülönösebb részét, a <q>csomót bezáró</q> let-rec (luste, rekurzív let-kifejezés) részét megvilágítsa. E kis személyes miniprojektemnek szintén <a href="https://github.com/alignalghii/practice-preparations-before-learning-attribute-grammars#readme">részletes README dokumentációja</a> van.</li>
 		</ul>
+		<hr/>
 		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#selfref">E szakasz angol változata</a></li>
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#selfref">Hungarian version of this section</a></li>
 		</ul>
+		<hr/>
 
-		<h3 id="calculi">Mini programnyelvek/kalkulusok implementációi. Típusderiváltak (zipper) használata</h3>
+		<h2 id="onliner">Haskell ujjgyakorlataim, kis kocepcióóbálkozások, vagy egyéb csonkprojektecskék</h2>
 		<ul>
-			<li><a href="https://github.com/alignalghii/CL-zipper-RWS">Kombinátorlogikai értelmezőprogram</a>. Egy lusta kiértékelésű mini funkcionális programnyelvecske sajátkezű megvalósítása értelmezőprogramként, Haskell nyelven implementálva. Egy minimalisztikus (mindazonáltal Turing-teljes) funkcionális programnyelv, amely minimalisztikus mivolta ellenére is rendelkezik elvileg mindazokkal az előnyökkel, amelyeket a lusta kiértékelési stratégia nyújt a Miranda, Clean, Haskell nyelvben. A projektum szolgáltatása mellett az azr megvalósító forráskódja is érdekes:  törekszik a lehető legnagyobb fogalmi tisztaságra (a <em>zipper</em> néven ismert adatszerkezet-technikát használja, ezzel átlátható módon valósítja meg a „legbalsó legkülső” redukálási stratégiát, amely a lusta kiértékelés sarkköve). Így a főalgoritmus minden összetettsége ellenére is fogalmilag egyszerű tud maradni. A fogalmi egyszerűség megtartása végett ez a projektum nem használ monász-transzformálókat, de nyitott arra, hogy a projektum későbbi elágazásai ilyenekkel árnyalják az algoritmust. maga a projekt alapjellege is szinte sugallja az ezt motiváló lehetőségek hozzáépítését, ezek legkézenfekvőbbike például a nyomkövetési naplózás, továbbá ennek részeként a végtelen körben futó „lefagyó” programok elkapása lépésszámlálási ellenőrzéssel).</li>
+			<li><a href="https://github.com/alignalghii/lazy-IO-for-pure-functional-interactivity">Lazy IO interactivity and update-hash</a></li>
+			<li><a href="https://github.com/alignalghii/tricky-foldr-oneliner-for-a-complex-query">Tricky foldr order</a></li>
 		</ul>
+		<hr/>
 		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#calculi">E szakasz angol változata</a></li>
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#onliner">Hungarian version of this section</a></li>
 		</ul>
+		<hr/>
 
-		<h3 id="testing">Tesztelés</h3>
+		<h2 id="webapp">Funkcionális nyelven írt webalkalmazások</h2>
 		<ul>
+			<li>Mostly cliens-side: <a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a>, example for JavaScript in the declaritve style. See the most functional-style part in the <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">model</a> module.  Implemented in Javascript, but inspired by Haskell design concepts. Used implementation techniques: <span class="emcode">Maybe</span> and <span class="emcode">Either</span> algebraic datatypes via Scala-style <em>case object</em>s, <span class="emcode">Monad</span> (and <span class="emcode">Eq</span> etc&hellip;) type classes via PHP-style <em>trait</em>s. In case of JavaScript, all these implemented via <em>prototypal inheritence</em>.</li>
+			<li>Mostly server-side: <a>Mini Scotty</a>, a Scotty webmicroframework sample</li>
+			<li><a href="https://github.com/alignalghii/functional-design-upon-imperative-substrate">Functional design upon imperative substrate</a> (JavaScript, PHP)</li>
+			<li>Both-tiers webapp sample: floor plan designer (frontend) with lightweight user and document ERP (backend).</li>
+			<li>Opposite of a web app: a <a href="https://github.com/alignalghii/sample-search-client-paginated-with-monad-transformers">crawler in Haskell with monad transfomers</a></li>
 		</ul>
+		<hr/>
 		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#testing">E szakasz angol változata</a></li>
+			<li><a href="#top">Jump to top of this page</a></li>
+			<li><a href="index.hu.html#webapp">Hungarian version of this section</a></li>
 		</ul>
+		<hr/>
 
-		<h3 id="onliner">Haskell &bdquo;egysorosaim&rdquo;, &bdquo;proof-of-concept&rdquo;-projektumaim, vagy egyéb extramini-projektumok</h3>
+		<h2 id="old-non-hs">My old non-Haskell projects</h2>
 		<ul>
+			<li><a href="old-projects.html">My old reference works and old projects</a>. Some of my small PHP web apps, with their standalone custom hand-made framework.</li>
 		</ul>
-		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#onliner">E szakasz angol változata</a></li>
-		</ul>
-
-		<h3 id="webapp">Webalkalmazás funkcionális nyelven</h3>
-		<ul>
-			<li>Kliensoldali túlsúlyú webalkalmazás példája. JavaScript-megvalósítás Haskell tervezési koncepciók alapján. Megvalósítási technikák: <span class="emcode">Maybe</span> és <span class="emcode">Either</span> algebrai adatszerkezetek Scala-stílusú <em>case object</em>-ek révén, <span class="emcode">Monad</span> (és <span class="emcode">Eq</span> stb&hellip;) típusosztályok pedig PHP-stílusú <em>trait</em>-ek révén. JavaScript esetében mindez prototípus-öröklödési technikán keresztül.</li>
-			<li>Szerveroldali túlsúlyú webalkalmazás példája</li>
-			<li>Mindkét oldalon kiépített webalkalmazás példája</li>
-			<li>&bdquo;Inverz webapp&rdquo;</li>
-		</ul>
-		<ul class="menu">
-			<li><a href="#top">Ugrás ez oldal tetejére</a></li>
-			<li><a href="index.html#webapp">E szakasz angol változata</a></li>
-		</ul>
-
-		<h3 id="old-non-hs">Régi nem-Haskell projektumaim</h3>
-			<li><a href="old-projects.html">Régi referenciamunkái, hobbiprojektumaim.</a> (csak angol változatban). PHP vebalkalmazásaim közül nhány kisebb hobbipéldány, saját házilagos keretrendszerrel.</li>
-		<h3 id="old-hs">Régi Haskell-projektumaim</h3>
-		<ul>
-		</ul>
-
-		<h2 id="intro-history">Bevezetés, személyes történelem</h2>
-
-		<p>Ez az  oldal programmozói tevékenységem és készségeim összefoglaló oldala akar lenni, jelen változatban azonban kiemelten kap szerepet a legutóbbi néhány év, melynek során hagyományos webprogramozói munkámban némi szünetet tartva, régi Haskell-tudásomat megpróbáltam új szintre emelni, hogy nagyobb projektek architekturális mintáira, fejlettebb tervezési mintákra is rálássak.</p>
-		<p>A fejlődés fenntarthatóságának érdekében (<q><em>low-hanging fruits</em></q>-szindróma elkerülése) igyekeztem fenntartani a kategóriaelméleti, topológiai, típuselméleti alapok folyamatos tanulását is (<a href="#math">→ matematika</a>), és perspektívát kapni a Haskell és a modern formális módszerek kapcsolatáról, a tételbizonyító rendszerek működéséről is (<a href="">→ Agda</a>).</p>
-		<p>Bár a gyakorlatias mintaprojektek terén nem született annyi felmutatható Haskell-eredmény, mint szerettem volna, de megvalósult Haskellben néhány kisebb mini-programyelv (logikai kalkulus) értelmezőprogramja, továbbá egy web-API kliens, és ezentúl két az előbbiekhez képest embrionális szakaszban maradt webalkalmazás is. Mindezek az alábbi technológiák alkalmazását is példázzák: zipper-adatszerkezetek (<q>kifejezésfák navigálható fókusz-lyukakkal</q>), nyíl (arrow) formalizmus (sokszor csak mint egyszerű paraméteres monászok, akár teljesen nem is formalizált Kleisli-monászok formájában), illetve kisebb monásztranszformálós architektúrák (viszonylag triviális, nem túl bonyolult kiépítésben)</p>
-		<p>Ezelőtti tevékenységem: backend webprogramozás nagyobbrészt PHP, kisebbrészt JavaScript nyelven. E gyakorlatiasabb korszak egy évtizedig tartott. Előtte (az <q>őskorban</q>) szintén Haskell-programozással foglalkoztam, ezáltal pályám egy sajátos spirális futott be, a Haskellből kiindulva, onnan egy évtizedig a <q>hagyományos</q> gyakorlati webprogramzás világába elkanyarodva, és a végén &mdash; átfogóbb matematikai rálátás igényével &mdash; a Haskell világába visszakanyarodva.</p>
-		<p>A két <q>világ</q> közti kapcsolatként lassanként elkezdtek a deklaratív, funkcionális programpzási stílus <q>betörni</q> PHP és JavaScript kódjaimba is: algebrai adattípusokat (<code>Maybe</code>, <code>Either</code>) osztályörökléssel megvalósítva (a Scala-ból ismert <q>case object</q> technikával), sőt a PHP <em>trait</em>-jei révén még akár kisebb Haskell típusosztályok (<code>Monad</code>) megvalósításával is. Ezeknek az <q>átvett</q> technikáknak az egyik gyakorlati terméke egy alaprajzszerkesztő kis webalkalmazás, (kliensodali JavaScript-es grafikus szerkesztő), amelynek fő matematikai <q>motorja</q> a Fourier-Motkin féle kiküszöbölési eljárás (lineáris egyenlőtlenség-rendszert megoldó algoritmust), illetve ennek sokszögek ütközés-vizsgálatára való alkalmazása. Az eredmény egy viccessen lassúcska, de teljes ütközésvizsgálatot végző alaprajzszerkesztő, szoba- és bútoralakzatokat fizikailag realisztikusan összetologató webalkalmazás.</p>
-	<p>E JavaScript-projektben magát a Fourier-Motzkin-algoritmust eredetileg egy az egyben Haskellben írtam meg (és onnan ültettem át JavaScriptre), de e matematikai motort körülvevő üzleti logika is rengeteg Haskell-ihlette adatstruktúrát és immutábilis, változatlan adatszerkezetet, sőt helyenként valódi monász-architektúrát tudott magába foglalni, még úgy is, hogy azokat <q>közvetlenül</q> JavaScriptben írtam.Egyszóval: egyszerű algebrai adattípusok, kisebb típusosztályok szintjéig képes vagyok JavaScriptben, sőt, PHP-ban is közvetlenül funkcionális, deklaratív megodásokat létrehozni. Ugyannakkor végzetes hiányosságnak bizonyult, hogy az üzleti logika ennél nagyobb képtékű, architekturális szintű megragadására <q>a két világ</q> egyikéből sem sikerült termékeny, kellően rugalmas és skálázható megközelítést kidolgoznom, ez később a projekt megfeneklését okozta. E súlyos hiányosságomnak az orvoslását célozta egy későbbi, immár teljesen funkcionális személetben írt, fő architektúrájában monásztranszmformálók mentén felépített tisztán Haskell-projekt.</p>
-		<p>Amiben még a matematika erősen rányomta bélyegét programozási stílusomra, az a tesztelés. Bár kevés dicsekednivalóm van: a szabványos, bevett tesztelőeszközök helyett az ad hoc összebütykült <span class="emcode">bash</span>-scriptek és a szövegfeldolgozó Linux-eszközök, <span class="emcode">perl</span>-, sőt <span class="emcode">AWK</span>- és <span class="emcode">sed</span>-scriptek világa ragadott inkább meg. Ezek közös sarokpontja az <em>állapotgép</em>, <em>állapotautomata</em> fogalma volt, amely egyben egy formális nyelvtant is meghatároz, így ezek világa általában is érdekelt (ezekből a leggyakorlatiasabb eredményem REST API-s webalkalmazások <q>curl-grep</q> stílusú automata tesztelése volt).</p>
-		<p>Egyébként gyakorlottság szempontjából nem tartom magam gyakorlott tesztelőnek, bár az Agda axiomatikus szemléletmódja mint a tesztfogalom afféle végletekig elvitt megtestesülése szintén vonzani tud: tesztelhető invariáns tulajdonságok, algebrai összefüggések meglátása. Azonban  Agda-bizonyítási képességeim nagyságrendben kb. az induktív típuscsaládok kisebb/közepes léptékű alkalmazásáig terjednek (Eq, Fin, Vec, bizonyítás-kifejezések), de a szövevényesebb vagy komolyabb formális módszerek módszeres alkalmazását még nem tudnám átlátni, bár szeretném mielőbb megszerezni e tudást.</p>
+		<h2 id="old-hs">My old Haskell projects</h2>
 	</body>
 </html>
