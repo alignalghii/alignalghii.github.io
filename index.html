@@ -17,10 +17,15 @@
 
 		<h2>Table of contents</h2>
 		<ul>
-			<li><a href="#live-hs-webapp">Online live webapp sample site to demonstate the use of functional programming in backend</a></li>
-			<li><a href="#Agda">My most recent projects at all: two very young Agda projects</a></li>
-			<li><a href="#recent">My most recent Haskell projects. Using monad transformers</a></li>
-			<li><a href="#calculi">Implementations of mini programming languages/calculi. Using zippers</a></li>
+			<li>
+				<a href="#recent-hs-backend">My most recent Haskell web-related, backend projects</a>
+				<ul>
+					<li><a href="#live-hs-webapp">Online live webapp sample: language tutoring site with quiz practice series</a></li>
+					<li><a href="#hs-web-client">A web client app for a given API. Demonstrating monad transformers</a></li>
+				</ul>
+			</li>
+			<li><a href="#Agda">Projects with theorem provers and dependent types: two very young Agda projects</a></li>
+			<li><a href="#calculi">Implementations of mini programming languages/calculi in Haskell. Using zippers</a></li>
 			<li><a href="#Haskell-inspired">A Haskell-inspired project, implemented in PHP and JavaScript</a></li>
 			<li><a href="#testing">Testing</a></li>
 			<li><a href="#text-processing">Testing with shell scripting and text-processing tools</a></li>
@@ -36,7 +41,9 @@
 			<li><a href="#old-hs">My old Haskell projects</a></li>
 		</ul>
 
-		<h2 id="live-hs-webapp">Online live webapp sample site to demonstate the use of functional programming in backend</h2>
+	        <h2 id="recent-hs-backend">My most recent Haskell web-related, backend projects</h2>
+	        <p>Besides that explicit contentual goals, they also an implicit technical aim: to explore possibilities, the use of functional programming in projects potentially growing very big, posing challanges in keeping architecture clean.</p>
+		<h3 id="live-hs-webapp">Online live webapp sample: language tutoring site with quiz practice series</h3>
 
 		<!--p><q>English-German word- and sentence practice</q>: <a href="https://github.com/alignalghii/bilingual-practice-EN" target="_blank">GitHub project page</a> (and as a part: <a href="https://github.com/alignalghii/bilingual-practice-EN#readme">README</a>), furthermore the live online web app <a href="http://bilingual.curlgrep-phantom-funspec.hu:3001" target="_blank">to be seen usable, testable</a>.</p-->
 		<p><q>Hungarian-English word- and sentence practice</q>: a quiz-like web app for tutoring English phrases to Hungarian persons. It generates random quiz series for practice out of a large pre-uploaded lexicon dataset. Moreover, the learners can store, manage, review, repeat their former completed practice quizzes, and compare them to see personal progress. (Later user-friendly cherrypicking features will be added, too.)</p>
@@ -48,7 +55,18 @@
 		<p>As for underlying web framework, the <a href="https://github.com/scotty-web/scotty/wiki/Scotty-Tutorials-&-Examples" target="_blank">Scotty</a> micro-webframework is used. And as for a <q>dark corner</q> od the project (at least at testing): despite of modern test tools being intended in future (unit, database, and web API tests), for the time being a DIY-self-hacked bash script autotest provides a rough web API test, in the manner of the (in)famous <q><a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app/blob/main/test/API-client-tester.bash" target="_blank">curl-grep</a></q> style.</p></p>
 		<!--p>(As for people having no relations to Hungarian language, especially for native English speakers, this web application has a <q>German-tutoring to English audience</q> variant, see its <a href="https://github.com/alignalghii/bilingual-practice-EN" target="_blank">GitHub project page</a> and live <a="http://bilingual.curlgrep-phantom-funspec.hu:3001">hosted site</a>. But this is yet in a much less developed stage with much less features yet, comaperd to the much more richly featured Hungarian-English in the previous paragraphs above.)</p-->
 
-		<h2 id="Agda">My most recent projects at all: two very young Agda projects</h2>
+
+		<h3 id="hs-web-client">A web client app for a given API. Demonstrating monad transformers</h3>
+
+		<p>After having seen a web application above implemented in Haskell, now let us see an example for the <q>opposite</q>, <q>counterpart</q>:
+		a <em>web client</em> application!</p>
+
+		<p>Here is a <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs" target="_blank">client app to Wikipedia&apos;s search API</a> (see also its <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README</a>). i have hdone the higher-lever and custom parts of handling Wikipedia&apos;s search API with appropriatelly designed monad transformers, &mdsh; moreover, originally the whole project started to be a demonstration and motivating example for monad transformers (and part of my own personal learning parth towards them).</p>
+
+		<p>As for the lower-level details of HTTP client programming, this project bases upon the <a href="http://www.serpentine.com/wreq/" target="_blank">Wreq</a> library.</p>
+
+
+		<h2 id="Agda">Projects with theorem provers and dependent types: two very young Agda projects</h2>
 		<p>&hellip; showing my most recent knowledge and coding style in theorem provers and Martin-Löf type theory</p>
 		<ul>
 			<li>
@@ -62,14 +80,9 @@
 			<li><a href="https://github.com/alignalghii/beyond-Haskell" target="_blank">Beyond Haskell</a>. A very early Agda project without definite goals. Presents a coding and proof style, but no particular achievments. Has some interesting parts, and a few existentially quantified theorems about even/odd natural numbers (<a href="https://github.com/alignalghii/beyond-Haskell/blob/main/Theorems/NatModulo.agda#L32" target="_blank">every even number has a half</a>).</li>
 		</ul>
 
-		<h2 id="recent">My most recent Haskell projects. Using monad transformers</h2>
-		<p>&hellip; showing my most recent knowledge and coding style</p>
-		<ul>
-			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs" target="_blank">A client app to MediaWiki&apos;s search API</a> (see also its <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README</a>). A sample project presenting a  motivating example for monad transformers (part of my own personal learning parth towards them).</li>
-			<li>An implementation of a mini functional programming language, i.e. a combinatory logic interpreter, with well-organized clean sourcecode. See below in details:</li>
-		</ul>
 
-		<h2 id="calculi">Implementations of mini programming languages/calculi. Using zippers</h2>
+		<h2 id="calculi">Implementations of mini programming languages/calculi in Haskell. Using zippers</h2>
+		<p><p>An implementation of a mini functional programming language, i.e. a combinatory logic interpreter, with well-organized clean sourcecode. See below in details:</p>
 		<ul>
 			<li><a href="https://github.com/alignalghii/CL-zipper-RWS" target="_blank">A combinatory logic evaluator</a> (see also its <a href="https://github.com/alignalghii/CL-zipper-RWS#readme">README</a>). My own interpreter for a mini lazy functional programming language, implemented in Haskell. A minimalistic, but still Turing complete functional programming language, having all advantages of being lazy in the term evaluation/ reduction strategy. The implementation tries to be as clean as possible (it uses the zipper technique to achieve the leftmost outermost reduction strategy, thus ensuring lazy evaluation). The main algorithm is a complex but kept conceptually simple with the zipper trick. It does not contain monad transformers for the sake of conceptual simplicity, but it is straitforward to develop it further in this way, and has many motivating prospects to do so (tracing, step counting, infinite runaway check). Work is still in progress, but core parts seem to be complete.</li>
 			<li><a href="https://hub.darcs.net/physis/CL-quine" target="_blank">CL-quine</a> (mature): an old, but more featureful combinatory logic interpreter of mine, more user-friendly in use, but with somewhat old and tangled sourcecode. It has also a <q>library</q> of combinators, i.e. a library of combinatory logic itself (i.e. of the target language, and not of Haskell, the meta/host/implementer language). The most sophisitcated combinator here is a full-fledget <em>quine</em>, i.e. an expression of combinatory logic that reduces into its own <q>quotation</q>, i.e. term tree representation in itself. That is exactly the functional counterpart of the familiar imperative <em>quine</em>s, i.e. programs that can print out their own sourcecode without any trick exploiting the operating system or any builtin reflection. (See Wikipedia about <a href="https://en.wikipedia.org/wiki/Quine_(computing)" target="_blank">quines</a>, and see also David Madore&apos;s <a href="http://www.madore.org/~david/computers/quine.html" target="_blank">article</a> about them. Quines are also the main pattern underlying <em>self-reproduction</em>.)</li>
@@ -146,13 +159,13 @@
 		</ul>
 		<hr/>
 
-		<h2 id="webapp">Functional web apps</h2>
+		<h2 id="webapp">My abandoned former functional web apps</h2>
 		<ul>
 			<li>Mostly cliens-side: <a href="https://github.com/alignalghii/Monty-Hall-problem">Monty Hall problem</a>, example for JavaScript in the declaritve style. See the most functional-style part in the <a href="https://github.com/alignalghii/Monty-Hall-problem/blob/main/js/model.js">model</a> module.  Implemented in Javascript, but inspired by Haskell design concepts. Used implementation techniques: <span class="emcode">Maybe</span> and <span class="emcode">Either</span> algebraic datatypes via Scala-style <em>case object</em>s, <span class="emcode">Monad</span> (and <span class="emcode">Eq</span> etc&hellip;) type classes via PHP-style <em>trait</em>s. In case of JavaScript, all these implemented via <em>prototypal inheritence</em>.</li>
 			<li>Mostly server-side: <a>Mini Scotty</a>, a Scotty webmicroframework sample</li>
 			<li><a href="https://github.com/alignalghii/functional-design-upon-imperative-substrate">Functional design upon imperative substrate</a> (JavaScript, PHP)</li>
 			<li>Both-tiers webapp sample: floor plan designer (frontend) with lightweight user and document ERP (backend).</li>
-			<li>Opposite of a web app: a <a href="https://github.com/alignalghii/sample-search-client-paginated-with-monad-transformers">crawler in Haskell with monad transfomers</a></li>
+			<!--li>Opposite of a web app: a <a href="https://github.com/alignalghii/sample-search-client-paginated-with-monad-transformers">crawler in Haskell with monad transfomers</a></li-->
 		</ul>
 		<hr/>
 		<ul class="menu">

@@ -17,9 +17,14 @@
 
 		<h2>Tartalom</h2>
 		<ul>
-			<li><a href="#live-hs-webapp">Online kipróbálható élő webalkalmazás-mintapelda a funkcionális programozás használatára backend terén</a></li>
+			<li>
+				<a href="#recent-hs-backend">Webbel kapcsolatos legfrissebb backend projektjeim Haskellben</a>
+				<ul>
+					<li><a href="#live-hs-webapp">Online kipróbálható élő webalkalmazás-mintapelda</a></li>
+					<li><a href="#hs-web-client">Adott külső API-hoz készült webkliens projekt. Az ún. <q>monásztranszformálók</q> hasznosítása.</a></li>
+				</ul>
+			</li>
 			<li><a href="#Agda">Legújabb mindenkori projektjeim: két nagyon újonc Agda-projekt</a></li>
-			<li><a href="#recent">Haskell-projektjeim közül a legfrissebbek. Az ún. <q>monásztranszformálók</q> használata</a></li>
 			<li><a href="#calculi">Mini programnyelvek (<q>kalkulusok</q>) megvalósítása interpreterként. Háttér: zipper-adatstruktúrák használata</a></li>
 			<li><a href="#Haskell-inspired">Egy Haskell által ihletett projekt, de PHP-ban és JavaScript-ben megvalósítva</a></li>
 			<li><a href="#testing">Tesztelés</a></li>
@@ -36,19 +41,27 @@
 			<li><a href="#old-hs">My old Haskell projects</a></li>
 		</ul>
 
-		<h2 id="live-hs-webapp">Online kipróbálható élő webalkalmazás-mintapelda a funkcionális programozás használatára backend terén</h2>
+		<h2 id="recent-hs-backend">Webbel kapcsolatos legfrissebb backend projektjeim Haskellben</h2>
+		<p>Közvetlen tartalmi céljuk mellett, mindkét itt bemutatott projekt születése mögött áll egy kimondatlan technikai indíték is: kikutatatni, hogy hosszútávon hogyan érvénesülnek, hasznosulnak a funkcionális programozás előnyei potenciéisan a jövőben esetleg nagyra növő, a technikai adósság szempszögéből nézve kihívó projektek esetében, miképp tartható az architektúra átláthatósága.</p>
+		<h3 id="live-hs-webapp">Online kipróbálható élő webalkalmazás-mintapelda a funkcionális programozás használatára backend terén</h3>
 
 		<!--p><q>Angol-német szó- és mondatgyakorló</q>: <a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app" target="_blank">GitHub-os projekt oldal</a> (ezen belül külön: <a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app#readme">README</a>), továbbá maga az élőszerverre telepített <a href="http://bilingual.curlgrep-phantom-funspec.hu:3000" target="_blank">élő kipróbálható online webalkalmazás</a>. E projekt technikailag a Haskell webprogramozás lehetőségeinek feltérképezésére indult (Scotty mikro-keretrendszer használata). Tartalmilag pedig nyelvtanulást segítő, gyakorlósorokat, fordítási kvízeket kezelő webalkalmazásról van szó.</p-->
 		<p><q>Angol-német szó- és mondatgyakorló</q> webalkalmazás angol nyelvet tanuló magyar felhasználók részére: a gyakorlás segítése véletlensszerűen generálható kvíz-szerű gyakorlósorokkal, amelyek tárolhatóak, utólag is visszanézhetőek, megismételhetőek, továbbalakíthatóak, és személyes fejlődést, összevetéseket is lehetővé tesznek.</p>
 		<ul>
 		    <li>Forráskódi rész: <a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app" target="_blank">GitHub-os projekt oldal</a> (ezen belül külön: <a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app#readme">README</a>),</li>
 		    <li>továbbá maga az élőszerverre telepített <a href="http://bilingual.curlgrep-phantom-funspec.hu:3000" target="_blank">élő kipróbálható online webalkalmazás</a>. (Ennek van az angol anyanyelvű közönség számára is megtekinthető <a href="http://bilingual.curlgrep-phantom-funspec.hu:3006" target="_blank">változata</a>.)
-        </ul>
-        <p>E projekt technikailag a Haskell webprogramozás lehetőségeinek feltérképezésére indult (Scotty mikro-keretrendszer használata). Hosszú távon majd megnézzük, ahogy nő a projekt, mennyi a hozadéka a funkcionális programozásnak, mennyiben segít a tecnhikai adósság megelőzésében, tesztelhetőségben, öndokumentációban, egészében véve a tiszta kódolásban: a nagyléptékű architekturát mennyivel teszi átláthatóbbá az itt szokásos eszközkészlet (pl. a monásztranszformálók tecnhikája) összevetve a <q>hagyományos</q> tervezési mintákkal.</p>
-        <p>Felhasznált keretrendszer: a jellegzetes Haskell-mikrokeretrendszerként ismert <a href="https://github.com/scotty-web/scotty/wiki/Scotty-Tutorials-&-Examples" target="_blank">Scotty</a>. Ami pedig a projekt egy <q>sötét sarkát</q> illeti (legalábbis az automata tesztelésnél): a jövőben tervezett korszerű eszközök, egységtesztek, adatbázistesztek és web API tesztk ellenére, jelenleg a projekt web API-jának durva automata tesztelését egyelőre egy kézi hackelésű, a híres-hírhedt <q><a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app/blob/main/test/API-client-tester.bash" target="_blank">curl-grep</a></q> stílusú bash technikán alapló shellscript teszt biztosítja.</p>
+		</ul>
+		<p>E projekt technikailag a Haskell webprogramozás lehetőségeinek feltérképezésére indult (Scotty mikro-keretrendszer használata). Hosszú távon majd megnézzük, ahogy nő a projekt, mennyi a hozadéka a funkcionális programozásnak, mennyiben segít a tecnhikai adósság megelőzésében, tesztelhetőségben, öndokumentációban, egészében véve a tiszta kódolásban: a nagyléptékű architekturát mennyivel teszi átláthatóbbá az itt szokásos eszközkészlet (pl. a monásztranszformálók tecnhikája) összevetve a <q>hagyományos</q> tervezési mintákkal.</p>
+		<p>Felhasznált keretrendszer: a jellegzetes Haskell-mikrokeretrendszerként ismert <a href="https://github.com/scotty-web/scotty/wiki/Scotty-Tutorials-&-Examples" target="_blank">Scotty</a>. Ami pedig a projekt egy <q>sötét sarkát</q> illeti (legalábbis az automata tesztelésnél): a jövőben tervezett korszerű eszközök, egységtesztek, adatbázistesztek és web API tesztk ellenére, jelenleg a projekt web API-jának durva automata tesztelését egyelőre egy kézi hackelésű, a híres-hírhedt <q><a href="https://github.com/alignalghii/bilingual-Hungarian-English-practice-quiz-app/blob/main/test/API-client-tester.bash" target="_blank">curl-grep</a></q> stílusú bash technikán alapló shellscript teszt biztosítja.</p>
+
+		<h2 id="hs-web-client">Adott külső API-hoz készült webkliens projekt. Az ún. <q>monásztranszformálók</q> hasznosítása.</h2>
+		<p>Miután itt elébb föntebb láttunk példát webalkalmazásra Haskell megvalósításban, most nézzünk példát az <q>ellentétére</q>: valósítsunk meg <em>webkliens-alkalmazást</em> Haskellben!</p>
+		<p>Íme <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs" target="_blank">kliensalkalmazás a Wikipédia keresőfelületének API-jához</a> (lásd még a részletes <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README dokumentációt</a>). Mintaprojekt webes API-kilensre, ahol a Wikipédia keresőfelülethez való kapcsolódás egyedi és magasabb szintű részleteinek kidolgozásához monásztranszformálókat használok, &mdash; sőt eredetileg maga a projekt is épp a monásztranszformálók bemutatásának afféle motiváló példájaként indult el. Bemutatja azt a személyes tanulási utamat is, ahogy e fogalommal megismerkedtem.</p>
+
+		<p>A HTTP-kliensprogramozás alacsonyabbszintű kezeléséhez alapul használt könyvtár pedig a <a href="http://www.serpentine.com/wreq/" target="_blank">Wreq</a>.</p>
 
 		<h2 id="Agda">Legújabb mindenkori projektjeim: két nagyon újonc Agda-projekt</h2>
-		<p>&hellip; azt mutatja be, mivel fogalkoztam a legutóbbi hónapban: tudásom és kódolási stílusom tételbizonyíto rendszerekben, Martin-Löf tíuselméletben</p>
+		<p>&hellip; azt mutatja be, mivel fogalkoztam a legutóbbi hónapban: tudásom és kódolási stílusom tételbizonyító rendszerekben, Martin-Löf tíuselméletben</p>
 		<ul>
 			<li>
 				<span><a href="https://github.com/alignalghii/vector-algebra-in-Agda" target="_blank">Vektoralgebra Agdában</a> (lásd még a részletes <a href="https://github.com/alignalghii/vector-algebra-in-Agda#readme">README dokumentációt</a> is). A projekt hosszútávú célja, hogy helyességbizonyítási támogatást nyújtson egy ütközésvizsgálati virtuálisfizika-könyvtárhoz (az ún.  <a href="https://en.wikipedia.org/wiki/Fourier%E2%80%93Motzkin_elimination" target="_blank">Fourier-Motzkin kiköszöbölési</a> eljárás alapján): lehessen tételeket felállítani és bizonyítani a témakör egésze terén. Természetesen e cél elérése még távol áll e projekttől. A jelenleg is megvalósult eredmények:</span>
@@ -59,13 +72,6 @@
 				</ul>
 			</li>
 			<li><a href="https://github.com/alignalghii/beyond-Haskell" target="_blank">A Haskell nyelven túl</a>. Határozott célkitűzések nélküli, nagyon korai Agda-projekt. Arra alkalmas lehet, hogy stílusjegyeimet bemutassa az Agda-kódolás, az intuicionista bizonyításterén. Az egyébként a bevezető szintű tételek szintjét meg nem haladó anyag az alkalmazott jlölési stílus, egyedi konvenciók terén mutat néhány érdekes részt, továbbá az egzisztenciális kvantorok használatában is tartalmaz néhány egyébként igen minimalisztikus példát, például: induktívan váltakozóan definiált páros és páratlan számok, illetve (<a href="https://github.com/alignalghii/beyond-Haskell/blob/main/Theorems/NatModulo.agda#L32" target="_blank">minden így definiált páros szám felbontható két azonos <q>félrész</q> összegére</a> (minden párosnak van fele).</li>
-		</ul>
-
-		<h2 id="recent">Haskell-projektjeim közül a legfrissebbek. Az ún. <q>monásztranszformálók</q> használata</h2>
-		<p>&hellip; ezek mutatják be legújabban kialakult kódolási stílusomat és tudásomat Haskell terén</p>
-		<ul>
-			<li><a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs" target="_blank">Kliensalkalmazás a Wikipédia keresőfelületének API-jához</a> (lásd még a részletes <a href="https://github.com/alignalghii/client-to-MW-search-API-with-demo-MTs#readme">README dokumentációt</a>). Mintaprojekt, amely eredetileg a monásztranszformálók bemutatásának afféle motiváló példájaként indult el. Bemutatja azt a személyes tanulási utamat is, ahogy e fogalommal megismerkedtem.</li>
-			<li>Egy funkcionális mini-programnyelv interpreteres megvalósítása, valójában egy kombinátorlogikai interpreter. Ez is viszonylag friss projekt, így alaklmas legutóbb kialakult programzási stílusom bemutatására. A műfajban (kalkulusok, kombinátorlogika megvalósítása) több korábbi kisprojektem is van (a legrégebbi közülük 2004-es), így ezek leírását külön alfejezetben is ld. alább részletesebben:</li>
 		</ul>
 
 		<h2 id="calculi">Mini programnyelvek (<q>kalkulusok</q>) megvalósítása interpreterként. Háttér: zipper-adatstruktúrák használata</h2>
